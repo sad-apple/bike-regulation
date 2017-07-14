@@ -1,0 +1,77 @@
+<div ng-controller="carTrackController" style="margin-top: -50px">
+    <toaster-container toaster-options="{'position-class': 'toast-top-right', 'close-button':true}"></toaster-container>
+    <div class="w-full bg-light lter b-b wrapper-xs">
+        <table width="99%" style="margin: 0 auto">
+            <tbody>
+            <tr>
+                <td width="7%">
+                    <label class="control-label text-left">开始日期:</label>
+                </td>
+                <td width="5%">
+                    <input type="text" class="form-control w-sm pull-left m-r-xs" name="foundTime" datepicker-popup="{{format}}" placeholder="开始日期" ng-model="startDate" is-open="showStartDate" datepicker-options="dateOptions" max-date="today"  close-text="关闭" />
+                </td>
+                <td width="4%">
+                    <button type="button" class="btn btn-default pull-left m-r-xs" ng-click="startDateClick($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                </td>
+                <td>
+                    <div uib-timepicker class="w-sm pull-left m-l-xs" ng-model="startTime" ng-change="timeChanged()" hour-step="1" show-seconds="true" minute-step="1" show-meridian="false" template-url="tpl/template/timepicker.html"></div>
+                </td>
+                <td width="7%">
+                    <label class="control-label text-left">结束日期:</label>
+                </td>
+                <td width="5%">
+                    <input type="text" class="form-control w-sm pull-left m-r-xs" name="foundTime" datepicker-popup="{{format}}" placeholder="结束日期" ng-model="endDate" is-open="showEndDate" datepicker-options="dateOptions" min-date="startDate" max-date="today" close-text="关闭" />
+                </td>
+                <td width="4%">
+                    <button type="button" class="btn btn-default pull-left m-r-xs" ng-click="endDateClick($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                </td>
+                <td>
+                    <div uib-timepicker class="w-sm pull-left m-l-xs" ng-model="endTime" ng-change="timeChanged()" hour-step="1" show-seconds="true" minute-step="1" show-meridian="false"></div>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-default pull-left m-b-xs" ng-click="initTrack()">查询</button>
+                    <button type="button" class="btn btn-success pull-left m-b-xs" ng-click="play()" ng-show="playStatus=='stop' || playStatus=='pause'">播放</button>
+                    <button type="button" class="btn btn-warning pull-left m-b-xs" ng-click="pause()" ng-show="playStatus == 'play'">暂停</button>
+                    <button type="button" class="btn btn-danger pull-left m-b-xs" ng-click="stop()" ng-show="playStatus != 'unload'">停止</button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <slider ng-model="playSlider" floor="1" ceiling="100" ng-change="sliderChanged()">
+    </slider>
+
+
+
+
+
+
+    <!--<div class="wrapper-sm" >-->
+        <!--<div class="row">-->
+            <!--<div class="col-sm-12 form-group">-->
+                <!--<label class="control-label text-left">开始日期:</label>-->
+                <!--<div class="pull-left">-->
+                    <!--<input type="text" class="form-control w-sm pull-left m-r-xs" name="foundTime" datepicker-popup="{{format}}" placeholder="开始日期" ng-model="startDate" is-open="showStartDate" datepicker-options="dateOptions" max-date="today"  close-text="关闭" />-->
+                    <!--<span>-->
+                        <!--<button type="button" class="btn btn-default pull-left m-r-xs" ng-click="startDateClick($event)"><i class="glyphicon glyphicon-calendar"></i></button>-->
+                    <!--</span>-->
+                <!--</div>-->
+                <!--<div uib-timepicker class="w-sm pull-left m-l-xs" ng-model="startTime" ng-change="timeChanged()" hour-step="1" show-seconds="true" minute-step="1" show-meridian="false" template-url="tpl/template/timepicker.html"></div>-->
+                <!--<label class="control-label text-left">结束日期:</label>-->
+                <!--<div class="pull-left">-->
+                    <!--<input type="text" class="form-control w-sm pull-left m-r-xs" name="foundTime" datepicker-popup="{{format}}" placeholder="结束日期" ng-model="endDate" is-open="showEndDate" datepicker-options="dateOptions" min-date="startDate" max-date="today" close-text="关闭" />-->
+                    <!--<span>-->
+                        <!--<button type="button" class="btn btn-default pull-left m-r-xs" ng-click="endDateClick($event)"><i class="glyphicon glyphicon-calendar"></i></button>-->
+                    <!--</span>-->
+                <!--</div>-->
+                <!--<div uib-timepicker class="w-sm pull-left m-l-xs" ng-model="endTime" ng-change="timeChanged()" hour-step="1" show-seconds="true" minute-step="1" show-meridian="false"></div>-->
+                <!--<button type="button" class="btn btn-default pull-left m-b-xs" ng-click="initTrack()">查询</button>-->
+                <!--<button type="button" class="btn btn-success pull-left m-b-xs" ng-click="play()" ng-show="playStatus=='stop' || playStatus=='pause'">播放</button>-->
+                <!--<button type="button" class="btn btn-warning pull-left m-b-xs" ng-click="pause()" ng-show="playStatus == 'play'">暂停</button>-->
+                <!--<button type="button" class="btn btn-danger pull-left m-b-xs" ng-click="stop()">停止</button>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+    <div id="allmap" style="width: 100%; height: 75vh;" fullscreen="isFullscreen" only-watched-property></div>
+</div>

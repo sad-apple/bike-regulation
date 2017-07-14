@@ -1,0 +1,24 @@
+server:
+  port: 8086
+spring:
+  output:
+    ansi:
+      enabled: never
+  jpa:
+    database: MYSQL
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+  datasource:
+    platform: mysql
+    url: jdbc:mysql://localhost:3306/sharebike?useUnicode=true&characterEncoding=UTF-8
+    username: root
+    password: cloudfog2017
+    driver-class-name: com.mysql.jdbc.Driver
+  redis:
+    host: 127.0.0.1
+
+logging:
+  file: ./mylogs/sharebike-bms.log
+  level.: ERROR
+  level.cn.net.share: INFO
