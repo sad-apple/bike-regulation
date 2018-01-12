@@ -1,6 +1,6 @@
 app.controller('updateSysUserController', ['$scope', '$http', '$modalInstance', 'sysUserId', function ($scope, $http, $modalInstance,sysUserId) {
     function init(){
-        $http.get('sysroles/getAllSysRole').success(function (data){
+        $http.get('sysroles/collection').success(function (data){
             $scope.roles = data.data;
         });
         

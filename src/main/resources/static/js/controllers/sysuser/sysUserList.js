@@ -16,6 +16,7 @@ app.controller('sysUserListController', ['$scope', '$http', '$modal', 'toaster',
         title: 'Title',
         text: 'Message'
     };
+
     $scope.pop = function(type,title,text){
         toaster.pop(type,'',text);
     };
@@ -25,6 +26,8 @@ app.controller('sysUserListController', ['$scope', '$http', '$modal', 'toaster',
         pageSize: '10',
         currentPage: 1
     };
+
+    $scope.role;
 
     $scope.gridOptions = {
         data: 'codes',
@@ -40,12 +43,14 @@ app.controller('sysUserListController', ['$scope', '$http', '$modal', 'toaster',
             { field: 'fullName', displayName: '账户姓名', width:'150px' },
             { field: 'phone', displayName: '手机号', width:'150px' },
             { field: 'email', displayName: '邮箱', width:'150px' },
-            { field: 'userStatus', displayName: '账户状态', width:'150px',cellTemplate: '<div class="ui-grid-cell-contents" >{{row.entity.userStatus == 1 ? "启用" : "禁用" }}</div>' },
-            { field: 'userType', displayName: '账户角色', width:'150px',cellTemplate: '<div class="ui-grid-cell-contents" >{{ row.entity.userType | reverse }}</div>' },
-            { field: 'remove', displayName: '操作', width: "400px", cellTemplate: '<a ng-click="editRowIndex(row.entity)" title="编辑" class="btn btn-default m-l-xs" style="margin-top: 2px"><i class="fa fa-pencil"></i></a>' +
-            '<a mwl-confirm message="确定删除?" title="删除" confirm-text="确定" cancel-text="取消" confirm-button-type="danger" on-confirm="removeRowIndex(row.entity)" class="btn btn-default m-l-xs" style="margin-top: 2px"><i class="fa fa-times"></i></a>' +
-            '<a ng-click="editPassword(row.entity)" title="编辑密码" class="btn btn-default m-l-xs" style="margin-top: 2px"><i class="icon-key"></i></a>' +
-            '<a ng-click="seeRowIndex(row.entity)" title="详情" class="btn btn-default m-l-xs" style="margin-top: 2px"><i class="fa fa-info-circle"></i></a>' }
+            { field: 'userStatus', displayName: '账户状态', width:'150px',cellTemplate: '<div class="ngCellText ng-scope col4 colt4" >{{row.entity.userStatus == 1 ? "启用" : "禁用" }}</div>' },
+            { field: 'userType', displayName: '账户角色', width:'150px',cellTemplate: '<div class="ngCellText ng-scope col5 colt5" >{{ row.entity.userType | reverse }}</div>' },
+            {
+                field: 'remove', displayName: '操作', width: "400px",
+                cellTemplate: '<button class="btn btn-primary btn-sm m-t-xs m-l-xs" title="编辑" style="margin-top: 2px" ng-click="editRowIndex(row.entity)">编辑</button>' +
+                '<button class="btn btn-info btn-sm m-t-xs m-l-xs" title="详情"  style="margin-top: 2px"  ng-click="seeRowIndex(row.entity)">详情</button>' +
+                '<button  class="btn btn-warning btn-sm m-t-xs m-l-xs" title="编辑密码"  style="margin-top: 2px" ng-click="editPassword(row.entity)">密码</button>' +
+                '<button class="btn btn-danger btn-sm m-t-xs m-l-xs" style="margin-top: 2px" confirm-button-type="danger" mwl-confirm message="确定删除?" title="删除" confirm-text="确定" cancel-text="取消" on-confirm="removeRowIndex(row.entity)">删除</button>' }
         ]
     };
 
@@ -68,8 +73,11 @@ app.controller('sysUserListController', ['$scope', '$http', '$modal', 'toaster',
     });
 
     $scope.getPagedDataAsync = function (pageSize, page, searchText) {
-        var url = 'sysusers?page=' + page + '&size=' + pageSize + '&username=' +$scope.username ;
-        if($scope.fullName != ""){
+        var url = 'sysusers?page=' + page + '&size=' + pageSize ;
+        if ($scope.username != "") {
+            url+="&username=" +$scope.username;
+        }
+        if($scope.fullName != "") {
             url+="&fullName="+$scope.fullName;
         }
         if ($scope.role != undefined && $scope.role != "") {
@@ -94,9 +102,11 @@ app.controller('sysUserListController', ['$scope', '$http', '$modal', 'toaster',
         }
     }, true);
 
-    $scope.pop = function(type,title,text){
-        toaster.pop(type,'',text);
-    };
+    $scope.$watch('role', function (newVal, oldVal) {
+        if (newVal !== oldVal) {
+            $scope.getPagedDataAsync($scope.pagingOptions.pageSize, $scope.pagingOptions.currentPage, $scope.filterOptions.filterText);
+        }
+    }, true);
 
     $scope.search = function(){
         $scope.pagingOptions.currentPage = 1;
@@ -104,19 +114,24 @@ app.controller('sysUserListController', ['$scope', '$http', '$modal', 'toaster',
     }
 
     function init(){
-        $http.get("sysusers/getLoginSysUser").success(function(data){
+        $http.get("sysusers/login-sysuser").success(function(data){
             $scope.loginUser = data.data;
         });
 
-        $http.get('sysroles/getAllSysRole').success(function (data){
+        $http.get('sysroles/collection').success(function (data){
+            var allRoles = {
+                id : 0,
+                name : '全部'
+            };
+            data.data.push(allRoles);
+            $scope.role = data.data[data.data.length -1];
             $scope.roles = data.data;
         });
-        
     }
+
     init();
 
     $scope.createSysUser = function(){
-        //todo
         if(0 == $scope.loginUser.userType){
             $scope.pop('error', '', '您不可以新增用户');
             return;
@@ -137,8 +152,7 @@ app.controller('sysUserListController', ['$scope', '$http', '$modal', 'toaster',
         },function(){
         });
     }
-
-
+    
     $scope.seeRowIndex = function(entity){
         var rtn = $modal.open({
             templateUrl: 'tpl/sysuser/see_sysuser.html',
@@ -216,5 +230,4 @@ app.controller('sysUserListController', ['$scope', '$http', '$modal', 'toaster',
         })
     }
 
-}])
-;
+}]);

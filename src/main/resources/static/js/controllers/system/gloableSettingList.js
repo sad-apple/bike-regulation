@@ -15,7 +15,7 @@ app.controller('gloableSettingListController', ['$scope', '$http', '$modal', 'to
         toaster.pop(type,'',text, 'trustedHtml');
     };
     
-    //ngGrid初始化数据
+    // ngGrid初始化数据
     $scope.filterOptions = {
         filterText: "",
         useExternalFilter: true

@@ -5,53 +5,58 @@ app.controller('riderStatsCtrl', function ($scope, $http, $moment) {
     $scope.totals = [];
     $scope.increments = [];
     $scope.selected = 0;
-    var type = ['YYYY-MM-DD', 'YYYY-MM', 'YYYY'];
+
     $scope.formats = {day:'yyyy-MM-dd',month:'yyyy-MM',year:'yyyy'};
     $scope.endDate  = $moment(new Date()).format('YYYY-MM-DD');
     $scope.startDate = $moment(new Date()).add(-10,'d').format('YYYY-MM-DD');
 
-    $scope.startDateOptions = {
-        day:{datepickerMode:"'day'",minMode:"'day'",showWeeks:"false"},
-        month:{datepickerMode:"'month'",minMode:"'month'",showWeeks:"false"},
-        year:{datepickerMode:"'year'",minMode:"'year'",showWeeks:"false"}
-    }
-    $scope.endDateOptions = {
-        day:{datepickerMode:"'day'",minMode:"'day'",showWeeks:"false"},
-        month:{datepickerMode:"'month'",minMode:"'month'",showWeeks:"false"},
-        year:{datepickerMode:"'year'",minMode:"'year'",showWeeks:"false"}
+    var type = ['YYYY-MM-DD', 'YYYY-MM', 'YYYY'];
+
+    function init(){
+        $http.get('report-stats/roles').success(function (data){
+            $scope.sysRole = data.data[0];
+            $scope.sysRoles = data.data;
+            $scope.stats();
+        });
     }
 
+    init();
+    
     $scope.selectType = function(index){
         $scope.selected = index;
-        if(index == 0){
-            $scope.endDate  = $moment(new Date()).format('YYYY-MM-DD');
-            $scope.startDate = $moment(new Date()).add(-1,'d').format('YYYY-MM-DD');
-        }else if(index == 1){
-            $scope.endDate  = $moment(new Date()).format('YYYY-MM-DD');
-            $scope.startDate = $moment(new Date()).startOf('month').add(-1,'d').format('YYYY-MM-DD');
-        }else{
-            $scope.endDate  = $moment(new Date()).format('YYYY-MM-DD');
-            $scope.startDate = $moment(new Date()).add(-1,'y').format('YYYY-MM-DD');
-        }
+        $scope.stats();
     }
 
     $scope.openStart = function($event) {
+        $event.preventDefault();
+        $event.stopPropagation();
         $scope.startOpened = true;
     };
 
     $scope.openEnd = function($event) {
+        $event.preventDefault();
+        $event.stopPropagation();
         $scope.endOpened = true;
+    };
+    
+    $scope.timeTool = function($event) {
+        $event.preventDefault();
+        $event.stopPropagation();
+        $scope.foundTimeOpened = true;
     };
 
     $scope.stats = function() {
-        $scope.categories = [];
-        $scope.totals = [];
-        $scope.increments = [];
         var startDate = $moment($scope.startDate).format(type[$scope.selected]);
         var endDate = $moment($scope.endDate).format(type[$scope.selected]);
-        $http.get('file_access_log/fileVisitStats?type=' + $scope.selected + '&startDate=' + startDate + '&endDate=' + endDate).success(function (data) {
-            var total = 0;
+        $http.get('report-stats/customer?type=' + $scope.selected + '&startDate=' + startDate + '&endDate=' + endDate + '&sysRoleId=' + $scope.sysRole.id).success(function (data) {
+            var total = data.data.total;
             var increment = data.data.increment;
+            $scope.categories = [];
+            $scope.totals = [];
+            $scope.increments = [];
+            if (increment.length == 0){
+                $scope.totals = [total];
+            }
             angular.forEach(increment, function(strs){
                 var str = strs.split(",");
                 $scope.categories.push(str[0]);
@@ -59,41 +64,43 @@ app.controller('riderStatsCtrl', function ($scope, $http, $moment) {
                 total += parseInt(str[1]);
                 $scope.totals.push(total);
             })
-            $scope.chartConfig = {
-                options: {
-                    xAxis: {
-                        categories: $scope.categories
+            $('#chartConfig').highcharts({
+                xAxis: {
+                    categories: $scope.categories
+                },
+                yAxis: {
+                    title: {
+                        text: $scope.sysRole.name
                     },
-                    yAxis: {
-                        title: {
-                            text: '骑行用户'
-                        },
-                        plotLines: [{
-                            value: 0,
-                            width: 1,
-                            color: '#808080'
-                        }]
-                    },
-                    chart: {
-                        type: 'line'
-                    }
+                    plotLines: [{
+                        value: 0,
+                        width: 1,
+                        color: '#808080'
+                    }]
+                },
+                chart: {
+                    type: 'line'
                 },
                 series: [{
-                    name:"骑行用户总数",
+                    name:$scope.sysRole.name + "总数",
                     data: $scope.totals
                 },
                     {
-                        name:"骑行用户新增数",
+                        name:$scope.sysRole.name + "新增数",
                         data: $scope.increments
                     }],
                 title: {
-                    text: '骑行用户增长趋势'
+                    text: $scope.sysRole.name + '增长趋势'
                 },
                 loading: false
-
-            }
+            })
         })
     }
 
-    $scope.stats();
+    $scope.$watch('sysRole', function (newVal, oldVal) {
+        if (newVal !== oldVal) {
+            $scope.stats();
+        }
+    }, true);
+
 });

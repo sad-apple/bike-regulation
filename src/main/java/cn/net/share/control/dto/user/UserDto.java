@@ -10,6 +10,7 @@ import java.util.List;
 
 @Data
 public class UserDto {
+
     private Long id;
     private String username;
     private List<SysRole> roles;
@@ -25,10 +26,4 @@ public class UserDto {
         this.customer = sysUser.getCustomer();
     }
 
-    public UserDto(SysUser sysUser){
-        this.id = sysUser.getId();
-        this.username = sysUser.getUsername();
-        this.roles = sysUser.getRoles();
-        this.customer = sysUser.getCustomer();
-    }
 }

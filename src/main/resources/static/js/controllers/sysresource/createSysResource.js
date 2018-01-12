@@ -1,7 +1,7 @@
 app.controller('createSysResourceController', ['$scope', '$http', '$modalInstance', function ($scope, $http, $modalInstance) {
 
     function init(){
-        $http.get('sysresources/getAll').success(function (data){
+        $http.get('sysresources/menus').success(function (data){
             $scope.sysResources = data.data;
         });
     }
@@ -9,7 +9,6 @@ app.controller('createSysResourceController', ['$scope', '$http', '$modalInstanc
     init();
 
     $scope.create = function () {
-
         $http.post('sysresources', $scope.sysResource).success(function (data) {
             if(data.status=="ERROR"){
                 $scope.pop('error', '', data.error);

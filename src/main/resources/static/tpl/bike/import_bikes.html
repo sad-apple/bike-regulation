@@ -1,0 +1,18 @@
+<div class="modal-header">
+    <h3 class="modal-title">批量导入</h3>
+</div>
+<div class="modal-body">
+    <form name="form" class="form-validation" novalidate>
+        <div class="form-group row">
+            <label class="col-sm-3 control-label text-right">导入文件:</label>
+            <div class="col-sm-8" style="height: 20%;">
+                <div file-upload targeturi="'files/import-excel'" filename="" on-change="upExcel(type,title,text,name)">
+                </div>
+            </div>
+        </div>
+
+    </form>
+</div>
+<div class="modal-footer ng-scope">
+    <button class="btn btn-default" ng-click="close()">取消</button>
+</div>

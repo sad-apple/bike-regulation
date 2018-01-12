@@ -1,9 +1,10 @@
 app.controller('updateSysRoleController', ['$scope', '$http', '$modalInstance', 'sysRoleId', function ($scope, $http, $modalInstance,sysRoleId) {
     $scope.sysResources = [];
     $scope.selectedResources = [];
-    $http.get('sysresources/findAll').success(function(data){
+
+    $http.get('sysresources/first-menus').success(function(data){
         $scope.sysResources = data.data;
-        $http.get('sysresources/sysRoles/'+sysRoleId).success(function(result){
+        $http.get('sysresources/sys-roles/'+sysRoleId).success(function(result){
             for(var i in result.data){
                 checkSysResource($scope.sysResources, result.data[i]);
             }
@@ -27,6 +28,7 @@ app.controller('updateSysRoleController', ['$scope', '$http', '$modalInstance', 
             $scope.sysRole = data.data;
         })
     }
+    
     init();
 
     function recursionOrg(resource){

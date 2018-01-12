@@ -1,0 +1,40 @@
+<ul class="breadcrumb bg-white b-b wrapper-sm m-b-none">
+    <li><a href><i class="fa fa-home"></i> 主页</a></li>
+    <li><a href>系统</a></li>
+    <li class="active">罚款规则</li>
+</ul>
+
+<div class="hbox hbox-auto-xs hbox-auto-sm" ng-controller="fineRuleListController">
+    <div>
+        <toaster-container toaster-options="{'position-class': 'toast-top-right', 'close-button':true}"></toaster-container>
+    </div>
+
+    <div class="wrapper-sm">
+        <div class="panel panel-default">
+            <div class="row wrapper">
+                <div class="col-lg-12">
+                    <button class="btn m-b-xs btn-default btn-addon" ng-click="createFineRule()"><i
+                            class="fa fa-plus"></i>添加罚款规则
+                    </button>
+                    <button class="btn m-b-xs btn-default pull-right m-r-xs" ng-click="search()">查询</button>
+                    <input ng-model="region" class="form-control w-sm pull-right m-r-xs" placeholder="输入所属区域查询"/>
+                    <span>
+                    <button type="button" class="btn btn-default pull-right m-r-xs" ng-click="timeTool($event)"><i
+                            class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                    <input type="text" class="form-control w-sm pull-right m-r-xs" name="createTime"
+                           datepicker-popup="{{format}}" placeholder="全部" ng-model="createTime"
+                           is-open="createTimeOpened" datepicker-options="dateOptions" min-date="tomorrow" close-text="关闭"/>
+                </div>
+            </div>
+
+            <div class="b-t">
+                <div class="table-responsive">
+                    <div ng-grid="gridOptions" style="min-height:680px"></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>

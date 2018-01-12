@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/sysusers")
+@RequestMapping("sysusers")
 public class SysUserController {
 
     @Autowired
@@ -31,7 +31,7 @@ public class SysUserController {
      * @param sysUser
      * @return
      */
-    @RequestMapping(value = "getLoginSysUser" ,method = RequestMethod.GET)
+    @RequestMapping(value = "login-sysuser" ,method = RequestMethod.GET)
     public ResponseEntity<Message> getLoginSysUser(@AuthenticationPrincipal SysUser sysUser){
         return sysUserService.getSysUserById(sysUser.getId());
     }
@@ -54,7 +54,7 @@ public class SysUserController {
      * @param sysUser
      * @return
      */
-    @RequestMapping(value = "/{id}/updateSysUserPassword",method = RequestMethod.PUT)
+    @RequestMapping(value = "/{id}/sysuser-password",method = RequestMethod.PUT)
     public ResponseEntity<Message> updateSysUserPassword(@PathVariable Long id, @RequestBody SysUser sysUser){
         return sysUserService.updateSysUserPassword(id, sysUser);
     }
@@ -100,4 +100,5 @@ public class SysUserController {
     public ResponseEntity<Message> changePassword(@PathVariable Long id, @RequestBody Map map){
         return sysUserService.changePassword(id, map.get("oldPwd").toString(), map.get("newPwd").toString());
     }
+
 }

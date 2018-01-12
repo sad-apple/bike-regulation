@@ -85,9 +85,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .deleteCookies("JSESSIONID")
                 .invalidateHttpSession(true)
                 .and()
-                .authorizeRequests()
-                .anyRequest().authenticated()
-                .and()
+//                .authorizeRequests() // 注销登陆认证
+//                .anyRequest().authenticated()
+//                .and()
                 .csrf().disable();
 //                .csrfTokenRepository(csrfTokenRepository())
 //                .and()
@@ -97,8 +97,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) throws Exception {
         web.ignoring().antMatchers(
-                "/tpl/**", "/fonts/**","/l10n/**", "/assets/**", "/staticfonts/**","/libs/**","/index.html", "/", "/img/**",
-                "/font", "/register","/getRandomCode");
-
+                "/tpl/**", "/fonts/**", "/l10n/**", "/assets/**", "/staticfonts/**", "/libs/**", "/index.html", "/", "/img/**",
+                "/json/**", "/font", "/register", "/random-code", "/voice-command/**");
     }
+    
 }

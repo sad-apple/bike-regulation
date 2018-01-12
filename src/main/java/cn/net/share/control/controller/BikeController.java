@@ -18,56 +18,72 @@ public class BikeController {
 
     /**
      * 分页返回当前用户的单车列表
-     * @param bike
+     *
+     * @param
      * @param page
      * @param size
-     * @param loginUser
+     * @param
      * @return
      */
     @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<Message> getBikeList(Bike bike, int page, int size, @AuthenticationPrincipal SysUser loginUser){
-        return bikeService.findByBikePage(bike,page,size,loginUser);
+    public ResponseEntity<Message> getBikeList(int page, int size, String plateNumber, String name) {
+        return bikeService.findByBikePage(page, size, plateNumber, name);
     }
 
     /**
      * 返回一个单车
+     *
      * @param id
      * @return
      */
-    @RequestMapping(value = "{id}" , method = RequestMethod.GET)
-    public ResponseEntity<Message> getBike(@PathVariable String id){
+    @RequestMapping(value = "{id}", method = RequestMethod.GET)
+    public ResponseEntity<Message> getBike(@PathVariable String id) {
         return bikeService.getBike(id);
     }
 
     /**
      * 创建一个单车
-     * @param bike
-     * @param sysUser
+     *
+     * @param
      * @return
      */
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<Message> createBike(@RequestBody Bike bike, @AuthenticationPrincipal SysUser sysUser){
+    public ResponseEntity<Message> createBike(@RequestBody Bike bike, @AuthenticationPrincipal SysUser sysUser) {
         return bikeService.createBike(bike, sysUser);
     }
 
     /**
+     * 批量导入单车
+     *
+     * @param fileName
+     * @return
+     */
+    @RequestMapping(value = "upload-bikes", method = RequestMethod.POST)
+    public ResponseEntity<Message> impBikes(@RequestBody String fileName) {
+        return bikeService.readExcel(fileName);
+    }
+
+    /**
      * 更新一个单车
+     *
      * @param bike
      * @param id
      * @return
      */
-    @RequestMapping(value = "{id}" , method = RequestMethod.PUT)
-    public ResponseEntity<Message> updateBike(@RequestBody Bike bike, @PathVariable String id){
+    @RequestMapping(value = "{id}", method = RequestMethod.PUT)
+    public ResponseEntity<Message> updateBike(@RequestBody Bike bike, @PathVariable String id) {
         return bikeService.updateBike(bike);
     }
 
     /**
      * 删除一个单车
+     *
      * @param id
      * @return
      */
-    @RequestMapping(value = "{id}" , method = RequestMethod.DELETE)
-    public ResponseEntity<Message> deleteBike(@PathVariable String id){
+    @RequestMapping(value = "{id}", method = RequestMethod.DELETE)
+    public ResponseEntity<Message> deleteBike(@PathVariable String id) {
         return bikeService.deleteBike(id);
     }
+
 }

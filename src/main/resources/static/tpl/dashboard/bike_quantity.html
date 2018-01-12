@@ -1,0 +1,76 @@
+<div class="container-fluid child-page-box">
+  <div class="row childPage-Top">
+    <div class="row child-page-title-common-bg">
+      <h2 class="tac">单车数量监管图表</h2>
+    </div>
+  </div>
+  <div class="row relative" ng-controller="bikeQuantityCtrl">
+    <div class="row panel-body echarts-common-bg">
+      <div class="col-md-8 panel panel-body childe-charts-style">
+        <div class="panel-body" id="container2" style="width:100%;height:450px;"></div>
+      </div>
+      <div class="col-md-4 panel panel-body childe-charts-style">
+        <div class="panel-body" id="container3" style="width:100%;height:450px;"></div>
+      </div>
+      <div class="clearfix"></div>
+    </div>
+    <!--table-->
+    <div class="row panel-body bg-white child-page-scroll-table-box">
+      <h2>车辆数量明细</h2>
+      <!--<div class="panel-body" ng-grid="gridOptions" style="min-height:480px;"></div>-->
+      <!-- table滚动开始 -->
+      <div class="row panel-body child-page-scroll-table">
+        <div class="row">
+          <table class="table table-hover child-page-table-1" border="1" align="center" cellpadding="0" cellspacing="0">
+            <tr>
+              <td width="11%">车辆编号</td>
+              <td width="11%">投放区域</td>
+              <td width="11%">运营方</td>
+              <td width="11%">制造商</td>
+              <td width="11%">投放时间</td>
+              <td width="11%">入网资格证</td>
+              <td width="11%">区域实投车辆</td>
+              <td width="11%">区域可投车辆</td>
+              <td width="11%">投放数量差</td>
+            </tr>
+          </table>
+        </div>
+        <div class="row" id="tableScrollDemo">
+          <div id="tableScrollDemoA">
+            <table class="table table-striped table-hover child-page-table-2" border="0" align="center" cellpadding="0" cellspacing="0">
+              <tr ng-repeat="bikeQuantityDto in bikeQuantityDtos">
+                <td width="11%">{{bikeQuantityDto.bikeId}}</td>
+                <td width="11%">{{bikeQuantityDto.area}}</td>
+                <td width="11%">{{bikeQuantityDto.operationOrg}}</td>
+                <td width="11%">{{bikeQuantityDto.manufacturer}}</td>
+                <td width="11%">{{bikeQuantityDto.accessTime | date:"yyyy-MM-dd HH:mm:ss"}}</td>
+                <td width="11%">{{bikeQuantityDto.certificate}}</td>
+                <td width="11%">{{bikeQuantityDto.bikeNum}}</td>
+                <td width="11%">{{bikeQuantityDto.bikeNumStandard}}</td>
+                <td width="11%">{{bikeQuantityDto.bikeNumDeviation}}</td>
+              </tr>
+            </table>
+          </div>
+          <div id="tableScrollDemoB">
+            <table class="table table-striped table-hover child-page-table-2" border="0" align="center" cellpadding="0" cellspacing="0">
+              <tr ng-repeat="bikeQuantityDto in bikeQuantityDtos">
+                <td width="11%">{{bikeQuantityDto.bikeId}}</td>
+                <td width="11%">{{bikeQuantityDto.area}}</td>
+                <td width="11%">{{bikeQuantityDto.operationOrg}}</td>
+                <td width="11%">{{bikeQuantityDto.manufacturer}}</td>
+                <td width="11%">{{bikeQuantityDto.accessTime | date:"yyyy-MM-dd"}}</td>
+                <td width="11%">{{bikeQuantityDto.certificate}}</td>
+                <td width="11%">{{bikeQuantityDto.bikeNum}}</td>
+                <td width="11%">{{bikeQuantityDto.bikeNumStandard}}</td>
+                <td width="11%">{{bikeQuantityDto.bikeNumDeviation}}</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+      <!--table滚动结束-->
+    </div>
+  </div>
+</div>
+
+

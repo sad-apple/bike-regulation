@@ -1,7 +1,7 @@
 <div class="container w-xxl w-auto-xs" ng-controller="SigninFormController" ng-init="app.settings.container = false;">
   <a href class="navbar-brand block m-t-lg m-b-md">
-    <img src="img/logo.png" alt="." width="80" height="56">
-    <span class="hidden-folded m-l-xs">{{app.name}}</span>
+    <img src="img/logo.png" alt="." style="max-height: 60px;"><br/>
+    <span class="hidden-folded m-l-xs font-bold h4 text-info">智慧城市共享车辆管理与运营系统</span>
   </a>
   <div class="m-b-lg">
     <div class="wrapper text-center">
@@ -16,6 +16,8 @@
       </div>
       <!-- / alert -->
       <div class="list-group list-group-sm">
+        <input type="password" autocomplete="new-password" style="visibility:hidden; height:0; width:1px; position:absolute; left:0; top:0">
+        <input type="password" autocomplete="new-password" style="visibility:hidden; height:0; width:1px; position:absolute; left:0; top:0">
         <div class="list-group-item">
           <div class="input-group">
             <span class="input-group-addon no-bg"><i class="icon-user"></i></span>

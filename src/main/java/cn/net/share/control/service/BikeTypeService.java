@@ -1,7 +1,7 @@
 package cn.net.share.control.service;
 
-import cn.net.share.control.dao.VehicleTypeRepository;
-import cn.net.share.control.domain.VehicleType;
+import cn.net.share.control.dao.BikeTypeRepository;
+import cn.net.share.control.domain.BikeType;
 import cn.net.share.control.dto.message.Message;
 import cn.net.share.control.dto.message.MessageType;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,19 +19,19 @@ import java.util.List;
 public class BikeTypeService {
 
     @Autowired
-    private VehicleTypeRepository vehicleTypeRepository;
+    private BikeTypeRepository bikeTypeRepository;
 
     /**
      * 分页获得单车类型列表
-     * @param vehicleType
+     * @param bikeType
      * @param page
      * @param size
      * @return
      */
-    public ResponseEntity<Message> findByVehicleTypePage(VehicleType vehicleType,int page,int size){
+    public ResponseEntity<Message> findByBikeTypePage(BikeType bikeType, int page, int size){
         ExampleMatcher exampleMatcher = ExampleMatcher.matching().withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING).withIgnoreNullValues();
-        Page vehicleTypes = vehicleTypeRepository.findAll(Example.of(vehicleType,exampleMatcher),new PageRequest(page - 1, size));
-        Message message = new Message(MessageType.MSG_TYPE_SUCCESS, vehicleTypes);
+        Page bikeTypes = bikeTypeRepository.findAll(Example.of(bikeType,exampleMatcher),new PageRequest(page - 1, size));
+        Message message = new Message(MessageType.MSG_TYPE_SUCCESS, bikeTypes);
         return new ResponseEntity<Message>(message, HttpStatus.OK);
     }
 
@@ -39,9 +39,9 @@ public class BikeTypeService {
      * 获得单车类型列表
      * @return
      */
-    public ResponseEntity<Message> getVehicleTypeAllList(){
-        List<VehicleType> vehicleTypes = vehicleTypeRepository.findByOrderByCreateTimeDesc();
-        Message message = new Message(MessageType.MSG_TYPE_SUCCESS, vehicleTypes);
+    public ResponseEntity<Message> getBikeTypeAllList(){
+        List<BikeType> bikeTypes = bikeTypeRepository.findByOrderByCreateTimeDesc();
+        Message message = new Message(MessageType.MSG_TYPE_SUCCESS, bikeTypes);
         return new ResponseEntity<Message>(message, HttpStatus.OK);
     }
 
@@ -50,29 +50,29 @@ public class BikeTypeService {
      * @param id
      * @return
      */
-    public ResponseEntity<Message> getVehicleType(String id){
-        VehicleType vehicleType = vehicleTypeRepository.findOne(id);
-        Message message = new Message(MessageType.MSG_TYPE_SUCCESS, vehicleType);
+    public ResponseEntity<Message> getBikeType(String id){
+        BikeType bikeType = bikeTypeRepository.findOne(id);
+        Message message = new Message(MessageType.MSG_TYPE_SUCCESS, bikeType);
         return new ResponseEntity<Message>(message, HttpStatus.OK);
     }
 
     /**
      * 创建单车类型
-     * @param vehicleType
+     * @param bikeType
      * @return
      */
-    public ResponseEntity<Message> createVehicleType(VehicleType vehicleType){
-        vehicleTypeRepository.save(vehicleType);
+    public ResponseEntity<Message> createBikeType(BikeType bikeType){
+        bikeTypeRepository.save(bikeType);
         return new ResponseEntity<Message>(new Message(MessageType.MSG_TYPE_SUCCESS), HttpStatus.OK);
     }
 
     /**
      * 更新单车类型
-     * @param vehicleType
+     * @param bikeType
      * @return
      */
-    public ResponseEntity<Message> updateVehicleType(VehicleType vehicleType){
-        vehicleTypeRepository.save(vehicleType);
+    public ResponseEntity<Message> updateBikeType(BikeType bikeType){
+        bikeTypeRepository.save(bikeType);
         return new ResponseEntity<Message>(new Message(MessageType.MSG_TYPE_SUCCESS), HttpStatus.OK);
     }
 
@@ -81,8 +81,9 @@ public class BikeTypeService {
      * @param id
      * @return
      */
-    public ResponseEntity<Message> deleteVehicleType(String id){
-        vehicleTypeRepository.delete(id);
+    public ResponseEntity<Message> deleteBikeType(String id){
+        bikeTypeRepository.delete(id);
         return new ResponseEntity<Message>(new Message(MessageType.MSG_TYPE_SUCCESS), HttpStatus.OK);
     }
+
 }

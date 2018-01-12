@@ -1,0 +1,88 @@
+<div class="modal-header">
+    <h3 class="modal-title">修改运营规则</h3>
+</div>
+<div class="modal-body">
+    <form name="form" class="form-validation" novalidate>
+        <div>
+            <toaster-container toaster-options="{'position-class': 'toast-top-right', 'close-button':true}"></toaster-container>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-3 control-label text-right">车辆类型:</label>
+            <div class="col-sm-8">
+                <select class="form-control w-lg m-r-xs pull-left" ng-options="bikeType.name for bikeType in bikeTypes" ng-model="operationRule.bikeType">
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-3 control-label text-right">认购单价:</label>
+            <div class="col-sm-8">
+                <input type="text" placeholder="请输入认购单价" class="form-control" name="price" ng-model="operationRule.price">
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-3 control-label text-right">分成比例:</label>
+            <div class="col-sm-8">
+                <span class="col-sm-2 form-inline pull-right text-left">%</span>
+                <input class="col-sm-10 form-inline" type="text" placeholder="请输入分成比例" name="proportion" ng-model="operationRule.proportion">
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-3 control-label text-right">计费模式:</label>
+            <input type="radio" ng-model="operationRule.accountPattern" value="1">按小时计费
+            <input type="radio" ng-model="operationRule.accountPattern" value="2">按行驶次数计费
+            <input type="radio" ng-model="operationRule.accountPattern" value="3">按行驶路程计费
+        </div>
+
+        <div class="form-group row" ng-switch="operationRule.accountPattern">
+            <div ng-switch-when="1">
+                <span class="col-sm-6 text-right">每骑行一小时，计费</span>
+                <input type="text" class="col-sm-1 control-label text-right" name="rideCost" ng-model="operationRule.rideCost"> 元；
+            </div>
+            <div ng-switch-when="2">
+                <span class="col-sm-6 text-right">每骑行一次，计费</span>
+                <input type="text" class="col-sm-1 control-label text-right" name="rideCost" ng-model="operationRule.rideCost"> 元；
+            </div>
+            <div ng-switch-when="3">
+                <span class="col-sm-6 text-right">每骑行一千米，计费</span>
+                <input type="text" class="col-sm-1 control-label text-right" name="rideCost" ng-model="operationRule.rideCost"> 元；
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-3 control-label text-right">骑行用户优惠政策:</label><br/>
+            <label class="col-sm-3 control-label pull-left"></label>
+            <input type="radio" class="pull-left" ng-model="operationRule.riderFreeTime" value="0">正常计费；<br/>
+            <label class="col-sm-3 control-label pull-left"></label>
+            <input type="radio" class="pull-left" ng-model="operationRule.riderFreeTime" value="999999999"><span class="pull-left">终生免费；</span><br/>
+            <label class="col-sm-3 control-label pull-left"></label>
+            <input type="radio" class="pull-left" ng-model="operationRule.riderFreeTime"><span
+                class="pull-left">交完押金后免费骑行</span>
+            <input type="text" class="col-sm-1 control-label text-right pull-left" name="riderFreeTime"
+                   ng-model="operationRule.riderFreeTime"><span class="pull-left">小时；</span>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-3 control-label text-right">认购用户优惠政策:</label><br/>
+            <label class="col-sm-3 control-label pull-left"></label>
+            <input type="radio" class="pull-left" ng-model="operationRule.bikeOwnerFreeTime" value="0">正常计费；<br/>
+            <label class="col-sm-3 control-label pull-left"></label>
+            <input type="radio" class="pull-left" ng-model="operationRule.bikeOwnerFreeTime" value="999999999"><span class="pull-left">终生免费；</span><br/>
+            <label class="col-sm-3 control-label pull-left"></label>
+            <input type="radio" class="pull-left" ng-model="operationRule.bikeOwnerFreeTime"><span
+                class="pull-left">交完押金后免费骑行</span>
+            <input type="text" class="col-sm-1 control-label text-right pull-left" name="bikeOwnerFreeTime"
+                   ng-model="operationRule.bikeOwnerFreeTime"><span class="pull-left">小时；</span>
+        </div>
+
+
+    </form>
+</div>
+
+<div class="modal-footer ng-scope">
+    <button class="btn btn-default" ng-click="close()">取消</button>
+    <button type="submit" class="btn btn-primary" ng-click="update()">保存</button>
+</div>

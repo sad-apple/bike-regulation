@@ -35,8 +35,10 @@ app.controller('sysRoleListController', ['$scope', '$http', '$modal', 'toaster',
         pagingOptions: $scope.pagingOptions,
         columnDefs: [
             { field: 'name', displayName: '角色名', width:'800px' },
-            { field: 'remove', displayName: '操作', width: "400px", cellTemplate: '<a title="编辑" ng-click="editRowIndex(row.entity)" class="btn btn-default m-l-xs" style="margin-top: 2px"><i class="fa fa-pencil"></i></a>' +
-            '<a title="删除" mwl-confirm message="确定删除?" confirm-text="确定" cancel-text="取消" confirm-button-type="danger" on-confirm="removeRowIndex(row.entity)" class="btn btn-default m-l-xs" style="margin-top: 2px"><i class="fa fa-times"></i></a>' }
+            {
+                field: 'remove', displayName: '操作', width: "400px",
+                cellTemplate: '<button class="btn btn-primary btn-sm m-t-xs m-l-xs" title="编辑" style="margin-top: 2px" ng-click="editRowIndex(row.entity)">编辑</button>' +
+                '<button class="btn btn-danger btn-sm m-t-xs m-l-xs" style="margin-top: 2px" confirm-button-type="danger" mwl-confirm message="确定删除?" title="删除" confirm-text="确定" cancel-text="取消" on-confirm="removeRowIndex(row.entity)">删除</button>' }
         ]
     };
     $scope.getPagedDataAsync = function (pageSize, page, searchText) {
@@ -59,15 +61,10 @@ app.controller('sysRoleListController', ['$scope', '$http', '$modal', 'toaster',
         }
     }, true);
 
-    $scope.pop = function(type,title,text){
-        toaster.pop(type,'',text);
-    };
-
     $scope.search = function(){
         $scope.pagingOptions.currentPage = 1;
         $scope.getPagedDataAsync($scope.pagingOptions.pageSize, $scope.pagingOptions.currentPage, '');
     }
-
 
     $scope.createSysRole = function(){
         var rtn = $modal.open({
@@ -117,6 +114,4 @@ app.controller('sysRoleListController', ['$scope', '$http', '$modal', 'toaster',
             }
         })
     }
-
-}])
-;
+}]);

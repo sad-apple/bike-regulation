@@ -12,12 +12,12 @@ app.controller('createBikeController', ['$scope', '$http', '$modalInstance', 'to
     };
 
     function init() {
-        $http.get("vehiclegroups/getAll").success(function (data) {
-            $scope.vehicleGroups = data.data;
+        $http.get("bike-groups").success(function (data) {
+            $scope.bikeGroups = data.data;
         });
 
-        $http.get("vehicletypes/getAll").success(function (data) {
-            $scope.vehicleTypes = data.data;
+        $http.get("bike-types/collection").success(function (data) {
+            $scope.bikeTypes = data.data;
         });
     }
 
@@ -32,7 +32,7 @@ app.controller('createBikeController', ['$scope', '$http', '$modalInstance', 'to
         }).error(function (err) {
             alert(err.error);
         });
-    }
+    };
 
     /**
      * 关闭新增窗口
@@ -47,7 +47,6 @@ app.controller('createBikeController', ['$scope', '$http', '$modalInstance', 'to
         $event.stopPropagation();
         $scope.factoryDateOpened = true;
     };
-
     
 }]);
 

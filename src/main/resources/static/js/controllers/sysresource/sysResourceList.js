@@ -4,20 +4,21 @@ app.controller('sysResourceListController', ['$scope', '$http', '$modal', 'toast
 
     $scope.description="";
 
-    //ngGrid初始化数据
-    $scope.filterOptions = {
-        filterText: "",
-        useExternalFilter: true
-    };
-
     //提示信息
     $scope.toaster = {
         type: 'success',
         title: 'Title',
         text: 'Message'
     };
+    
     $scope.pop = function(type,title,text){
         toaster.pop(type,'',text);
+    };
+
+    //ngGrid初始化数据
+    $scope.filterOptions = {
+        filterText: "",
+        useExternalFilter: true
     };
 
     $scope.pagingOptions = {
@@ -25,6 +26,7 @@ app.controller('sysResourceListController', ['$scope', '$http', '$modal', 'toast
         pageSize: '10',
         currentPage: 1
     };
+
     $scope.gridOptions = {
         data: 'codes',
         enablePaging: true,
@@ -41,6 +43,7 @@ app.controller('sysResourceListController', ['$scope', '$http', '$modal', 'toast
             '<a ng-click="seeRowIndex(row.entity)" title="详情" class="btn btn-default m-l-xs" style="margin-top: 2px"><i class="fa fa-info-circle"></i></a>' }
         ]
     };
+    
     $scope.getPagedDataAsync = function (pageSize, page, searchText) {
         var url = 'sysresources?page=' + page + '&size=' + pageSize +'&description=' +$scope.description;
         $http.get(url).success(function (pagedata) {
@@ -48,7 +51,9 @@ app.controller('sysResourceListController', ['$scope', '$http', '$modal', 'toast
             $scope.totalServerItems = pagedata.data.totalElements;
         });
     };
+
     $scope.getPagedDataAsync($scope.pagingOptions.pageSize, $scope.pagingOptions.currentPage, "");
+
     $scope.$watch('pagingOptions', function (newVal, oldVal) {
         if (newVal !== oldVal || newVal.currentPage !== oldVal.currentPage || newVal.pageSize !== oldVal.pageSize) {
             $scope.getPagedDataAsync($scope.pagingOptions.pageSize, $scope.pagingOptions.currentPage, $scope.filterOptions.filterText);
@@ -61,16 +66,11 @@ app.controller('sysResourceListController', ['$scope', '$http', '$modal', 'toast
         }
     }, true);
 
-    $scope.pop = function(type,title,text){
-        toaster.pop(type,'',text);
-    };
-
     $scope.search = function(){
         $scope.pagingOptions.currentPage = 1;
         $scope.getPagedDataAsync($scope.pagingOptions.pageSize, $scope.pagingOptions.currentPage, '');
     }
-
-
+    
     $scope.createSysResource = function(){
         var rtn = $modal.open({
             templateUrl: 'tpl/sysresource/create_sysresource.html',
@@ -100,8 +100,7 @@ app.controller('sysResourceListController', ['$scope', '$http', '$modal', 'toast
         },function(){
         });
     }
-
-
+    
     $scope.editRowIndex = function(entity){
         var id = this.row.entity.id;
         var rtn = $modal.open({
@@ -119,7 +118,5 @@ app.controller('sysResourceListController', ['$scope', '$http', '$modal', 'toast
         },function(){
         });
     }
-
-
-}])
-;
+    
+}]);

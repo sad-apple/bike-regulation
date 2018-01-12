@@ -22,7 +22,7 @@
         <div class="form-group row">
             <label class="col-sm-3 control-label text-right">类型:</label>
             <div class="col-sm-8">
-                <select class="form-control w-lg m-r-xs pull-left" ng-options="bikeType.id as bikeType.name for bikeType in vehicleTypes" ng-model="bike.type.id">
+                <select class="form-control w-lg m-r-xs pull-left" ng-options="bikeType.id as bikeType.name for bikeType in bikeTypes" ng-model="bike.type.id">
                 </select>
             </div>
         </div>
@@ -30,9 +30,9 @@
         <div class="form-group row">
             <label class="col-sm-3 control-label text-right">所属分组:</label>
             <div class="col-sm-8">
-                <b ng-repeat="group in vehicleGroups">
+                <b ng-repeat="group in bikeGroups">
                     <label class="i-checks">
-                        <input type="checkbox" checklist-model="bike.vehicleGroups" checklist-value="group">
+                        <input type="checkbox" checklist-model="bike.bikeGroups" checklist-value="group">
                         <i></i>
                         {{group.name}}
                     </label>

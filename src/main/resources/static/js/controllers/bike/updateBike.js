@@ -1,16 +1,16 @@
-app.controller('updateBikeController', ['$scope', '$http', '$modalInstance', 'vehicleId', function ($scope, $http, $modalInstance, vehicleId) {
+app.controller('updateBikeController', ['$scope', '$http', '$modalInstance', 'bikeId', function ($scope, $http, $modalInstance, bikeId) {
     function init() {
 
-        $http.get("bikes/" + vehicleId).success(function (data) {
+        $http.get("bikes/" + bikeId).success(function (data) {
             $scope.bike = data.data;
         })
 
-        $http.get("vehiclegroups/getAll").success(function (data) {
-            $scope.vehicleGroups = data.data;
+        $http.get("bikegroups/getAll").success(function (data) {
+            $scope.bikeGroups = data.data;
         });
 
-        $http.get("vehicletypes/getAll").success(function (data) {
-            $scope.vehicleTypes = data.data;
+        $http.get("bike-types/collection").success(function (data) {
+            $scope.bikeTypes = data.data;
         });
     }
 

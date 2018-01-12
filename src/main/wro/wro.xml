@@ -71,6 +71,10 @@
         <js>file:@project.basedir@/src/main/resources/static/libs/angular/angular-textAngular/textAngular.js</js>
         <js>file:@project.basedir@/src/main/resources/static/libs/angular/angular-textAngular/textAngular-sanitize.js</js>
         <js>file:@project.basedir@/src/main/resources/static/libs/angular/angular-textAngular/textAngularSetup.js</js>
+        <js>file:@project.basedir@/src/main/resources/static/js/directives/fileModel.js</js>
+        <js>file:@project.basedir@/src/main/resources/static/js/directives/echarts/pieCharts.js</js>
+        <js>file:@project.basedir@/src/main/resources/static/js/directives/echarts/mapCharts.js</js>
+        <js>file:@project.basedir@/src/main/resources/static/js/directives/shortcut.js</js>
 
         <js>file:@project.basedir@/src/main/resources/static/libs/angular/angular-fullscreen/angular-fullscreen.js</js>
         <!--<js>file:@project.basedir@/src/main/resources/static/libs/angular/angular-baidu-map/angular-baidu-map.js</js>-->

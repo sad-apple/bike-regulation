@@ -1,6 +1,6 @@
 app.controller('updateRiderController', ['$scope', '$http', '$modalInstance', 'customerId', function ($scope, $http, $modalInstance,customerId) {
     function init(){
-        $http.get('customers/rider/'+ customerId).success(function(data){
+        $http.get('riders/'+ customerId).success(function(data){
             $scope.roles = data.data.roles;
             $scope.riderDto = data.data;
         }).error(function (err) {
@@ -14,8 +14,11 @@ app.controller('updateRiderController', ['$scope', '$http', '$modalInstance', 'c
      * 保存角色
      */
     $scope.update = function () {
-        $http.put('customers/rider/'+$scope.riderDto.id, $scope.riderDto).success(function (data) {
-            $scope.close('SUCCESS');
+        $http.put('riders/'+$scope.riderDto.id, $scope.riderDto).success(function (data) {
+            if (data.status == 'ERROR')
+                alert(data.error);
+            else
+                $scope.close('SUCCESS');
         }).error(function (err) {
             alert(err.error);
         });

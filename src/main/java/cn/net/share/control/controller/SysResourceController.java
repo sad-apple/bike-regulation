@@ -30,7 +30,7 @@ public class SysResourceController {
      * 返回所有菜单
      * @return
      */
-    @RequestMapping(value = "getAll" , method = RequestMethod.GET)
+    @RequestMapping(value = "/menus" , method = RequestMethod.GET)
     public ResponseEntity<Message> getSysResourceAll(){
         return sysResourceService.getSysResourceAll();
     }
@@ -40,7 +40,7 @@ public class SysResourceController {
      * @param id
      * @return
      */
-    @RequestMapping(value = "{id}",method = RequestMethod.GET)
+    @RequestMapping(value = "/menus/{id}",method = RequestMethod.GET)
     public ResponseEntity<Message> getSysResource(@PathVariable Long id){
         return sysResourceService.getSysResource(id);
     }
@@ -81,7 +81,7 @@ public class SysResourceController {
      * @param id
      * @return
      */
-    @RequestMapping(value = "/sysRoles/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/sys-roles/{id}", method = RequestMethod.GET)
     public ResponseEntity<Message> getRoleContainResource(@PathVariable Long id){
         return sysResourceService.getRoleContainResource(id);
     }
@@ -90,8 +90,9 @@ public class SysResourceController {
      * 返回一级菜单
      * @return
      */
-    @RequestMapping(value = "findAll",method = RequestMethod.GET)
+    @RequestMapping(value = "/first-menus", method = RequestMethod.GET)
     public ResponseEntity<Message> findAll(){
         return sysResourceService.findAll();
     }
+
 }

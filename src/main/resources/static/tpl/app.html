@@ -1,28 +1,120 @@
-
 <!-- saved from url=(0054)http://flatfull.com/themes/angulr/angular/tpl/app.html -->
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></head><body><div data-ng-include=" &#39;tpl/blocks/header.html&#39; " class="app-header navbar">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" type="text/css" href="css/index.css"/>
+  <link rel="stylesheet" type="text/css" href="libs/common/lucky/css/animate.css"/>
+  <script type="text/javascript" src="libs/jquery/jquery/dist/jquery.js"></script>
+</head>
+<body>
+
+<!-- 我是分割线 -->
+<div class="indexFGX"></div>
+
+<!--地图-->
+<div class="relative" style="overflow:hidden;" ng-controller="navController">
+  <!--顶部-->
+  <div class="indexTop relative transiton5">
+    <div class="indexTop-c auto relative">
+      <div class="indexTop-l relative col-md-2 col-sm-3 col-sm-offset-1 col-xs-3 col-xs-offset-1 col-md-offset-1">
+        <img src="img/index/logo1.png" alt="" class="zoom-in row" ui-sref="app.dashboard">
+      </div>
+      <!-- 导航栏大 -->
+      <div class="hidden-sm hidden-xs indexNav col-lg-8 col-md-9" id="indexNavs">
+        <i id="indexNavFirst"></i>
+        <ul class="indexNavUl indexNav1">
+          <li class="all-dpm">全部</li>
+          <li class="jiaoTong">交通局</li>
+          <li class="gongAn">公安局</li>
+          <li class="chengGuan">城管局</li>
+          <li class="jinRong">金融办</li>
+          <li class="wuJia">物价局</li>
+          <li class="zhiJian">质监局</li>
+          <li class="guiHua">规划局</li>
+          <li class="shuiWu">税务局</li>
+        </ul>
+      </div>
+      <div class="hidden-lg hidden-md col-lg-8 col-md-9 col-sm-8 col-xs-8">
+        <div class="row" style="height:90px;">
+          <img class="pull-right hide-nav" src="img/index/nav_btn.png" alt="">
+        </div>
+      </div>
+      <div class="clear"></div>
+      <div class="hidden-lg hidden-md row indexNav-b hidden">
+        <div class="indexNav col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
+          <ul class="indexNavUl list-unstyled indexNav2">
+            <li class="all-dpm">全部</li>
+            <li class="jiaoTong">交通局</li>
+            <li class="gongAn">公安局</li>
+            <li class="chengGuan">城管局</li>
+            <li class="jinRong">金融办</li>
+            <li class="wuJia">物价局</li>
+            <li class="zhiJian">质监局</li>
+            <li class="guiHua">规划局</li>
+            <li class="shuiWu">税务局</li>
+          </ul>
+        </div>
+      </div>
+      <!-- 全部 -->
+      <div class="slide-nav hide">
+        <div class="col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 panel-body" style="padding:35px 0;">
+          <div class="col-md-3 col-md-offset-2 col-sm-3 col-xs-4 slide-danche" style="border:none;padding-left:15px;">
+            <h3 style="margin-left:0px;">共享单车</h3>
+            <div class="slide-danche-c fl" style="margin-left:30px;">
+              <h2 value="车辆数量1" ui-sref="app.bikeQuantity">单车数量监管图表</h2>
+              <h2 value="红色违停1" ui-sref="app.bikeIllegalPark">单车违停红色监管图表</h2>
+              <h2 value="违行1" ui-sref="app.bikeViolation">单车违行监管图表</h2>
+              <h2 value="交通事故1" ui-sref="app.dashboardInsured">单车投保监管图表</h2>
+              <h2 value="车辆安全1" ui-sref="app.dashboardIllegalMoving">单车安全监管图表</h2>
+              <h2 value="车辆调度1" ui-sref="app.bikeDispatcher">单车调度指挥系统</h2>
+              <h2 value="车身广告1" ui-sref="app.adSupervision">车身广告监管图表</h2>
+              <h2 value="押金监管1" ui-sref="app.depositSuperviseReport">单车押金监管图表</h2>
+              <h2 value="充值监管1" ui-sref="app.dashboardRecharge">单车充值监管图表</h2>
+              <h2 value="物价收费1" ui-sref="app.bikePrice">单车物价监管图表</h2>
+            <!--</div>-->
+            <!--<div class="slide-danche-c fl" style="margin-left:30px;">-->
+              <h2 value="车辆质量1" ui-sref="app.bikeQuality">单车质量监管图表</h2>
+              <h2 value="电子围栏1" ui-sref="app.dashboardArea">虚拟车桩与禁停区域</h2>
+              <h2 value="慢行交通1" ui-sref="app.slowTrafficSystem">慢行交通系统规划</h2>
+              <h2 value="税务监管1" ui-sref="app.taxSuperviseReport">单车税务监管图表</h2>
+              <h2 value="区域停放1" ui-sref="app.regionReform">区域停放设施改造</h2>
+            </div>
+          </div>
+          <div class="col-md-3 col-sm-3 col-xs-4 slide-danche">
+            <h3>共享汽车</h3>
+            <div class="slide-danche-c">
+              <h2 value="车辆数量3" ui-sref="app.quantitySupervise">汽车数量监管图表</h2>
+              <h2 value="交通事故3" ui-sref='app.carInsure'>汽车投保监管图表</h2>
+              <h2 value="车辆安全3" ui-sref='app.carIllegalMoving'>汽车安全监管图表</h2>
+              <h2 value="车辆调度3" ui-sref="app.carDispatcher">汽车调度监管图表</h2>
+              <h2 value="押金监管3" ui-sref="app.carDepositSupervise">汽车押金监管图表</h2>
+              <h2 value="充值监管3" ui-sref="app.carRechargeSupervise">汽车充值监管图表</h2>
+              <h2 value="物价收费3" ui-sref="app.shareCarPriceSupervise">汽车物价监管图表</h2>
+              <h2 value="车辆质量3" ui-sref="app.carQuality">汽车质量监管图表</h2>
+              <h2 value="税务监管3" ui-sref="app.carTaxSupervise">汽车税务监管图表</h2>
+            </div>
+          </div>
+          <div class="col-md-3 col-sm-4 col-xs-4 slide-danche">
+            <h3>顺风车</h3>
+            <div class="slide-danche-c">
+              <h2 value="车辆数量2" ui-sref="app.numberSupervise">车辆数量监管图表</h2>
+              <h2 value="交通事故2" ui-sref="app.carAccidentInsured">交通事故投保监管图表</h2>
+              <h2 value="投诉纠纷2" ui-sref="app.carComplaintStatistics">投诉及纠纷</h2>
+              <h2 value="物价收费2" ui-sref="app.priceSupervise">车辆物价监管图表</h2>
+              <h2 value="税务监管2" ui-sref="app.freeRiderTax">顺风车税务监管图表</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--/  顶部-->
+
+  <div id="app-content" class="fade-in-up" ui-view=""></div>
+
+
 </div>
-<!-- / navbar -->
+<script type="text/javascript" src="libs/common/lucky/js/lucky.js" charset="GBK"></script>
 
-<!-- menu -->
-<div data-ng-include=" &#39;tpl/blocks/aside.html&#39; " class="app-aside hidden-xs {{app.settings.asideColor}}">
-</div>
-<!-- / menu -->
-
-<!-- content -->
-<div class="app-content">
-    <div ui-butterbar=""></div>
-    <a href="" class="off-screen-toggle hide" ui-toggle-class="off-screen" data-target=".app-aside"></a>
-    <div class="app-content-body fade-in-up" ui-view=""></div>
-</div>
-<!-- /content -->
-
-<!-- footer -->
-<div class="app-footer wrapper b-t bg-light">
-    <span class="pull-right">{{app.version}}</span>
-    &copy; 2017 合肥市携尔科技有限公司 版权所有.
-</div>
-<!-- / footer -->
-
-
-</body></html>
+</body>
+</html>

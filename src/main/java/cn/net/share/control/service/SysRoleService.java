@@ -44,6 +44,7 @@ public class SysRoleService {
      * @return
      */
     public ResponseEntity<Message> createSysRole(SysRole sysRole){
+        sysRole.setDeleteType("1");
         sysRoleRepository.save(sysRole);
         return new ResponseEntity(new Message(MessageType.MSG_TYPE_SUCCESS), HttpStatus.OK);
     }
@@ -88,4 +89,5 @@ public class SysRoleService {
         else
             return null;
     }
+
 }

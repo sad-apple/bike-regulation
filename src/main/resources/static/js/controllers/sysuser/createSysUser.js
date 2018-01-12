@@ -6,7 +6,7 @@ app.controller('createSysUserController', ['$scope', '$http', '$modalInstance', 
 
     //获得角色列表
     function init(){
-        $http.get('sysroles/getAllSysRole').success(function (data){
+        $http.get('sysroles/collection').success(function (data){
             $scope.roles = data.data;
         });
 

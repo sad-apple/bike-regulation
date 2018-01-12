@@ -1,0 +1,106 @@
+<div class="container-fluid child-page-box">
+  <div class="row childPage-Top">
+    <div class="row child-page-title-common-bg">
+      <h2 class="tac">汽车质量监管图表</h2>
+    </div>
+  </div>
+  <div class="row relative" ng-controller="carQualityCtrl">
+    <div class="row panel-body echarts-common-bg">
+      <div class="col-md-8 panel panel-body childe-charts-style">
+        <div class="panel-body" id="container2" style="width:100%;height:450px;"></div>
+        <!-- 图例开始 -->
+        <div class="col-lg-7 col-lg-offset-5 col-md-8 col-md-offset-4 hidden-sm hidden-xs" style="position:absolute;top:4%;z-index:99;">
+          <div class="wrapper-sm col-md-4 child-number-scroll-box">
+            <div class="child-number-scroll-lenged">
+              <span class=" fl" style="background:rgb(26, 189, 157);"></span>车辆总数&nbsp;(辆)
+            </div>
+            <div class="child-number-scroll" style="color:rgb(26, 189, 157);text-shadow: 0px 0px 5px rgba(26, 189, 157,.6);">5,000</div>
+          </div>
+          <div class="wrapper-sm col-md-4 child-number-scroll-box">
+            <div class="child-number-scroll-lenged">
+              <span class=" fl" style="background:rgb(61, 177, 255);"></span>质量合格&nbsp;(辆)
+            </div>
+            <div class="child-number-scroll fl" style="color:rgb(61, 177, 255);text-shadow: 0px 0px 5px rgba(61, 177, 255,.6);">4,500</div>
+          </div>
+          <div class="wrapper-sm col-md-4 child-number-scroll-box">
+            <div class="child-number-scroll-lenged">
+              <span class=" fl" style="background:rgb(205, 105, 245);"></span>质量不合格&nbsp;(辆)
+            </div>
+            <div class="child-number-scroll fl" style="color:rgb(205, 105, 245);text-shadow: 0px 0px 5px rgba(205, 105, 245,.6);">500</div>
+          </div>
+        </div>
+        <!-- 图例结束 -->
+      </div>
+      <div class="col-md-4 panel panel-body childe-charts-style">
+        <div class="panel-body" id="container3" style="width:100%;height:450px;"></div>
+      </div>
+      <div class="clearfix"></div>
+    </div>
+    <!--table-->
+    <div class="row panel-body bg-white child-page-scroll-table-box">
+      <h2>车辆质量明细</h2>
+      <!-- table滚动开始 -->
+      <div class="row panel-body child-page-scroll-table">
+        <div class="row">
+          <table class="table table-bordered table-hover child-page-table-1" border="1" align="center" cellpadding="0" cellspacing="0">
+            <tr>
+              <td colspan="6">车辆出厂质量评估</td>
+              <td colspan="4">车辆骑行质量评估</td>
+              <td>车辆质量评估结果</td>
+            </tr>
+            <tr>
+              <td width="9%">车辆编号</td>
+              <td width="9%">运营方</td>
+              <td width="9%">质量标准</td>
+              <td width="9%">制造商</td>
+              <td width="9%">入网资格证</td>
+              <td width="9%">入网时间</td>
+              <td width="9%">故障次数</td>
+              <td width="9%">故障次数/骑行次数</td>
+              <td width="9%">故障次数/骑行时间(小时)</td>
+              <td width="9%">故障次数/骑行路程(公里)</td>
+              <td width="9%">是否需要召回</td>
+            </tr>
+          </table>
+        </div>
+        <div class="row" id="tableScrollDemo">
+          <div id="tableScrollDemoA">
+            <table class="table table-striped table-hover child-page-table-2" border="0" align="center" cellpadding="0" cellspacing="0">
+              <tr ng-repeat="bikeQualityDto in bikeQualityDtos">
+                <td width="9%">{{bikeQualityDto.bikeId}}</td>
+                <td width="9%">{{bikeQualityDto.operationOrg}}</td>
+                <td width="9%">{{bikeQualityDto.qualityStandard}}</td>
+                <td width="9%">{{bikeQualityDto.manufacturer}}</td>
+                <td width="9%">{{bikeQualityDto.certificate}}</td>
+                <td width="9%">{{bikeQualityDto.accessTime | date:"yyyy-MM-dd"}}</td>
+                <td width="9%">{{bikeQualityDto.failureNumber}}</td>
+                <td width="9%">{{bikeQualityDto.fAndNum}}</td>
+                <td width="9%">{{bikeQualityDto.fAndTime}}</td>
+                <td width="9%">{{bikeQualityDto.fAndDistance}}</td>
+                <td width="9%">{{bikeQualityDto.isRecall == 0? "否": "是"}}</td>
+              </tr>
+            </table>
+          </div>
+          <div id="tableScrollDemoB">
+            <table class="table table-striped table-hover child-page-table-2" border="0" align="center" cellpadding="0" cellspacing="0">
+              <tr ng-repeat="bikeQualityDto in bikeQualityDtos">
+                <td width="9%">{{bikeQualityDto.bikeId}}</td>
+                <td width="9%">{{bikeQualityDto.operationOrg}}</td>
+                <td width="9%">{{bikeQualityDto.qualityStandard}}</td>
+                <td width="9%">{{bikeQualityDto.manufacturer}}</td>
+                <td width="9%">{{bikeQualityDto.certificate}}</td>
+                <td width="9%">{{bikeQualityDto.accessTime | date:"yyyy-MM-dd"}}</td>
+                <td width="9%">{{bikeQualityDto.failureNumber}}</td>
+                <td width="9%">{{bikeQualityDto.fAndNum}}</td>
+                <td width="9%">{{bikeQualityDto.fAndTime}}</td>
+                <td width="9%">{{bikeQualityDto.fAndDistance}}</td>
+                <td width="9%">{{bikeQualityDto.isRecall == 0? "否": "是"}}</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+      <!--table滚动结束-->
+    </div>
+  </div>
+</div>

@@ -78,7 +78,7 @@ angular.module('app')
       {
           name:'angularFileUpload',
           files: [
-            'libs/angular/angular-file-upload/angular-file-upload.js'
+              'libs/angular/angular-file-upload/angular-file-upload.js'
           ]
       },
       {

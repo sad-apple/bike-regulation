@@ -6,9 +6,11 @@ app.controller('changePwdController',['$http', '$scope','$localStorage','$state'
         title: 'Title',
         text: 'Message'
     };
+
     $scope.pop = function(type,title,text){
         toaster.pop(type,'',text);
     };
+
     $scope.save = function(){
         $http.put("/sysusers/"+$localStorage.userinfo.id+"/password",{"oldPwd":$scope.oldPwd,"newPwd":$scope.newPwd}).success(function(data){
             if(data.status == "SUCCESS"){
@@ -19,6 +21,7 @@ app.controller('changePwdController',['$http', '$scope','$localStorage','$state'
             }
         })
     }
+
     $scope.addAlert = function (type,msg) {
         $scope.closeAlert();
         $scope.alerts.push({
@@ -26,6 +29,7 @@ app.controller('changePwdController',['$http', '$scope','$localStorage','$state'
             msg: msg
         })
     };
+    
     $scope.closeAlert = function (b) {
         $scope.alerts.splice(b, 1)
     };

@@ -1,0 +1,71 @@
+<div ng-controller="bikeLiveController">
+
+    <ul class="breadcrumb bg-white b-b wrapper-sm m-b-none">
+        <li><a href><i class="fa fa-home"></i> 主页</a></li>
+        <li><a href>监控</a></li>
+        <li class="active">单车实况</li>
+    </ul>
+
+    <div class="hbox hbox-auto-xs hbox-auto-sm">
+        <toaster-container
+                toaster-options="{'position-class': 'toast-top-right', 'close-button':true}"></toaster-container>
+        <div class="wrapper-sm m-b-none">
+            <div class="panel panel-default ">
+                <div class="row wrapper-xs">
+                    <div class="col-md-12 col-sm-12 col-lg-12">
+                        <div class="optionpanel pull-right">
+                        <select class="form-control" ng-model="mapStyle" ng-options="x.title for x in mapStyles"
+                                ng-init="mapStyle = mapStyles[0]" ng-change="onChangeMapStyle()"></select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row wrapper-xs">
+                    <div class="col-md-12 col-sm-12 col-lg-12">
+                        <div id="allmap" style="width: 100%; height:58vh; background: #ccc" fullscreen="isFullscreen"
+                             only-watched-property>地图
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row wrapper-xs">
+                    <div class="col-md-12 col-sm-12 col-lg-12">
+                        <div class="panel-heading b-b b-light b-a">单车信息
+                            <button class="btn btn-default btn-xs pull-right" ng-init="isCollapsed=false" ng-click="displayFrame()">折叠</button>
+                        </div>
+                        <div collapse="isCollapsed" class="panel-body b-a ">
+                            <table width="100%" class="table table-striped b-a m-b-none" >
+                                <tbody>
+                                <tr>
+                                    <td style="width: 8%">SIM卡号：</td>
+                                    <td style="width: 25%"><label
+                                            class="text-left m-b-xs m-t-xs">{{lastPosition.simCardNum}}</label></td>
+                                    <td style="width: 8%">服务器时间：</td>
+                                    <td style="width: 25%"><label class="text-left m-b-xs m-t-xs">{{lastPosition.time |
+                                        date:"yyyy-MM-dd HH:mm:ss"}}</label></td>
+                                    <td style="width: 9%">GPS设备时间：</td>
+                                    <td style="width: 25%"><label class="text-left m-b-xs m-t-xs">{{lastPosition.receiveTime
+                                        |
+                                        date:"yyyy-MM-dd HH:mm:ss"}}</label></td>
+                                <tr>
+                                    <td style="width: 8%">状态：</td>
+                                    <td style="width: 25%"><label
+                                            class="text-left m-b-xs m-t-xs">{{lastPosition.status}}</label></td>
+                                    <td style="width: 8%">经度：</td>
+                                    <td style="width: 25%"><label
+                                            class="text-left m-b-xs m-t-xs">{{lastPosition.lat}}</label>
+                                    </td>
+                                    <td style="width: 9%">纬度：</td>
+                                    <td style="width: 25%"><label
+                                            class="text-left m-b-xs m-t-xs">{{lastPosition.lon}}</label>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

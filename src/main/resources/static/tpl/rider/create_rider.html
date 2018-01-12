@@ -3,11 +3,6 @@
 </div>
 <div class="modal-body">
     <form name="form" class="form-validation" novalidate>
-        <!-- alert -->
-        <div>
-            <toaster-container toaster-options="{'position-class': 'toast-top-right', 'close-button':true}"></toaster-container>
-        </div>
-        <!-- / alert -->
         <div class="form-group row">
             <input type="text" autocomplete="new-password" style="visibility:hidden;height:0;width:1px;position:absolute;left:0;top:0">
             <input type="password" autocomplete="new-password" style="visibility:hidden;height:0;width:1px;position:absolute;left:0;top:0">
@@ -66,13 +61,8 @@
         <div class="form-group row">
             <label class="col-sm-3 control-label text-right">身份证号:</label>
             <div class="col-sm-8">
-                <input type="text" placeholder="请输入身份证号" class="form-control" name="idCardNumber"
-                       ng-model="riderDto.idCardNumber" required>
-                <p>
-                    <span style="color: red" ng-show="form.idCardNumber.$invalid">
-                        <span ng-show="idCardValidate">*身份证输入有误</span>
-                    </span>
-                </p>
+                <input class="form-control" type="text" placeholder="请输入身份证号" name="idCardNumber"
+                       ng-model="riderDto.idCardNumber" ng-pattern="/(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/">
             </div>
         </div>
 

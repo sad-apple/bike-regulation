@@ -3,7 +3,7 @@
  */
 app.controller('seeSysResourceController', ['$scope', '$http', '$modalInstance', 'sysResource', function ($scope, $http, $modalInstance,sysResource) {
 
-    $scope.sysResource=sysResource;
+    $scope.sysResource = sysResource;
     /**
      * 关闭新增窗口
      * @param status

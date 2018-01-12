@@ -10,48 +10,51 @@
     <div class="wrapper-sm" >
         <div class="panel panel-default">
             <div class="row wrapper">
-                <div class="col-md-3 col-sm-8 col-lg-2">
+                <div class="col-md-3 col-sm-3 col-lg-3">
                     <div class="btn-group">
                         <label class="btn btn-default" ng-model="radioModel" btn-radio="'day'" ng-click="selectType(0)" uncheckable ng-class="{'btn-info': 0 == selected}">日</label>
                         <label class="btn btn-default" ng-model="radioModel" btn-radio="'month'" ng-click="selectType(1)"  uncheckable ng-class="{'btn-info': 1 == selected}">月</label>
                         <label class="btn btn-default" ng-model="radioModel" btn-radio="'year'" ng-click="selectType(2)"  uncheckable ng-class="{'btn-info': 2 == selected}">年</label>
                     </div>
+                    <select class="form-control w-sm pull-right m-r-xs" placeholder="选择统计用户类型" ng-model="sysRole" ng-change="statsByRole()"
+                            ng-options="sysRole.name for sysRole in sysRoles"></select>
                 </div>
-                <div class="col-md-9 col-sm-4 col-lg-10">
+                <div class="col-md-9 col-sm-9 col-lg-9">
                     <button class="btn btn-default pull-right m-l" ng-click="stats()">确定</button>
                     <p class="input-group w-lg pull-right" ng-show="0 == selected">
-                        <input type="text" class="form-control w-md" datepicker-popup="{{formats.day}}" ng-model="endDate" datepicker-options="{{endDateOptions.day}}" is-open="endOpened" min-date="startDate"  ng-required="true" close-text="Close" />
+                        <input type="text" class="form-control w-md" datepicker-popup="{{formats.day}}" ng-model="endDate" datepicker-options="dateOptions" is-open="endOpened" min-date="startDate"  ng-required="true" close-text="Close" />
                         <span class="input-group-btn">
                             <button type="button" class="btn btn-default" ng-click="openEnd($event)"><i class="glyphicon glyphicon-calendar"></i></button>
                         </span>
                     </p>
                     <p class="input-group w-lg pull-right" ng-show="1 == selected">
-                        <input type="text" class="form-control w-md" datepicker-popup="{{formats.month}}" ng-model="endDate" datepicker-options="{{endDateOptions.month}}" is-open="endOpened" min-date="startDate"  ng-required="true" close-text="Close" />
+                        <input type="text" class="form-control w-md" datepicker-popup="{{formats.month}}" ng-model="endDate" datepicker-options="dateOptions" is-open="endOpened" min-date="startDate"  ng-required="true" close-text="Close" />
                         <span class="input-group-btn">
                             <button type="button" class="btn btn-default" ng-click="openEnd($event)"><i class="glyphicon glyphicon-calendar"></i></button>
                         </span>
                     </p>
                     <p class="input-group w-lg pull-right" ng-show="2 == selected">
-                        <input type="text" class="form-control w-md" datepicker-popup="{{formats.year}}" ng-model="endDate" datepicker-options="{{endDateOptions.year}}" is-open="endOpened" min-date="startDate"  ng-required="true" close-text="Close" />
+                        <input type="text" class="form-control w-md" datepicker-popup="{{formats.year}}" ng-model="endDate" datepicker-options="dateOptions" is-open="endOpened" min-date="startDate"  ng-required="true" close-text="Close" />
                         <span class="input-group-btn">
                             <button type="button" class="btn btn-default" ng-click="openEnd($event)"><i class="glyphicon glyphicon-calendar"></i></button>
                         </span>
                     </p>
                     <p class="pull-right w-3x l-h-2x text-center">至</p>
+
                     <p class="input-group w-lg pull-right" ng-show="0 == selected">
-                        <input type="text" class="form-control w-md" datepicker-popup="{{formats.day}}" datepicker-options="{{startDateOptions.day}}" ng-model="startDate" is-open="startOpened " max-date="endDate"   ng-required="true" close-text="Close" />
+                        <input name="factoryDate" type="text" class="form-control w-md" datepicker-popup="{{formats.day}}" datepicker-options="dateOptions" ng-model="startDate" is-open="startOpened " max-date="endDate"   ng-required="true" close-text="Close" />
                         <span class="input-group-btn">
                             <button type="button" class="btn btn-default" ng-click="openStart($event)"><i class="glyphicon glyphicon-calendar"></i></button>
                         </span>
                     </p>
                     <p class="input-group w-lg pull-right" ng-show="1 == selected">
-                        <input type="text" class="form-control w-md" datepicker-popup="{{formats.month}}" datepicker-options="{{startDateOptions.month}}" ng-model="startDate" is-open="startOpened" max-date="endDate"   ng-required="true" close-text="Close" />
+                        <input name="factoryDate" type="text" class="form-control w-md" datepicker-popup="{{formats.month}}" datepicker-options="dateOptions" ng-model="startDate" is-open="startOpened" max-date="endDate"   ng-required="true" close-text="Close" />
                         <span class="input-group-btn">
                             <button type="button" class="btn btn-default" ng-click="openStart($event)"><i class="glyphicon glyphicon-calendar"></i></button>
                         </span>
                     </p>
                     <p class="input-group w-lg pull-right" ng-show="2 == selected">
-                        <input type="text" class="form-control w-md" datepicker-popup="{{formats.year}}" datepicker-options="{{startDateOptions.year}}" ng-model="startDate" is-open="startOpened " max-date="endDate"  ng-required="true" close-text="Close" />
+                        <input name="factoryDate" type="text" class="form-control w-md" datepicker-popup="{{formats.year}}" datepicker-options="dateOptions" ng-model="startDate" is-open="startOpened " max-date="endDate"  ng-required="true" close-text="Close" />
                         <span class="input-group-btn">
                             <button type="button" class="btn btn-default" ng-click="openStart($event)"><i class="glyphicon glyphicon-calendar"></i></button>
                         </span>
@@ -59,8 +62,7 @@
 
                 </div>
             </div>
-            <div class="b-t">
-                <highchart class="chart" config="chartConfig" class="span9" ></highchart>
+            <div id="chartConfig" class="b-t" >
             </div>
         </div>
     </div>

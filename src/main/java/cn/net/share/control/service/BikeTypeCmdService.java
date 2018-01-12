@@ -1,19 +1,15 @@
 package cn.net.share.control.service;
 
-import cn.net.share.control.dao.VehicleTypeCmdRepository;
-import cn.net.share.control.dao.VehicleTypeRepository;
-import cn.net.share.control.domain.VehicleType;
-import cn.net.share.control.domain.VehicleTypeCmd;
-import cn.net.share.control.dto.bike.VehicleTypeCmdDto;
+import cn.net.share.control.dao.BikeTypeCmdRepository;
+import cn.net.share.control.dao.BikeTypeRepository;
+import cn.net.share.control.domain.BikeType;
+import cn.net.share.control.domain.BikeTypeCmd;
+import cn.net.share.control.dto.bike.BikeTypeCmdDto;
 import cn.net.share.control.dto.message.Message;
 import cn.net.share.control.dto.message.MessageType;
 
 import com.google.common.collect.Maps;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.ExampleMatcher;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -24,24 +20,24 @@ import java.util.Map;
 public class BikeTypeCmdService {
 
     @Autowired
-    private VehicleTypeCmdRepository vehicleTypeCmdRepository;
+    private BikeTypeCmdRepository bikeTypeCmdRepository;
 
     @Autowired
-    private VehicleTypeRepository vehicleTypeRepository;
+    private BikeTypeRepository bikeTypeRepository;
 
     /**
      * 分页返回单车类型命令列表
-     * @param vehicleTypeCmd
+     * @param bikeTypeCmd
      * @param page
      * @param size
      * @return
      */
-    public ResponseEntity<Message> findByVehicleTypeCmdPage(VehicleTypeCmd vehicleTypeCmd, int page, int size){
+    public ResponseEntity<Message> findByBikeTypeCmdPage(BikeTypeCmd bikeTypeCmd, int page, int size){
         Integer offsetNum = (page - 1) * size;
-        String[] vehicleTypeCmds = vehicleTypeCmdRepository.vehicleTypeCmds(offsetNum, size, vehicleTypeCmd.getName(), vehicleTypeCmd.getCode());
+        String[] bikeTypeCmds = bikeTypeCmdRepository.bikeTypeCmds(offsetNum, size, bikeTypeCmd.getName(), bikeTypeCmd.getCode());
         Map map = Maps.newHashMap();
-        map.put("content", vehicleTypeCmds);
-        map.put("totalElements", vehicleTypeCmdRepository.vehicleTypeCmdsCounts(vehicleTypeCmd.getName(), vehicleTypeCmd.getCode()));
+        map.put("content", bikeTypeCmds);
+        map.put("totalElements", bikeTypeCmdRepository.bikeTypeCmdsCounts(bikeTypeCmd.getName(), bikeTypeCmd.getCode()));
         Message message = new Message(MessageType.MSG_TYPE_SUCCESS, map);
         return new ResponseEntity<Message>(message, HttpStatus.OK);
     }
@@ -51,24 +47,24 @@ public class BikeTypeCmdService {
      * @param id
      * @return
      */
-    public ResponseEntity<Message> getVehicleTypeCmd(String id){
-        VehicleTypeCmd vehicleTypeCmd = vehicleTypeCmdRepository.findOne(id);
-        VehicleType vehicleType = vehicleTypeRepository.findOne(vehicleTypeCmd.getVehicleType().getId());
-        VehicleTypeCmdDto vehicleTypeCmdDto = new VehicleTypeCmdDto(vehicleTypeCmd, vehicleType);
-        Message message = new Message(MessageType.MSG_TYPE_SUCCESS, vehicleTypeCmdDto);
+    public ResponseEntity<Message> getBikeTypeCmd(String id){
+        BikeTypeCmd bikeTypeCmd = bikeTypeCmdRepository.findOne(id);
+        BikeType bikeType = bikeTypeRepository.findOne(bikeTypeCmd.getBikeType().getId());
+        BikeTypeCmdDto bikeTypeCmdDto = new BikeTypeCmdDto(bikeTypeCmd, bikeType);
+        Message message = new Message(MessageType.MSG_TYPE_SUCCESS, bikeTypeCmdDto);
         return new ResponseEntity<Message>(message, HttpStatus.OK);
     }
 
     /**
      * 创建单车类型命令
-     * @param vehicleTypeCmdDto
+     * @param bikeTypeCmdDto
      * @return
      */
-    public ResponseEntity<Message> createVehicleTypeCmd(VehicleTypeCmdDto vehicleTypeCmdDto){
-        VehicleType vehicleType = vehicleTypeRepository.findOne(vehicleTypeCmdDto.getVehicleTypeId());
-        VehicleTypeCmd vehicleTypeCmd = new VehicleTypeCmd(vehicleTypeCmdDto);
-        vehicleTypeCmd.setVehicleType(vehicleType);
-        vehicleTypeCmdRepository.save(vehicleTypeCmd);
+    public ResponseEntity<Message> createBikeTypeCmd(BikeTypeCmdDto bikeTypeCmdDto){
+        BikeType bikeType = bikeTypeRepository.findOne(bikeTypeCmdDto.getBikeTypeId());
+        BikeTypeCmd bikeTypeCmd = new BikeTypeCmd(bikeTypeCmdDto);
+        bikeTypeCmd.setBikeType(bikeType);
+        bikeTypeCmdRepository.save(bikeTypeCmd);
         Message message = new Message(MessageType.MSG_TYPE_SUCCESS);
         return new ResponseEntity<Message>(message, HttpStatus.OK);
     }
@@ -76,17 +72,17 @@ public class BikeTypeCmdService {
     /**
      * 更新单车类型命令
      * @param id
-     * @param vehicleTypeCmdDto
+     * @param bikeTypeCmdDto
      * @return
      */
-    public ResponseEntity<Message> updateVehicleTypeCmd(String id, VehicleTypeCmdDto vehicleTypeCmdDto){
-        VehicleTypeCmd vehicleTypeCmd = vehicleTypeCmdRepository.findOne(id);
-        vehicleTypeCmd.setName(vehicleTypeCmdDto.getName());
-        vehicleTypeCmd.setCode(vehicleTypeCmdDto.getCode());
-        vehicleTypeCmd.setRemark(vehicleTypeCmdDto.getRemark());
-        VehicleType vehicleType = vehicleTypeRepository.findOne(vehicleTypeCmdDto.getVehicleTypeId());
-        vehicleTypeCmd.setVehicleType(vehicleType);
-        vehicleTypeCmdRepository.save(vehicleTypeCmd);
+    public ResponseEntity<Message> updateBikeTypeCmd(String id, BikeTypeCmdDto bikeTypeCmdDto){
+        BikeTypeCmd bikeTypeCmd = bikeTypeCmdRepository.findOne(id);
+        bikeTypeCmd.setName(bikeTypeCmdDto.getName());
+        bikeTypeCmd.setCode(bikeTypeCmdDto.getCode());
+        bikeTypeCmd.setRemark(bikeTypeCmdDto.getRemark());
+        BikeType bikeType = bikeTypeRepository.findOne(bikeTypeCmdDto.getBikeTypeId());
+        bikeTypeCmd.setBikeType(bikeType);
+        bikeTypeCmdRepository.save(bikeTypeCmd);
         Message message = new Message(MessageType.MSG_TYPE_SUCCESS);
         return new ResponseEntity<Message>(message, HttpStatus.OK);
     }
@@ -96,9 +92,10 @@ public class BikeTypeCmdService {
      * @param id
      * @return ResponseEntity<Message>
      */
-    public ResponseEntity<Message> deleteVehicleTypeCmd(String id){
-        vehicleTypeCmdRepository.delete(id);
+    public ResponseEntity<Message> deleteBikeTypeCmd(String id){
+        bikeTypeCmdRepository.delete(id);
         Message message = new Message(MessageType.MSG_TYPE_SUCCESS);
         return new ResponseEntity<Message>(message, HttpStatus.OK);
     }
+
 }

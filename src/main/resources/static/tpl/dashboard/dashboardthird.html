@@ -1,0 +1,193 @@
+<!--<link rel="stylesheet" href="libs/common/lucky/css/jquery.dataTables.css">-->
+    <!--<link rel="stylesheet" href="libs/common/lucky/css/dataTables.jqueryui.min.css">-->
+
+<script type="text/javascript" src="libs/jquery/jquery/dist/jquery.js"></script>
+    <!--<script src="libs/common/lucky/js/jquery.dataTables.min.js" charset="utf-8"></script>-->
+<link rel="stylesheet" href="libs/common/lucky/css/bootstrap-table.css">
+<script src="libs/common/lucky/js/bootstrap-table.js"></script>
+
+<link rel="stylesheet" type="text/css" href="../../css/app.css"/>
+<style>
+    .bootstrap-table th,.bootstrap-table td{
+        text-align: center;
+        vertical-align: middle;
+    }
+</style>
+<!-- breadcrumb -->
+<ul class="breadcrumb bg-white b-b wrapper-sm m-b-none">
+    <li><a href><i class="fa fa-home"></i> 主页</a></li>
+    <li><a href>首页</a></li>
+    <li class="active">Dashboard</li>
+</ul>
+<!-- / breadcrumb -->
+<!-- hbox layout -->
+<div class="hbox hbox-auto-xs hbox-auto-sm"  ng-controller="dashboard3Ctrl">
+    <!--<div class="wrapper-sm" >-->
+        <!--<select class="form-control w-sm pull-right m-r-xs" placeholder="选择主题类型" ng-model="theme" ng-change="themeChange()"-->
+            <!--ng-options="theme for theme in themes"></select>-->
+    <!--</div>-->
+    <!--<div class="wrapper-sm">-->
+        <!--<div class="col-md-6 col-sm-6 col-lg-6">-->
+            <!--<div class="panel panel-default">-->
+                <!--<div class="panel-heading">-->
+                    <!--活跃用户数量-->
+                <!--</div>-->
+                <!--<div class="panel-body" id="aliveChartConfig" style="height: 400px">-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--<div class="col-md-6 col-sm-6 col-lg-6">-->
+            <!--<div class="panel panel-default">-->
+                <!--<div class="panel-heading">-->
+                    <!--分布亮点图-->
+                <!--</div>-->
+                <!--<div class="panel-body" id="bikeLocationChartConfig" style="height: 400px">-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+
+    <!--<div class="wrapper-sm">-->
+        <!--<div class="row text-center">-->
+            <!--<div class="col-md-4 col-sm-4 col-lg-4">-->
+                <!--<div class="panel panel-default">-->
+                    <!--<div class="panel-heading">-->
+                        <!--单车投放数量-->
+                    <!--</div>-->
+                    <!--<div class="panel-body" id="bikeChartConfig" style="height: 400px">-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--<div class="col-md-4 col-sm-4 col-lg-4">-->
+                <!--<div class="panel panel-default">-->
+                    <!--<div class="panel-heading">-->
+                        <!--本周用户增长量-->
+                    <!--</div>-->
+                    <!--<div class="panel-body" id="riderChartConfig" style="height: 400px">-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--<div class="col-md-4 col-sm-4 col-lg-4">-->
+                <!--<div class="panel panel-default">-->
+                    <!--<div class="panel-heading">-->
+                        <!--运营车辆占比-->
+                    <!--</div>-->
+                    <!--<div class="panel-body" id="bikeTypeChartConfig" style="height: 400px">-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+
+    <!--<div class="wrapper-sm">-->
+        <!--<div class="panel panel-default">-->
+            <!--<div class="panel-heading">-->
+                <!--测试-->
+            <!--</div>-->
+            <!--<div class="panel-body" id="testChartConfig" style="height: 600px">-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+
+    <!--<div class="wrapper-sm">-->
+        <!--<div class="row text-center">-->
+            <!--<div class="col-md-4 col-sm-4 col-lg-4">-->
+                <!--<div class="panel panel-default">-->
+                    <!--<div class="panel-heading">-->
+                        <!--测试1-->
+                    <!--</div>-->
+                    <!--<div class="panel-body" id="tes1ChartConfig" style="height: 400px">-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+
+            <!--&lt;!&ndash;<div class="col-md-4 col-sm-4 col-lg-4">-->
+                <!--<div class="panel panel-default">-->
+                    <!--<div class="panel-heading">-->
+                        <!--测试3-->
+                    <!--</div>-->
+                    <!--<div class="panel-body" id="tes3ChartConfig" style="height: 400px">-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>&ndash;&gt;-->
+        <!--</div>-->
+    <!--</div>-->
+    <div class="wrapper-sm">
+        <div class="row text-center">
+            <div class="col-md-12 col-sm-12 col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        测试2
+                    </div>
+                    <div class="panel-body">
+                        <table id="table-style" data-toggle="table" class="childPage-table-c relative"  data-height="246" cellspacing="0" width="100%">
+                            <thead style="background:#f9fafc;">
+                                <tr>
+                                    <th colspan='3'>骑行用户角色</th>
+                                    <th colspan='5'>车辆信息</th>
+                                    <th colspan='4'>缴费信息</th>
+                                    <th colspan='2'>罚款信息</th>
+                                </tr>
+                                <tr>
+                                    <th>姓名</th>
+                                    <th>身份证</th>
+                                    <th>手机</th>
+                                    <th>城市</th>
+                                    <th>运营方</th>
+                                    <th>车辆编号</th>
+                                    <th>骑行时间</th>
+                                    <th>骑行时长</th>
+                                    <th>标准</th>
+                                    <th>应收</th>
+                                    <th>实收</th>
+                                    <th>幅度</th>
+                                    <th>是否罚款</th>
+                                    <th>罚款金额</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="riderOrderDto in riderOrderDtos">
+                                    <td>{{riderOrderDto.sysUser.name}}</td>
+                                    <td>{{riderOrderDto.idCardNumber}}</td>
+                                    <td>{{riderOrderDto.sysUser.phone}}</td>
+                                    <td>{{riderOrderDto.city}}</td>
+                                    <td>{{riderOrderDto.operationOrg}}</td>
+                                    <td>{{riderOrderDto.bike.plateNumber}}</td>
+                                    <td>{{riderOrderDto.rideTime | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                                    <td>{{riderOrderDto.runTime}}</td>
+                                    <td>{{riderOrderDto.price}}</td>
+                                    <td>{{riderOrderDto.expectIncome}}</td>
+                                    <td>{{riderOrderDto.actualityIncome}}</td>
+                                    <td>{{riderOrderDto.margin + "%"}}</td>
+                                    <td>{{riderOrderDto.isFined == 1 ? "是" : "否"}}</td>
+                                    <td>{{riderOrderDto.fineNum}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--<script type="text/javascript" src="libs/common/lucky/js/lucky-c.js"></script>-->
+<script>
+//    $(function() {
+//        alert("1");
+//        $('#hover, #striped').click(function() {
+//            var classes = 'table';
+//            if ($('#hover').prop('checked')) {
+//                classes = 'table table-hover';
+//            }
+//            $('#table-style').bootstrapTable('destroy')
+//                  .bootstrapTable({
+//                      classes: classes,
+//                      striped: $('#striped').prop('checked')
+//                  });
+//        });
+//        alert("2");
+//    });
+//$('#table-style').bootstrapTable({
+//    url: 'data.json'
+//});
+</script>

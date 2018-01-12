@@ -33,7 +33,7 @@ app.controller('positionReviewController', ['$scope', '$http', '$modal', 'toaste
 
     $scope.lastPosition = null;
     function getLastPosition(){
-        $http.get('gpsDatas/newPosition/' + simCardNum).success(function(result){
+        $http.get('gps-datas/new-position/' + simCardNum).success(function(result){
             if(result.status == 'SUCCESS'){
                 $scope.lastPosition = result.data;
             }else{
@@ -73,7 +73,7 @@ app.controller('positionReviewController', ['$scope', '$http', '$modal', 'toaste
             "<div>纬度:"+$scope.lastPosition.lat+"</div>" +
             "<div>速度:" + $scope.lastPosition.speed+"</div>" +
             "<div>方向:"+$scope.lastPosition.direction+"</div>" +
-            "<div>里程:"+$scope.lastPosition.distance+"</div>" +
+            // "<div>里程:"+$scope.lastPosition.distance+"</div>" +
             "<div>服务器时间:"+$scope.lastPosition.receiveTime+"</div>" +
             "<div onclick='test()'>gps时间:"+$scope.lastPosition.time+"</div>", opts);
         map.openInfoWindow(infoWindow, bike.getPosition());
@@ -85,12 +85,12 @@ app.controller('positionReviewController', ['$scope', '$http', '$modal', 'toaste
     }
 
     $scope.$watch('lastPosition', function(newValue, oldValue){
-        if(newValue != null && newValue !== oldValue){
+        if(newValue != null && newValue !== oldValue)
             addCar();
-        }
     }, true);
 
     var interval = $interval(getLastPosition, 20000);
+
     $scope.$on('$destroy', function() {
         if (angular.isDefined(interval)) {
             $interval.cancel(interval);

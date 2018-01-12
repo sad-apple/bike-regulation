@@ -1,5 +1,5 @@
 server:
-  port: 8086
+  port: 8090
 spring:
   output:
     ansi:
@@ -11,14 +11,20 @@ spring:
       ddl-auto: update
   datasource:
     platform: mysql
-    url: jdbc:mysql://192.168.3.20:3306/sharebike?useUnicode=true&characterEncoding=UTF-8
+    url: jdbc:mysql://192.168.3.20:3306/bike_regulation?useUnicode=true&characterEncoding=UTF-8
     username: dev
     password: dev123456
     driver-class-name: com.mysql.jdbc.Driver
   redis:
     host: 127.0.0.1
 
+file:
+  filePath: ./files/
+  excelFilePath: ./files/excel/
+  newsFilePath: /var/www/html/news/
+  requestNewsFilePath: http://192.168.3.20:8090/news/
+
 logging:
-  file: ./mylogs/sharebike-bms.log
+  file: ./mylogs/bike-regulation.log
   level.: ERROR
   level.cn.net.share: INFO

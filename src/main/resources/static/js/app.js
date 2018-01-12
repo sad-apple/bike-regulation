@@ -20,6 +20,9 @@ angular.module('app', [
     'mwl.confirm',
     'ivh.treeview',
     'checklist-model',
-    'highcharts-ng',
+    // 'ng-echarts',
+    // 'highcharts-ng',
+    'textAngular',
     'angular-momentjs'
+    
 ]);

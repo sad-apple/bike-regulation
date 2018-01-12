@@ -1,19 +1,17 @@
 package cn.net.share.control.controller;
 
+import cn.net.share.control.domain.GpsData;
 import cn.net.share.control.dto.message.Message;
 import cn.net.share.control.service.GpsDataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 
 @RestController
-@RequestMapping(value = "gpsDatas")
+@RequestMapping(value = "gps-datas")
 public class GpsDataController {
     @Autowired
     private GpsDataService gpsDataService;
@@ -23,9 +21,9 @@ public class GpsDataController {
      * @param simCardNum
      * @return
      */
-    @RequestMapping(value = "/newPosition/{simCardNum}", method = RequestMethod.GET)
-    public ResponseEntity<Message> getVehicleNewPosition(@PathVariable String simCardNum){
-        return gpsDataService.getVehicleNewPosition(simCardNum);
+    @RequestMapping(value = "/new-position/{simCardNum}", method = RequestMethod.GET)
+    public ResponseEntity<Message> getBikeNewPosition(@PathVariable String simCardNum){
+        return gpsDataService.getBikeNewPosition(simCardNum);
     }
 
     /**
@@ -59,4 +57,11 @@ public class GpsDataController {
     public void deleteRedis(String simCardNum){
         gpsDataService.deleteRedis(simCardNum);
     }
+
+    //临时代码：保存gps演示点
+    @RequestMapping(method = RequestMethod.POST)
+    public void saveData() {
+        gpsDataService.saveData();
+    }
+
 }

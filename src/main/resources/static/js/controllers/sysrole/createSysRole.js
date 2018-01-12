@@ -2,7 +2,7 @@ app.controller('createSysRoleController', ['$scope', '$http', '$modalInstance', 
     $scope.sysResources = [];
     $scope.selectedResources = [];
 
-    $http.get('sysresources/findAll').success(function(data){
+    $http.get('sysresources/first-menus').success(function(data){
         $scope.sysResources = data.data;
     })
     /**

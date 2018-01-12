@@ -1,16 +1,22 @@
-app.controller('updateRegulatorController', ['$scope', '$http', '$modalInstance', 'customerId', function ($scope, $http, $modalInstance,customerId) {
+app.controller('updateRegulatorController', ['$scope', '$http', '$modalInstance', 'regulatorDetailsId', function ($scope, $http, $modalInstance,regulatorDetailsId) {
     function init(){
-        $http.get('customers/'+ customerId).success(function(data){
-            $scope.customer = data.data;
+        $http.get('regulator-orgs/'+ regulatorDetailsId).success(function(data){
+            $scope.regulatorOrgDetailsDto = data.data;
+        }).error(function (err) {
+            alert(err.error);
         })
     }
+    
     init();
+    
     /**
      * 保存客户信息
      */
     $scope.update = function () {
-        $http.put('customers/'+$scope.customer.id, $scope.customer).success(function (data) {
+        $http.put('regulator-orgs/'+$scope.regulatorOrgDetailsDto.id, $scope.regulatorOrgDetailsDto).success(function (data) {
             $scope.close('SUCCESS');
+        }).error(function (err) {
+            alert(err.error);
         })
     }
 

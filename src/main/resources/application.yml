@@ -1,4 +1,6 @@
 spring:
+  jmx:
+    default-domain: bike-regulation
   profiles:
     active: prod
 

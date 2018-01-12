@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 public class SystemController {
     @Autowired
     private SystemService systemService;
+
     /**
      * 登录接口
      * @return
@@ -36,8 +37,9 @@ public class SystemController {
      * @param timeStamp
      * @return
      */
-    @RequestMapping(value = "/getRandomCode", method = RequestMethod.GET)
+    @RequestMapping(value = "/random-code", method = RequestMethod.GET)
     public ResponseEntity<Message> getRandomCodeByTimeStamp(String timeStamp){
         return  systemService.getRandomCodeByTimeStamp(timeStamp);
     }
+
 }

@@ -3,7 +3,7 @@ app.controller('updateSysUserPasswordController', ['$scope', '$http', '$modalIns
      * 保存角色
      */
     $scope.updatePwd = function () {
-        $http.put('sysusers/'+ sysUserId+'/updateSysUserPassword', $scope.sysUser).success(function (data) {
+        $http.put('sysusers/'+ sysUserId+'/sysuser-password', $scope.sysUser).success(function (data) {
             $scope.close('SUCCESS');
         })
     }

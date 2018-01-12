@@ -1,0 +1,83 @@
+<div class="container-fluid child-page-box">
+  <div class="row childPage-Top">
+    <div class="row child-page-title-common-bg">
+      <h2 class="tac">投诉及纠纷</h2>
+    </div>
+  </div>
+  <div class="row relative" ng-controller="carComplaintStatistics">
+    <div class="row panel-body echarts-common-bg">
+      <div class="col-md-8 panel panel-body childe-charts-style">
+        <div class="panel-body" id="option1" style="width:100%;height:450px;"></div>
+      </div>
+      <div class="col-md-4 panel panel-body childe-charts-style">
+        <div class="panel-body" id="option2" style="width:100%;height:450px;"></div>
+        <!--日期选择控件开始-->
+        <div style="position: absolute;top:24%;right:2%;z-index: 99">
+          <button type="button" class="btn btn-default pull-right m-r-xs" ng-click="timeTool($event)"><i
+                  class="glyphicon glyphicon-calendar"></i></button>
+          <input type="text" class="form-control w-sm pull-right m-r-xs" name="createTime"
+                 datepicker-popup="{{format}}" placeholder="" ng-model="date"
+                 is-open="createTimeOpened" datepicker-options="dateOptions" max-date="maxDate"
+                 close-text="关闭" style="height:28px;width:100px;"/>
+        </div>
+        <!--日期选择控件结束-->
+      </div>
+      <div class="clearfix"></div>
+    </div>
+    <!--table-->
+    <div class="row panel-body bg-white child-page-scroll-table-box">
+      <h2>投诉及纠纷处理明细</h2>
+      <!-- table滚动开始 -->
+      <div class="row panel-body child-page-scroll-table">
+        <div class="row">
+          <table class="table table-hover child-page-table-1" border="1" align="center" cellpadding="0" cellspacing="0">
+            <tr>
+              <td width="11%">单号</td>
+              <td width="11%">投诉车辆</td>
+              <td width="11%">车主</td>
+              <td width="11%">电话</td>
+              <td width="11%">运营类型</td>
+              <td width="11%">投诉时间</td>
+              <td width="11%">投诉类型</td>
+              <td width="11%">投诉内容</td>
+              <td width="11%">处理情况</td>
+            </tr>
+          </table>
+        </div>
+        <div class="row" id="tableScrollDemo">
+          <div id="tableScrollDemoA">
+            <table class="table table-striped table-hover child-page-table-2" border="0" align="center" cellpadding="0" cellspacing="0">
+              <tr ng-repeat="carDeposit in tableSource">
+                <td width="11%">{{carDeposit.billNumber}}</td>
+                <td width="11%">{{carDeposit.carNumber}}</td>
+                <td width="11%">{{carDeposit.carOwner}}</td>
+                <td width="11%">{{carDeposit.telephoneNumber}}</td>
+                <td width="11%">{{carDeposit.orgType}}</td>
+                <td width="11%">{{carDeposit.date | date:"yyyy-MM-dd HH:mm:ss"}}</td>
+                <td width="11%">{{carDeposit.type}}</td>
+                <td width="11%">{{carDeposit.content}}</td>
+                <td width="11%" ng-style="setColor(carDeposit.result)">{{carDeposit.result}}</td>
+              </tr>
+            </table>
+          </div>
+          <div id="tableScrollDemoB">
+            <table class="table table-striped table-hover child-page-table-2" border="0" align="center" cellpadding="0" cellspacing="0">
+              <tr ng-repeat="carDeposit in tableSource">
+                <td width="11%">{{carDeposit.billNumber}}</td>
+                <td width="11%">{{carDeposit.carNumber}}</td>
+                <td width="11%">{{carDeposit.carOwner}}</td>
+                <td width="11%">{{carDeposit.telephoneNumber}}</td>
+                <td width="11%">{{carDeposit.orgType}}</td>
+                <td width="11%">{{carDeposit.date | date:"yyyy-MM-dd HH:mm:ss"}}</td>
+                <td width="11%">{{carDeposit.type}}</td>
+                <td width="11%">{{carDeposit.content}}</td>
+                <td width="11%" ng-style="setColor(carDeposit.result)">{{carDeposit.result}}</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+      <!--table滚动结束-->
+    </div>
+  </div>
+</div>

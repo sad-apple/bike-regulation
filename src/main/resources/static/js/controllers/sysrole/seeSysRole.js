@@ -2,6 +2,7 @@ app.controller('seeSysRoleController', ['$scope', '$http', '$modalInstance', 'sy
     function init(){
         $scope.sysRole = sysRole;
     }
+    
     init();
 
     /**

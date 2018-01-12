@@ -1,14 +1,22 @@
 'use strict';
 
 app.controller('riderListCtrl', ['$scope', '$http', '$modal', 'toaster', function ($scope, $http, $modal, toaster) {
+
     $scope.username = "";
     $scope.fullName = "";
 
-    //ngGrid初始化数据
-    $scope.filterOptions = {
-        filterText: "",
-        useExternalFilter: true
-    };
+    /**
+     * 获取登录用户信息
+     */
+    function init(){
+        $http.get("sysusers/login-sysuser").success(function(data){
+            $scope.loginUser = data.data;
+        }).error(function (err) {
+            alert(err.error);
+        });
+    }
+
+    init();
 
     //提示信息
     $scope.toaster = {
@@ -16,8 +24,15 @@ app.controller('riderListCtrl', ['$scope', '$http', '$modal', 'toaster', functio
         title: 'Title',
         text: 'Message'
     };
+
     $scope.pop = function(type,title,text){
         toaster.pop(type,'',text);
+    };
+
+    //ngGrid初始化数据
+    $scope.filterOptions = {
+        filterText: '',
+        useExternalFilter: true
     };
 
     $scope.pagingOptions = {
@@ -37,7 +52,7 @@ app.controller('riderListCtrl', ['$scope', '$http', '$modal', 'toaster', functio
         pagingOptions: $scope.pagingOptions,
         columnDefs: [
             { field: 'username', displayName: '用户名', width:'150px' },
-            { field: 'type', displayName: '类别', width:'150px',cellTemplate: '<div class="ngCellText ng-scope col1 colt1" >{{row.entity.type == 1 ? "骑行用户" : "单车车主" }}</div>' },
+            { field: 'type', displayName: '类别', width:'150px',cellTemplate: '<div class="ngCellText ng-scope col1 colt1" >{{row.entity.type == 3 ? "骑行用户" : "单车车主" }}</div>' },
             { field: 'fullName', displayName: '姓名', width:'150px' },
             { field: 'idCardNumber', displayName: '身份证号', width:'160px' },
             { field: 'sex', displayName: '性别', width:'100px' },
@@ -45,24 +60,28 @@ app.controller('riderListCtrl', ['$scope', '$http', '$modal', 'toaster', functio
             { field: 'phone', displayName: '手机号', width:'150px' },
             { field: 'email', displayName: '邮箱', width:'150px' },
             { field: 'userStatus', displayName: '用户状态', width:'100px',cellTemplate: '<div class="ngCellText ng-scope col8 colt8" >{{row.entity.userStatus == 1 ? "启用" : "禁用" }}</div>' },
-            { field: 'remove', displayName: '操作', width: "400px", cellTemplate: '<a ng-click="editRowIndex(row.entity)" title="编辑" class="btn btn-default m-l-xs" style="margin-top: 2px"><i class="fa fa-pencil"></i></a>' +
-            '<a mwl-confirm message="确定删除?" title="删除" confirm-text="确定" cancel-text="取消" confirm-button-type="danger" on-confirm="removeRowIndex(row.entity)" class="btn btn-default m-l-xs" style="margin-top: 2px"><i class="fa fa-times"></i></a>' +
-            '<a ng-click="editPassword(row.entity)" title="编辑密码" class="btn btn-default m-l-xs" style="margin-top: 2px"><i class="icon-key"></i></a>' +
-            '<a ng-click="seeRowIndex(row.entity)" title="详情" class="btn btn-default m-l-xs" style="margin-top: 2px"><i class="fa fa-info-circle"></i></a>' +
-            '<a mwl-confirm message="确定升级?" title="升级" confirm-text="确定" cancel-text="取消" confirm-button-type="danger" on-confirm="upgrade(row.entity)" class="btn btn-default m-l-xs" style="margin-top: 2px"><i class="fa fa-star"></i></a>'}
+            { field: 'remove', displayName: '操作', width: "400px", 
+              cellTemplate: '<button class="btn btn-primary btn-sm m-t-xs m-l-xs" title="编辑" style="margin-top: 2px" ng-click="editRowIndex(row.entity)">编辑</button>' +
+              '<button class="btn btn-warning btn-sm m-t-xs m-l-xs" title="密码"  style="margin-top: 2px"  ng-click="editPassword(row.entity)">密码</button>' +
+              '<button class="btn btn-info btn-sm m-t-xs m-l-xs" title="详情"  style="margin-top: 2px" ng-click="seeRowIndex(row.entity)">详情</button>' +
+              '<button class="btn btn-success btn-sm m-t-xs m-l-xs" style="margin-top: 2px" confirm-button-type="info" mwl-confirm message="确定升级?" title="升级" confirm-text="确定" cancel-text="取消" on-confirm="upgrade(row.entity)">升级</button>' +
+              '<button class="btn btn-danger btn-sm m-t-xs m-l-xs" style="margin-top: 2px" confirm-button-type="danger" mwl-confirm message="确定删除?" title="删除" confirm-text="确定" cancel-text="取消" on-confirm="removeRowIndex(row.entity)">删除</button>'
+            }
         ]
     };
+
     /**
      * 获取骑行用户列表
      * @param pageSize
      * @param page
      * @param searchText
      */
-    $scope.getPagedDataAsync = function (pageSize, page, searchText) {
-        var url = 'customers/rider?page=' + page + '&size=' + pageSize + '&username=' +$scope.username ;
-        if($scope.fullName != ""){
-            url+="&fullName="+$scope.fullName;
-        }
+    $scope.getPagedDataAsync = function (pageSize, page) {
+        var url = 'riders?page=' + page + '&size=' + pageSize ;
+
+        url = $scope.username != "" ? url + '&username=' + $scope.username : url;
+
+        url = $scope.username != "" ? url + '&fullName=' + $scope.fullName : url;
 
         $http.get(url).success(function (pagedata) {
             $scope.codes = pagedata.data.content;
@@ -71,39 +90,25 @@ app.controller('riderListCtrl', ['$scope', '$http', '$modal', 'toaster', functio
             alert(err.error);
         });
     };
-    $scope.getPagedDataAsync($scope.pagingOptions.pageSize, $scope.pagingOptions.currentPage, "");
+    
+    $scope.getPagedDataAsync($scope.pagingOptions.pageSize, $scope.pagingOptions.currentPage);
+    
     $scope.$watch('pagingOptions', function (newVal, oldVal) {
         if (newVal !== oldVal || newVal.currentPage !== oldVal.currentPage || newVal.pageSize !== oldVal.pageSize) {
-            $scope.getPagedDataAsync($scope.pagingOptions.pageSize, $scope.pagingOptions.currentPage, $scope.filterOptions.filterText);
+            $scope.getPagedDataAsync($scope.pagingOptions.pageSize, $scope.pagingOptions.currentPage);
         }
     }, true);
 
     $scope.$watch('filterOptions', function (newVal, oldVal) {
         if (newVal !== oldVal) {
-            $scope.getPagedDataAsync($scope.pagingOptions.pageSize, $scope.pagingOptions.currentPage, $scope.filterOptions.filterText);
+            $scope.getPagedDataAsync($scope.pagingOptions.pageSize, $scope.pagingOptions.currentPage);
         }
     }, true);
 
-    $scope.pop = function(type,title,text){
-        toaster.pop(type,'',text);
-    };
-
     $scope.search = function(){
         $scope.pagingOptions.currentPage = 1;
-        $scope.getPagedDataAsync($scope.pagingOptions.pageSize, $scope.pagingOptions.currentPage, '');
+        $scope.getPagedDataAsync($scope.pagingOptions.pageSize, $scope.pagingOptions.currentPage);
     }
-
-    /**
-     * 获取登录用户信息
-     */
-    function init(){
-        $http.get("sysusers/getLoginSysUser").success(function(data){
-            $scope.loginUser = data.data;
-        }).error(function (err) {
-            alert(err.error);
-        });
-    }
-    init();
 
     /**
      * 创建用户
@@ -199,14 +204,17 @@ app.controller('riderListCtrl', ['$scope', '$http', '$modal', 'toaster', functio
             $scope.pop('error', '', '您不可以删除用户');
             return;
         }
-        $http.delete('customers/riderRemove/'+this.row.entity.id).success(function(data) {
+
+        $http.delete('riders/'+this.row.entity.id).success(function(data) {
             if(data.status == 'SUCCESS'){
                 $scope.pop('success','','删除成功');
                 $scope.getPagedDataAsync($scope.pagingOptions.pageSize, $scope.pagingOptions.currentPage);
             }else{
-                $scope.pop('error', '', data.error);
+                alert(data.error);
             }
-        })
+        }).error(function (err) {
+            alert(err.error);
+        });
     }
 
     /**
@@ -214,15 +222,15 @@ app.controller('riderListCtrl', ['$scope', '$http', '$modal', 'toaster', functio
      * @param entity
      */
     $scope.upgrade = function (entity) {
-        $http.put('customers/upgrade',{id:this.row.entity.id}).success(function (data) {
+        $http.put('riders/upgrade',{id:this.row.entity.id}).success(function (data) {
             if (data.status == 'SUCCESS'){
                 $scope.pop('success','','升级成功');
                 $scope.getPagedDataAsync($scope.pagingOptions.pageSize, $scope.pagingOptions.currentPage);
             }else {
-                $scope.pop('error', '', data.error);
+                alert(data.error);
             }
-        })
+        }).error(function (err) {
+            alert(err.error);
+        });
     }
-    
-}])
-;
+}]);

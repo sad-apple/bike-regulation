@@ -1,33 +1,69 @@
-<!DOCTYPE html>
 <html lang="zh-CN" data-ng-app="app">
 <head>
   <meta charset="utf-8" />
   <meta name="renderer" content="webkit">
-  <title>携尔单车管理系统</title>
+  <title>携尔智慧交通系统</title>
   <meta name="description" content="Angularjs, Html5, Music, Landing, 4 in 1 ui kits package" />
   <meta name="keywords" content="AngularJS, angular, bootstrap, admin, dashboard, panel, app, charts, components,flat, responsive, layout, kit, ui, route, web, app, widgets" />
-  <meta name="viewport" content="width=bike-width, initial-scale=1, maximum-scale=1" />
+  <!--<meta name="viewport" content="width=bike-width, initial-scale=1, maximum-scale=1" />-->
   <link rel="stylesheet" href="libs/assets/animate.css/animate.css" type="text/css" />
   <link rel="stylesheet" href="libs/assets/font-awesome/css/font-awesome.min.css" type="text/css" />
   <link rel="stylesheet" href="libs/assets/simple-line-icons/css/simple-line-icons.css" type="text/css" />
   <link rel="stylesheet" href="libs/jquery/bootstrap/dist/css/bootstrap.css" type="text/css" />
   <link rel="stylesheet" href="css/app.angular.css" type="text/css" />
-  <link href="http://api.map.baidu.com/library/TrafficControl/1.4/src/TrafficControl_min.css" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" href="css/textAngular.css" type="text/css" />
+  <link rel="stylesheet" href="libs/common/confirm/css/showBo.css" type="text/css" />
+  <link rel="stylesheet" href="css/app.css" type="text/css" />
   <script src="js/app.angular.js"></script>
+  <link rel="stylesheet" href="http://api.map.baidu.com/library/TrafficControl/1.4/src/TrafficControl_min.css" type="text/css" />
+  <link rel="stylesheet" href="http://api.map.baidu.com/library/DrawingManager/1.4/src/DrawingManager_min.css" />
+  <link rel="stylesheet" href="http://api.map.baidu.com/library/SearchInfoWindow/1.4/src/SearchInfoWindow_min.css" />
   <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=584cqWoEbTyVH9gjxjbojF5Xi9Wt2NMc"></script>
-  <script type="text/javascript" src="http://api.map.baidu.com/library/DistanceTool/1.2/src/DistanceTool_min.js"></script>
+
+  <script src="libs/common/mapbox/mapbox-gl.js"></script>
+  <!--<script src='libs/common/mapbox/echarts-gl.min.js'></script>-->
+  <link href='libs/common/mapbox/mapbox-gl.css' rel='stylesheet'/>
+
   <script type="text/javascript" src="http://api.map.baidu.com/library/TrafficControl/1.4/src/TrafficControl_min.js"></script>
   <script type="text/javascript" src="http://api.map.baidu.com/library/DrawingManager/1.4/src/DrawingManager_min.js"></script>
-  <link rel="stylesheet" href="http://api.map.baidu.com/library/DrawingManager/1.4/src/DrawingManager_min.css" />
-  <script type="text/javascript" src="http://api.map.baidu.com/library/DrawingManager/1.4/src/DrawingManager_min.js"></script>
-  <link rel="stylesheet" href="http://api.map.baidu.com/library/DrawingManager/1.4/src/DrawingManager_min.css" />
+  <script type="text/javascript" src="http://api.map.baidu.com/library/GeoUtils/1.2/src/GeoUtils.js"></script>
+  <script type="text/javascript" src="http://api.map.baidu.com/library/SearchInfoWindow/1.4/src/SearchInfoWindow_min.js"></script>
+  <script type="text/javascript" src="http://api.map.baidu.com/library/DistanceTool/1.2/src/DistanceTool_min.js"></script>
+  <script type="text/javascript" src="http://api.map.baidu.com/library/LuShu/1.2/src/LuShu_min.js"></script>
+  <script type="text/javascript" src="http://api.map.baidu.com/library/TextIconOverlay/1.2/src/TextIconOverlay_min.js"></script>
+  <script type="text/javascript" src="http://api.map.baidu.com/library/MarkerClusterer/1.2/src/MarkerClusterer_min.js"></script>
+  <script type="text/javascript" src="http://api.map.baidu.com/library/Heatmap/2.0/src/Heatmap_min.js"></script>
+  <script src="libs/common/mapbox/coord-transformation.js"></script>
+  <script src="libs/jquery/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="libs/jquery/bootstrap/dist/js/bootstrap.js"></script>
+  <script src="libs/angular/angular-echart/echarts.js"></script>
+  <script src="libs/angular/angular-echart/bmap.min.js"></script>
+  <script src="libs/angular/angular-echart/lodash.js"></script>
+  <script src="libs/angular/angular-echart/themes/vintage.js"></script>
+  <script src="libs/angular/angular-echart/themes/dark.js"></script>
+  <script src="libs/angular/angular-echart/themes/infographic.js"></script>
+  <script src="libs/angular/angular-echart/themes/macarons.js"></script>
+  <script src="libs/angular/angular-echart/themes/roma.js"></script>
+  <script src="libs/angular/angular-echart/themes/shine.js"></script>
+  <script src="libs/angular/angular-echart/echarts-gl.js"></script>
+  <script src="libs/angular/angular-echart/ng-echarts.js"></script>
+  <script src="libs/angular/angular-file-upload/angular-file-upload.js"></script>
+  <script src="libs/common/excel/alasql.min.js"></script>
+  <script src="libs/common/excel/xls.core.min.js"></script>
 </head>
-<body ng-controller="AppCtrl">
-  <div class="app" id="app" ng-class="{'app-header-fixed':app.settings.headerFixed, 'app-aside-fixed':app.settings.asideFixed, 'app-aside-folded':app.settings.asideFolded, 'app-aside-dock':app.settings.asideDock, 'container':app.settings.container}" ui-view></div>
-  <script src="libs/angular/angular-highcharts/highcharts-ng.js"></script>
-  <script src="libs/angular/angular-highcharts/highstock.js"></script>
+
+<body ng-controller="AppCtrl" style="background:rgb(55, 61, 65);">
+  <div class="app" id="app" ng-class="{'app-aside-folded':app.settings.asideFolded, 'app-aside-dock':app.settings.asideDock, 'container':app.settings.container}" ui-view></div>
+  <script src="libs/angular/angular-highcharts/highcharts.js"></script>
+  <script src="libs/angular/angular-highcharts/highcharts-more.js"></script>
+  <script src="libs/angular/angular-highcharts/solid-gauge.js"></script>
   <script src="libs/angular/angular-image-compress/ng-image-compress.js"></script>
   <script src="libs/angular/angular-textAngular/textAngular-rangy.min.js"></script>
   <script src="libs/angular/angular-moment/angular-momentjs.js"></script>
+  <script src="libs/common/speech/require.js"></script>
+  <script src="libs/common/speech/speech.browser.sdk.js"></script>
+  <script src="libs/common/confirm/js/showBo.js"></script>
+  <script src="libs/common/baidumap/AreaRestriction_min.js"></script>
+  <script type="text/javascript" src="libs/common/lucky/js/lucky.js" charset="GBK"></script>
 </body>
 </html>

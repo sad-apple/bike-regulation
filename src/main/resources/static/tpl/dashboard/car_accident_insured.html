@@ -1,0 +1,74 @@
+<div class="container-fluid child-page-box">
+  <div class="row childPage-Top">
+    <div class="row child-page-title-common-bg">
+      <h2 class="tac">交通事故投保监管图表</h2>
+    </div>
+  </div>
+  <div class="row relative" ng-controller="carAccidentInsured">
+    <div class="row panel-body echarts-common-bg">
+      <div class="col-md-8 panel panel-body childe-charts-style relative">
+        <div class="panel-body" id="option1" style="width:100%;height:450px;"></div>
+      </div>
+      <div class="col-md-4 panel panel-body childe-charts-style">
+        <div class="panel-body" id="option2" style="width:100%;height:450px;"></div>
+      </div>
+      <div class="clearfix"></div>
+    </div>
+    <!--table-->
+    <div class="row panel-body bg-white child-page-scroll-table-box">
+      <h2>交通事故及投保情况</h2>
+      <!--<div ng-grid="gridOptions" class="table-bordered" style="min-height:480px;"></div>-->
+      <!-- table滚动开始 -->
+      <div class="row panel-body child-page-scroll-table">
+        <div class="row">
+          <table class="table table-hover child-page-table-1" border="1" align="center" cellpadding="0" cellspacing="0">
+            <tr>
+              <td width="11%">车牌号码</td>
+              <td width="11%">车主</td>
+              <td width="11%">电话</td>
+              <td width="11%">运营类型</td>
+              <td width="11%">事故类型</td>
+              <td width="11%">发生时间</td>
+              <td width="11%">投保情况</td>
+              <td width="11%">保险公司</td>
+              <td width="11%">投保类型</td>
+            </tr>
+          </table>
+        </div>
+        <div class="row" id="tableScrollDemo">
+          <div id="tableScrollDemoA">
+            <table class="table table-striped table-hover child-page-table-2" border="0" align="center" cellpadding="0" cellspacing="0">
+              <tr ng-repeat="bikeQuantityDto in tableSource">
+                <td width="11%">{{bikeQuantityDto.platNumber}}</td>
+                <td width="11%">{{bikeQuantityDto.ownerName}}</td>
+                <td width="11%">{{bikeQuantityDto.phone}}</td>
+                <td width="11%">{{bikeQuantityDto.operationType}}</td>
+                <td width="11%">{{bikeQuantityDto.accidentType}}</td>
+                <td width="11%">{{bikeQuantityDto.dateTime | date:"yyyy-MM-dd HH:mm:ss"}}</td>
+                <td width="11%">{{bikeQuantityDto.insuredStatus}}</td>
+                <td width="11%">{{bikeQuantityDto.insuranceCompany}}</td>
+                <td width="11%">{{bikeQuantityDto.insuredType}}</td>
+              </tr>
+            </table>
+          </div>
+          <div id="tableScrollDemoB">
+            <table class="table table-striped table-hover child-page-table-2" border="0" align="center" cellpadding="0" cellspacing="0">
+              <tr ng-repeat="bikeQuantityDto in tableSource">
+                <td width="11%">{{bikeQuantityDto.platNumber}}</td>
+                <td width="11%">{{bikeQuantityDto.ownerName}}</td>
+                <td width="11%">{{bikeQuantityDto.phone}}</td>
+                <td width="11%">{{bikeQuantityDto.operationType}}</td>
+                <td width="11%">{{bikeQuantityDto.accidentType}}</td>
+                <td width="11%">{{bikeQuantityDto.dateTime | date:"yyyy-MM-dd"}}</td>
+                <td width="11%">{{bikeQuantityDto.insuredStatus}}</td>
+                <td width="11%">{{bikeQuantityDto.insuranceCompany}}</td>
+                <td width="11%">{{bikeQuantityDto.insuredType}}</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+      <!--table滚动结束-->
+    </div>
+  </div>
+</div>

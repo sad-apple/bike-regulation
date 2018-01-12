@@ -1,0 +1,90 @@
+<div class="container-fluid child-page-box">
+  <div class="row childPage-Top">
+    <div class="row child-page-title-common-bg">
+      <h2 class="tac">车辆物价监管图表</h2>
+    </div>
+  </div>
+  <div class="row relative" ng-controller="priceChargeController">
+    <div class="row panel-body echarts-common-bg">
+      <div class="col-md-12 panel panel-body childe-charts-style">
+        <div class="panel-body" id="priceChargeChart" style="width:100%;height:450px;"></div>
+        <!-- 图例开始 -->
+        <div class="col-lg-4 col-lg-offset-4 col-md-6 col-md-offset-4 hidden-sm hidden-xs" style="position:absolute;top:4%;z-index:99;">
+          <div class="wrapper-sm col-md-6 child-number-scroll-box">
+            <div class="child-number-scroll-lenged">
+              <span class=" fl" style="background:rgb(61, 177, 255);"></span>运营收费总额&nbsp;(元)
+            </div>
+            <div class="child-number-scroll fl" style="color:rgb(61, 177, 255);text-shadow: 0px 0px 5px rgba(61, 177, 255,.6);">{{operation}}</div>
+          </div>
+          <div class="wrapper-sm col-md-6 child-number-scroll-box">
+            <div class="child-number-scroll-lenged">
+              <span class=" fl" style="background:rgb(33, 212, 177);"></span>标准收费总额&nbsp;(元)
+            </div>
+            <div class="child-number-scroll fl" style="color:rgb(33, 212, 177);text-shadow: 0px 0px 5px rgba(33, 212, 177,.6);">{{standard}}</div>
+          </div>
+        </div>
+        <!-- 图例结束 -->
+      </div>
+      <div class="clearfix"></div>
+    </div>
+    <!--table-->
+    <div class="row panel-body bg-white child-page-scroll-table-box">
+      <h2>运营收费明细</h2>
+      <!--<div class="panel-body" ng-grid="gridOptions" style="min-height:480px;"></div>-->
+      <!-- table滚动开始 -->
+      <div class="row panel-body child-page-scroll-table">
+        <div class="row">
+          <table class="table table-hover child-page-table-1" border="1" align="center" cellpadding="0" cellspacing="0">
+            <tr>
+              <td width="10%">司机</td>
+              <td width="10%">车牌号码</td>
+              <td width="10%">手机</td>
+              <td width="10%">开始时间</td>
+              <td width="10%">行驶时长</td>
+              <td width="10%">行车距离</td>
+              <td width="10%">标准</td>
+              <td width="10%">应收</td>
+              <td width="10%">实收</td>
+              <td width="10%">幅度</td>
+            </tr>
+          </table>
+        </div>
+        <div class="row" id="tableScrollDemo">
+          <div id="tableScrollDemoA">
+            <table class="table table-striped table-hover child-page-table-2" border="0" align="center" cellpadding="0" cellspacing="0">
+              <tr ng-repeat="carDeposit in carPriceSupervises">
+                <td width="10%">{{carDeposit.driver}}</td>
+                <td width="10%">{{carDeposit.plateNumber}}</td>
+                <td width="10%">{{carDeposit.phoneNumber}}</td>
+                <td width="10%">{{carDeposit.startTime | date:"yyyy-MM-dd HH:mm:ss"}}</td>
+                <td width="10%">{{carDeposit.tripTime}}</td>
+                <td width="10%">{{carDeposit.tripDistance}}</td>
+                <td width="10%">{{carDeposit.standards}}</td>
+                <td width="10%">{{carDeposit.receiveAmount}}</td>
+                <td width="10%">{{carDeposit.actualAmount}}</td>
+                <td width="10%">{{carDeposit.ranges}}</td>
+              </tr>
+            </table>
+          </div>
+          <div id="tableScrollDemoB">
+            <table class="table table-striped table-hover child-page-table-2" border="0" align="center" cellpadding="0" cellspacing="0">
+              <tr ng-repeat="carDeposit in carPriceSupervises">
+                <td width="10%">{{carDeposit.driver}}</td>
+                <td width="10%">{{carDeposit.plateNumber}}</td>
+                <td width="10%">{{carDeposit.phoneNumber}}</td>
+                <td width="10%">{{carDeposit.startTime | date:"yyyy-MM-dd HH:mm:ss"}}</td>
+                <td width="10%">{{carDeposit.tripTime}}</td>
+                <td width="10%">{{carDeposit.tripDistance}}</td>
+                <td width="10%">{{carDeposit.standards}}</td>
+                <td width="10%">{{carDeposit.receiveAmount}}</td>
+                <td width="10%">{{carDeposit.actualAmount}}</td>
+                <td width="10%">{{carDeposit.ranges}}</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+      <!--table滚动结束-->
+    </div>
+  </div>
+</div>

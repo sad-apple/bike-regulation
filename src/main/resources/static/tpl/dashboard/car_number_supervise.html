@@ -1,0 +1,81 @@
+<div class="container-fluid child-page-box">
+  <div class="row childPage-Top">
+    <div class="row child-page-title-common-bg">
+      <h2 class="tac">车辆数量监管图表</h2>
+    </div>
+  </div>
+  <div class="row relative" ng-controller="carNumberSuperviseController">
+    <div class="row panel-body echarts-common-bg">
+      <div class="col-md-8 panel panel-body childe-charts-style" style="height:480px;">
+        <h1 class="col-md-4 col-sm-11" style="margin-left:4%;padding:0;">车辆分布</h1>
+        <div class="panel-body" id="mapChart" style="width:100%;height:420px;margin-top:30px;margin-left:15px;"></div>
+      </div>
+      <div class="col-md-4 panel panel-body childe-charts-style" style="height:480px;">
+        <h1 class="tac col-md-11 col-md-offset-1" style="">商圈车辆数量统计</h1>
+        <div class="col-md-12" style="height:420px;">
+          <ul style="width: 100%;height: 420px;overflow-y: scroll;font-size:16px;"
+              class="slow-traffic-systemUl">
+            <li ng-repeat="item in carTotalNums" style="height:45px;line-height:45px;position:relative;color:white;">
+              <span style="width:10%;">{{$index+1}}</span>
+              <span style="width:60%;">{{item.tradingArea}}</span>
+              <span style="width:20%;">{{item.carTotalNum}}</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+    </div>
+    <!--table-->
+    <div class="row panel-body bg-white child-page-scroll-table-box">
+      <h2>车辆数量明细</h2>
+      <!-- table滚动开始 -->
+      <div class="row panel-body child-page-scroll-table">
+        <div class="row">
+          <table class="table table-hover child-page-table-1" border="1" align="center" cellpadding="0" cellspacing="0">
+            <tr>
+              <td width="12.5%">区域</td>
+              <td width="12.5%">商圈</td>
+              <td width="12.5%">日期</td>
+              <td width="12.5%">空车数量</td>
+              <td width="12.5%">载客数量</td>
+              <td width="12.5%">顺风车</td>
+              <td width="12.5%">快车运营</td>
+              <td width="12.5%">车辆总数</td>
+            </tr>
+          </table>
+        </div>
+        <div class="row" id="tableScrollDemo">
+          <div id="tableScrollDemoA">
+            <table class="table table-striped table-hover child-page-table-2" border="0" align="center" cellpadding="0" cellspacing="0">
+              <tr ng-repeat="carNumSupervise in carNumSupervises">
+                <td width="12.5%">{{carNumSupervise.area}}</td>
+                <td width="12.5%">{{carNumSupervise.tradingArea}}</td>
+                <td width="12.5%">{{carNumSupervise.foundTime | date:"yyyy-MM-dd HH:mm:ss"}}</td>
+                <td width="12.5%">{{carNumSupervise.emptyCarNum}}</td>
+                <td width="12.5%">{{carNumSupervise.passengerNum}}</td>
+                <td width="12.5%">{{carNumSupervise.freeCarNum}}</td>
+                <td width="12.5%">{{carNumSupervise.fastCarNUm}}</td>
+                <td width="12.5%">{{carNumSupervise.carTotalNum}}</td>
+              </tr>
+            </table>
+          </div>
+          <div id="tableScrollDemoB">
+            <table class="table table-striped table-hover child-page-table-2" border="0" align="center" cellpadding="0" cellspacing="0">
+              <tr ng-repeat="carNumSupervise in carNumSupervises">
+                <td width="12.5%">{{carNumSupervise.area}}</td>
+                <td width="12.5%">{{carNumSupervise.tradingArea}}</td>
+                <td width="12.5%">{{carNumSupervise.foundTime | date:"yyyy-MM-dd HH:mm:ss"}}</td>
+                <td width="12.5%">{{carNumSupervise.emptyCarNum}}</td>
+                <td width="12.5%">{{carNumSupervise.passengerNum}}</td>
+                <td width="12.5%">{{carNumSupervise.freeCarNum}}</td>
+                <td width="12.5%">{{carNumSupervise.fastCarNUm}}</td>
+                <td width="12.5%">{{carNumSupervise.carTotalNum}}</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+      <!--table滚动结束-->
+    </div>
+  </div>
+</div>

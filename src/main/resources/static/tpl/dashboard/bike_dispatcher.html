@@ -1,0 +1,83 @@
+<div class="container-fluid child-page-box">
+  <div class="row childPage-Top">
+    <div class="row child-page-title-common-bg">
+      <h2 class="tac">单车调度指挥系统</h2>
+    </div>
+  </div>
+  <div class="row relative" ng-controller="bikeDispatcherController">
+    <div class="row panel-body echarts-common-bg">
+      <div class="col-md-7 panel panel-body childe-charts-style" style="padding-left:30px;height:535px;">
+        <h1 class="col-lg-4 col-md-6 col-sm-10" style="margin-left:15px;padding:0;">需求空缺和可调度车辆展示</h1>
+        <!--地图的图例-->
+        <h6 class="row col-md-12 col-sm-12 panel-body" style="margin-left:0px;">
+          <span class="bg-yellow" style="margin:0;"></span>&nbsp;&nbsp;车辆非法移动中
+          <span class="bg-red"></span>&nbsp;&nbsp;非法移动结束
+        </h6>
+        <div class="panel-body" id="mapChart" style="width:100%;height:450px;margin-top:30px;">地图</div>
+      </div>
+      <div class="col-md-5 panel panel-body childe-charts-style relative" style="height:535px;">
+        <!--<h1 class="col-md-11">区域非法移动数</h1>-->
+        <div class="row" id="lineChart" style="width:100%;height:525px;">就一个</div>
+      </div>
+      <div class="clearfix"></div>
+    </div>
+    <!--table-->
+    <div class="row panel-body bg-white child-page-scroll-table-box">
+      <h2>车辆调度明细</h2>
+      <!--<div class="panel-body" ng-grid="gridOptions" style="min-height:480px;"></div>-->
+      <!-- table滚动开始 -->
+      <div class="row panel-body child-page-scroll-table">
+        <div class="row">
+          <table class="table table-hover child-page-table-1" border="1" align="center" cellpadding="0" cellspacing="0">
+            <tr>
+              <td width="11%">车辆编号</td>
+              <td width="11%">区域</td>
+              <td width="11%">出厂日期</td>
+              <td width="11%">运营方</td>
+              <td width="11%">调度人员</td>
+              <td width="11%">停车时长</td>
+              <td width="11%">始发地</td>
+              <td width="11%">目的地</td>
+              <td width="11%">调度情况</td>
+            </tr>
+          </table>
+        </div>
+        <div class="row" id="tableScrollDemo">
+          <div id="tableScrollDemoA">
+            <table class="table table-striped table-hover child-page-table-2" border="0" align="center" cellpadding="0"
+                   cellspacing="0">
+              <tr ng-repeat="x in bikeDispatchDtoData">
+                <td width="11%">{{x.bikeId}}</td>
+                <td width="11%">{{x.area}}</td>
+                <td width="11%">{{x.productionTime | date:"yyyy-MM-dd HH:mm:ss"}}</td>
+                <td width="11%">{{x.operationOrg}}</td>
+                <td width="11%">{{x.dispatcher}}</td>
+                <td width="11%">{{x.parkingTime}}</td>
+                <td width="11%">{{x.startAddress}}</td>
+                <td width="11%">{{x.endAddress}}</td>
+                <td width="11%">{{x.dispatchStatus}}</td>
+              </tr>
+            </table>
+          </div>
+          <div id="tableScrollDemoB">
+            <table class="table table-striped table-hover child-page-table-2" border="0" align="center" cellpadding="0"
+                   cellspacing="0">
+              <tr ng-repeat="x in bikeDispatchDtoData">
+                <td width="11%">{{x.bikeId}}</td>
+                <td width="11%">{{x.area}}</td>
+                <td width="11%">{{x.productionTime | date:"yyyy-MM-dd HH:mm:ss"}}</td>
+                <td width="11%">{{x.operationOrg}}</td>
+                <td width="11%">{{x.dispatcher}}</td>
+                <td width="11%">{{x.parkingTime}}</td>
+                <td width="11%">{{x.startAddress}}</td>
+                <td width="11%">{{x.endAddress}}</td>
+                <td width="11%">{{x.dispatchStatus}}</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+      <!--table滚动结束-->
+    </div>
+  </div>
+</div>

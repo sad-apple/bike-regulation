@@ -1,16 +1,25 @@
-<div class="panel panel-default" ng-controller="sysRoleListController">
+<ul class="breadcrumb bg-white b-b wrapper-sm m-b-none">
+    <li><a href><i class="fa fa-home"></i> 主页</a></li>
+    <li><a href>账户</a></li>
+    <li class="active">角色管理</li>
+</ul>
+
+<div class="hbox hbox-auto-xs hbox-auto-sm" ng-controller="sysRoleListController">
     <div>
-        <toaster-container toaster-options="{'position-class': 'toast-top-right', 'close-button':true}"></toaster-container>
+        <toaster-container
+                toaster-options="{'position-class': 'toast-top-right', 'close-button':true}"></toaster-container>
     </div>
-    <div class="wrapper-sm" >
+
+    <div class="wrapper-sm">
         <div>
-            <button class="btn m-b-xs btn-default btn-addon" ng-click="createSysRole()"><i class="fa fa-user"></i>添加角色</button>
+            <button class="btn m-b-xs btn-default btn-addon" ng-click="createSysRole()"><i class="fa fa-user"></i>添加角色
+            </button>
         </div>
 
         <div class="panel panel-default">
-            <div class="panel-body">
+            <div class="b-t">
                 <div class="table-responsive">
-                    <div ng-grid="gridOptions" style="min-height:480px"></div>
+                    <div ng-grid="gridOptions" style="min-height:680px"></div>
                 </div>
             </div>
         </div>

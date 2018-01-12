@@ -1,0 +1,44 @@
+<!-- 共享汽车首页 （已停用）-->
+
+<div  ng-controller="carhomePageCtrl">
+    <!--<ng-echarts class="col-md-12 echarts" ec-config="lineConfig" ec-option="lineOption" ></ng-echarts>-->
+
+    <div class="optionpanel pull-right" style="width:150px;height:30px;position:fixed;right:10px;top:5px;z-index:999;">
+        <select class="form-control" ng-model="mapStyle" ng-options="mapStyle.styleName for mapStyle in mapStyles" ng-init="mapStyle = mapStyles[7]" ng-change="onChangeMapStyle()">
+        </select>
+    </div>
+    <div id="lineChart"></div>
+
+    <!-- 地图风格切换 -->
+    <div class="indexMapTab transiton3">
+        <div class="indexMapTab-s indexMapTab-s1 on transiton3" title="全局监控" ng-click="change(1)">
+            <em>全局监控</em>
+        </div>
+        <div class="indexMapTab-s indexMapTab-s2 transiton3" title="数据监控" ng-click="change(2)">
+            <em style="display:none;">数据监控</em>
+        </div>
+        <div class="indexMapTab-s indexMapTab-s3 transiton3" title="热力图监控" ng-click="change(3)">
+            <em style="display:none;">热力图监控</em>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    $(function(){
+        var lineChartH = document.body.clientHeight;
+        $("#lineChart").attr("style",'height:'+lineChartH);
+        $(".indexMapTab-s").click(function(){
+            var $s1 = $(".indexMapTab-s1");
+            var $s2 = $(".indexMapTab-s1");
+            var $s3 = $(".indexMapTab-s1");
+            // alert($(".indexMapTab-s1").attr('right'));
+            $(".indexMapTab-s").find("em").css({display:'none'});
+            $(this).children("em").css({display:'block'});
+            $(this).addClass("on").siblings('.indexMapTab-s').removeClass('on');
+
+        });
+    });
+
+</script>
+

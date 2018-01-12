@@ -1,0 +1,85 @@
+<div class="container-fluid child-page-box">
+    <div class="row childPage-Top">
+        <div class="row child-page-title-common-bg">
+            <h2 class="tac">车身广告监管图表</h2>
+        </div>
+    </div>
+    <div class="row relative" ng-controller="adSupervisionController">
+        <div class="row panel-body echarts-common-bg">
+            <div class="col-md-8 panel panel-body childe-charts-style">
+                <h1 class="col-md-3 col-sm-11 col-sm-offset-1" style="margin-left:4%;padding:0;">投诉统计</h1>
+                <div class="panel-body" id="complaintChart" style="width:100%;height:450px;"></div>
+                <!--图例开始-->
+                <div class="hidden-xs" style="position: absolute;top:5%;right:4%;">
+                    <button type="button" class="btn btn-default pull-right m-r-xs" ng-click="complainTimeTool($event)"><i
+                            class="glyphicon glyphicon-calendar"></i></button>
+                    <input type="text" class="form-control w-sm pull-right m-r-xs" name="complaintTime"
+                           datepicker-popup="{{format}}" placeholder="" ng-model="complaintTime"
+                           is-open="complaintTimeOpened" datepicker-options="dateOptions" max-date="maxDate"
+                           close-text="关闭" style="height:28px;"/>
+                </div>
+                <!--图例结束-->
+            </div>
+            <div class="col-md-4 panel panel-body childe-charts-style">
+                <div class="panel-body" id="adStatChart" style="width:100%;height:450px;"></div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <!--table-->
+        <div class="row panel-body bg-white child-page-scroll-table-box">
+            <h2>车身广告投放明细</h2>
+            <!--<div ng-grid="gridOptions" class="table-bordered" style="min-height:480px;"></div>-->
+            <!-- table滚动开始 -->
+            <div class="row panel-body child-page-scroll-table">
+                <div class="row">
+                    <table class="table table-hover child-page-table-1" border="1" align="center" cellpadding="0" cellspacing="0">
+                        <tr>
+                            <td width="11%">车辆编号</td>
+                            <td width="11%">所属区域</td>
+                            <td width="11%">投放日期</td>
+                            <td width="11%">运营方</td>
+                            <td width="11%">广告类型</td>
+                            <td width="11%">投放商</td>
+                            <td width="11%">广告内容</td>
+                            <td width="11%">收到投诉</td>
+                            <td width="11%">是否处理</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="row" id="tableScrollDemo">
+                    <div id="tableScrollDemoA">
+                        <table class="table table-striped table-hover child-page-table-2" border="0" align="center" cellpadding="0" cellspacing="0">
+                            <tr ng-repeat="x in bikeAdDatas">
+                                <td width="11%">{{x.plateNumber}}</td>
+                                <td width="11%">{{x.region}}</td>
+                                <td width="11%">{{x.deliveryDate | date:"yyyy-MM-dd HH:mm:ss"}}</td>
+                                <td width="11%">{{x.operationOrgName}}</td>
+                                <td width="11%">{{x.adType}}</td>
+                                <td width="11%">{{x.adOwner}}</td>
+                                <td width="11%">{{x.adContent}}</td>
+                                <td width="11%">{{x.isComplaint}}</td>
+                                <td width="11%">{{x.isHandel}}</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id="tableScrollDemoB">
+                        <table class="table table-striped table-hover child-page-table-2" border="0" align="center" cellpadding="0" cellspacing="0">
+                            <tr ng-repeat="x in bikeAdDatas">
+                                <td width="11%">{{x.plateNumber}}</td>
+                                <td width="11%">{{x.region}}</td>
+                                <td width="11%">{{x.deliveryDate | date:"yyyy-MM-dd HH:mm:ss"}}</td>
+                                <td width="11%">{{x.operationOrgName}}</td>
+                                <td width="11%">{{x.adType}}</td>
+                                <td width="11%">{{x.adOwner}}</td>
+                                <td width="11%">{{x.adContent}}</td>
+                                <td width="11%">{{x.isComplaint}}</td>
+                                <td width="11%">{{x.isHandel}}</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!--table滚动结束-->
+        </div>
+    </div>
+</div>

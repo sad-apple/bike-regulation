@@ -21,6 +21,7 @@ import java.util.List;
 
 @Service
 public class SystemService {
+
     @Autowired
     private PasswordEncoder passwordEncoder;
 
@@ -32,6 +33,7 @@ public class SystemService {
 
     @Autowired
     private SysResourceRepository sysResourceRepository;
+
     /**
      * 登录接口
      * @return
@@ -81,4 +83,5 @@ public class SystemService {
         redisRepository.save(timeStamp, code, 300);
         return new ResponseEntity<Message>(new Message(MessageType.MSG_TYPE_SUCCESS,(Object)code), HttpStatus.OK);
     }
+
 }

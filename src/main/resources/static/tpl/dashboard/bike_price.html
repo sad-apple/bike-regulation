@@ -1,0 +1,120 @@
+<div class="container-fluid child-page-box">
+  <div class="row childPage-Top">
+    <div class="row child-page-title-common-bg">
+      <h2 class="tac">单车物价监管图表</h2>
+    </div>
+  </div>
+  <div class="row relative" ng-controller="bikePriceCtrl">
+    <div class="row panel-body echarts-common-bg">
+      <div class="row panel panel-body childe-charts-style">
+        <div class="panel-body" id="container" style="width:100%;height:450px;">报表</div>
+        <!-- 图例开始 -->
+        <div class="col-lg-6 col-lg-offset-4 col-md-7 col-md-offset-4 hidden-sm hidden-xs" style="position:absolute;top:4%;z-index:99;">
+          <div class="wrapper-sm col-md-4 child-number-scroll-box">
+            <div class="child-number-scroll-lenged">
+              <span class=" fl" style="background:rgb(248, 249, 1);"></span>标准收费每小时&nbsp;(元)
+            </div>
+            <div class="child-number-scroll tac" style="color:rgb(248, 249, 1);text-shadow: 0px 0px 5px rgba(248, 249, 1,.6);">1</div>
+          </div>
+          <div class="wrapper-sm col-md-4 child-number-scroll-box">
+            <div class="child-number-scroll-lenged">
+              <span class=" fl" style="background:rgb(61, 177, 255);"></span>运营收费总额&nbsp;(元)
+            </div>
+            <div class="child-number-scroll fl" style="color:rgb(61, 177, 255);text-shadow: 0px 0px 5px rgba(61, 177, 255,.6);">511,242{{recharge}}</div>
+          </div>
+          <div class="wrapper-sm col-md-4 child-number-scroll-box">
+            <div class="child-number-scroll-lenged">
+              <span class=" fl" style="background:rgb(33, 212, 177);"></span>标准收费总额&nbsp;(元)
+            </div>
+            <div class="child-number-scroll fl" style="color:rgb(33, 212, 177);text-shadow: 0px 0px 5px rgba(33, 212, 177,.6);">5,200,000</div>
+          </div>
+        </div>
+        <!-- 图例结束 -->
+        <!--日期选择开始-->
+        <div class="col-md-3" style="position:absolute;right:1%;top:2%;z-index: 100;">
+          <button type="button" class="btn btn-default pull-right m-r-xs" ng-click="timeTool($event)">
+            <i class="glyphicon glyphicon-calendar"></i>
+          </button>
+          <input type="text" class="form-control w-sm pull-right m-r-xs" name="createTime"
+                 datepicker-popup="{{format}}" placeholder="" ng-model="createTime" max-date="today"
+                 is-open="createTimeOpened" datepicker-options="dateOptions" min-date="tomorrow"
+                 close-text="关闭" style="height:28px;width:100px;"/>
+        </div>
+        <!--日期选择结束-->
+      </div>
+      <div class="clearfix"></div>
+    </div>
+    <!--table-->
+    <div class="row panel-body bg-white child-page-scroll-table-box">
+      <h2>运营收入明细</h2>
+      <!-- table滚动开始 -->
+      <div class="row panel-body child-page-scroll-table">
+        <div class="row">
+          <table class="table table-hover child-page-table-1" border="1" align="center" cellpadding="0" cellspacing="0">
+            <tr>
+              <td width="4%">姓名</td>
+              <td width="10%">身份证号</td>
+              <td width="7%">手机号</td>
+              <td width="7%">城市</td>
+              <td width="5%">运营方</td>
+              <td width="7%">车辆编号</td>
+              <td width="7%">骑行开始时间</td>
+              <td width="7%">骑行时长</td>
+              <td width="7%">标准</td>
+              <td width="7%">应收</td>
+              <td width="7%">实收</td>
+              <td width="7%">幅度</td>
+              <td width="7%">是否罚款</td>
+              <td width="7%">罚款金额</td>
+            </tr>
+          </table>
+        </div>
+        <div class="row" id="tableScrollDemo">
+          <div id="tableScrollDemoA">
+            <table class="table table-striped table-hover child-page-table-2" border="0" align="center" cellpadding="0"
+                   cellspacing="0">
+              <tr ng-repeat="bikePriceDto in bikePriceDtos">
+                <td width="4%">{{bikePriceDto.fullName}}</td>
+                <td width="10%">{{bikePriceDto.idCardNumber}}</td>
+                <td width="7%">{{bikePriceDto.phoneNumber}}</td>
+                <td width="7%">{{bikePriceDto.city}}</td>
+                <td width="5%">{{bikePriceDto.company}}</td>
+                <td width="7%">{{bikePriceDto.bikeId}}</td>
+                <td width="7%">{{bikePriceDto.rideTime | date:"yyyy-MM-dd HH:mm:ss"}}</td>
+                <td width="7%">{{bikePriceDto.runTime}}</td>
+                <td width="7%">{{bikePriceDto.price}}</td>
+                <td width="7%">{{bikePriceDto.expectIncome}}</td>
+                <td width="7%">{{bikePriceDto.actualityIncome}}</td>
+                <td width="7%">{{bikePriceDto.margin}}</td>
+                <td width="7%">{{bikePriceDto.isFined == 0?"否" :"是"}}</td>
+                <td width="7%">{{bikePriceDto.fineNum}}</td>
+              </tr>
+            </table>
+          </div>
+          <div id="tableScrollDemoB">
+            <table class="table table-striped table-hover child-page-table-2" border="0" align="center" cellpadding="0"
+                   cellspacing="0">
+              <tr ng-repeat="bikePriceDto in bikePriceDtos">
+                <td width="4%">{{bikePriceDto.fullName}}</td>
+                <td width="10%">{{bikePriceDto.idCardNumber}}</td>
+                <td width="7%">{{bikePriceDto.phoneNumber}}</td>
+                <td width="7%">{{bikePriceDto.city}}</td>
+                <td width="5%">{{bikePriceDto.company}}</td>
+                <td width="7%">{{bikePriceDto.bikeId}}</td>
+                <td width="7%">{{bikePriceDto.rideTime | date:"yyyy-MM-dd"}}</td>
+                <td width="7%">{{bikePriceDto.runTime}}</td>
+                <td width="7%">{{bikePriceDto.price}}</td>
+                <td width="7%">{{bikePriceDto.expectIncome}}</td>
+                <td width="7%">{{bikePriceDto.actualityIncome}}</td>
+                <td width="7%">{{bikePriceDto.margin}}</td>
+                <td width="7%">{{bikePriceDto.isFined == 0?"否" :"是"}}</td>
+                <td width="7%">{{bikePriceDto.fineNum}}</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+      <!--table滚动结束-->
+    </div>
+  </div>
+</div>

@@ -1,0 +1,94 @@
+<!-- breadcrumb -->
+<ul class="breadcrumb bg-white b-b wrapper-sm m-b-none">
+    <li><a href><i class="fa fa-home"></i> 主页</a></li>
+    <li><a href>报表</a></li>
+    <li class="active">单车统计</li>
+</ul>
+<!-- / breadcrumb -->
+<!-- hbox layout -->
+<div class="hbox hbox-auto-xs hbox-auto-sm"  ng-controller="bikeStatsCtrl">
+    <div class="wrapper-sm" >
+        <div class="panel panel-default">
+            <div class="row wrapper">
+                <div class="col-md-3 col-sm-3 col-lg-3">
+                    <div class="btn-group">
+                        <label class="btn btn-default" ng-model="radioModel" btn-radio="'day'" ng-click="selectType(0)" uncheckable ng-class="{'btn-info': 0 == selected}">日</label>
+                        <label class="btn btn-default" ng-model="radioModel" btn-radio="'month'" ng-click="selectType(1)"  uncheckable ng-class="{'btn-info': 1 == selected}">月</label>
+                        <label class="btn btn-default" ng-model="radioModel" btn-radio="'year'" ng-click="selectType(2)"  uncheckable ng-class="{'btn-info': 2 == selected}">年</label>
+                    </div>
+                    <select class="form-control w-sm pull-right m-r-xs" placeholder="选择统计单车类型" ng-model="bikeType" ng-change="statsOfType()"
+                            ng-options="bikeType.name for bikeType in bikeTypes"></select>
+                </div>
+                <div class="col-md-9 col-sm-9 col-lg-9">
+                    <button class="btn btn-default pull-right m-l" ng-click="stats(selectChart)">确定</button>
+                    <p class="input-group w-lg pull-right" ng-show="0 == selected">
+                        <input type="text" class="form-control w-md" datepicker-popup="{{formats.day}}" ng-model="endDate" datepicker-options="dateOptions" is-open="endOpened" min-date="startDate"  ng-required="true" close-text="Close" />
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="openEnd($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                        </span>
+                    </p>
+                    <p class="input-group w-lg pull-right" ng-show="1 == selected">
+                        <input type="text" class="form-control w-md" datepicker-popup="{{formats.month}}" ng-model="endDate" datepicker-options="dateOptions" is-open="endOpened" min-date="startDate"  ng-required="true" close-text="Close" />
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="openEnd($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                        </span>
+                    </p>
+                    <p class="input-group w-lg pull-right" ng-show="2 == selected">
+                        <input type="text" class="form-control w-md" datepicker-popup="{{formats.year}}" ng-model="endDate" datepicker-options="dateOptions" is-open="endOpened" min-date="startDate"  ng-required="true" close-text="Close" />
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="openEnd($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                        </span>
+                    </p>
+
+                    <p class="pull-right w-3x l-h-2x text-center">至</p>
+
+                    <p class="input-group w-lg pull-right" ng-show="0 == selected">
+                        <input name="factoryDate" type="text" class="form-control w-md" datepicker-popup="{{formats.day}}" datepicker-options="dateOptions" ng-model="startDate" is-open="startOpened " max-date="endDate"   ng-required="true" close-text="Close" />
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="openStart($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                        </span>
+                    </p>
+                    <p class="input-group w-lg pull-right" ng-show="1 == selected">
+                        <input name="factoryDate" type="text" class="form-control w-md" datepicker-popup="{{formats.month}}" datepicker-options="dateOptions" ng-model="startDate" is-open="startOpened" max-date="endDate"   ng-required="true" close-text="Close" />
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="openStart($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                        </span>
+                    </p>
+                    <p class="input-group w-lg pull-right" ng-show="2 == selected">
+                        <input name="factoryDate" type="text" class="form-control w-md" datepicker-popup="{{formats.year}}" datepicker-options="dateOptions" ng-model="startDate" is-open="startOpened " max-date="endDate"  ng-required="true" close-text="Close" />
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="openStart($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                        </span>
+                    </p>
+
+                </div>
+            </div>
+            <div class="row wrapper">
+                <div class="col-md-6 col-sm-6 col-lg-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            单车增长趋势
+                        </div>
+                        <div class="panel-body">
+                            <ul class="nav nav-pills nav-xxs nav-rounded m-b-lg">
+                                <li ng-class="{'active': 0 == selectChart}"><a ng-click="stats(0)">柱状图</a></li>
+                                <li ng-class="{'active': 1 == selectChart}"><a ng-click="stats(1)">折线图</a></li>
+                            </ul>
+                            <div id="container"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-6 col-lg-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            各类单车占比
+                        </div>
+                        <div class="panel-body" id="pieChartConfig">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /hbox layout -->

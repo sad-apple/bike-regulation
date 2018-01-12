@@ -1,13 +1,14 @@
 app.controller('updateSysResourceController', ['$scope', '$http', '$modalInstance', 'sysResourceId', function ($scope, $http, $modalInstance,sysResourceId) {
     function init(){
-        $http.get('sysresources/'+ sysResourceId).success(function(data){
+        $http.get('sysresources/menus/'+ sysResourceId).success(function(data){
             $scope.sysResource = data.data;
         })
 
-        $http.get('sysresources/getAll').success(function (data){
+        $http.get('sysresources/menus').success(function (data){
             $scope.sysResources = data.data;
         });
     }
+
     init();
     /**
      * 保存信息

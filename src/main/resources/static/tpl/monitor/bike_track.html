@@ -1,77 +1,103 @@
 <div ng-controller="carTrackController" style="margin-top: -50px">
-    <toaster-container toaster-options="{'position-class': 'toast-top-right', 'close-button':true}"></toaster-container>
-    <div class="w-full bg-light lter b-b wrapper-xs">
-        <table width="99%" style="margin: 0 auto">
-            <tbody>
-            <tr>
-                <td width="7%">
-                    <label class="control-label text-left">开始日期:</label>
-                </td>
-                <td width="5%">
-                    <input type="text" class="form-control w-sm pull-left m-r-xs" name="foundTime" datepicker-popup="{{format}}" placeholder="开始日期" ng-model="startDate" is-open="showStartDate" datepicker-options="dateOptions" max-date="today"  close-text="关闭" />
-                </td>
-                <td width="4%">
-                    <button type="button" class="btn btn-default pull-left m-r-xs" ng-click="startDateClick($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-                </td>
-                <td>
-                    <div uib-timepicker class="w-sm pull-left m-l-xs" ng-model="startTime" ng-change="timeChanged()" hour-step="1" show-seconds="true" minute-step="1" show-meridian="false" template-url="tpl/template/timepicker.html"></div>
-                </td>
-                <td width="7%">
-                    <label class="control-label text-left">结束日期:</label>
-                </td>
-                <td width="5%">
-                    <input type="text" class="form-control w-sm pull-left m-r-xs" name="foundTime" datepicker-popup="{{format}}" placeholder="结束日期" ng-model="endDate" is-open="showEndDate" datepicker-options="dateOptions" min-date="startDate" max-date="today" close-text="关闭" />
-                </td>
-                <td width="4%">
-                    <button type="button" class="btn btn-default pull-left m-r-xs" ng-click="endDateClick($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-                </td>
-                <td>
-                    <div uib-timepicker class="w-sm pull-left m-l-xs" ng-model="endTime" ng-change="timeChanged()" hour-step="1" show-seconds="true" minute-step="1" show-meridian="false"></div>
-                </td>
-                <td>
-                    <button type="button" class="btn btn-default pull-left m-b-xs" ng-click="initTrack()">查询</button>
-                    <button type="button" class="btn btn-success pull-left m-b-xs" ng-click="play()" ng-show="playStatus=='stop' || playStatus=='pause'">播放</button>
-                    <button type="button" class="btn btn-warning pull-left m-b-xs" ng-click="pause()" ng-show="playStatus == 'play'">暂停</button>
-                    <button type="button" class="btn btn-danger pull-left m-b-xs" ng-click="stop()" ng-show="playStatus != 'unload'">停止</button>
-                </td>
-            </tr>
-            </tbody>
-        </table>
+    <!-- breadcrumb -->
+    <ul class="breadcrumb bg-white b-b wrapper-sm m-b-none">
+        <li><a href><i class="fa fa-home"></i> 主页</a></li>
+        <li><a href>监控</a></li>
+        <li class="active">车辆跟踪</li>
+    </ul>
+
+    <!-- / breadcrumb -->
+    <!-- hbox layout -->
+    <div class="hbox hbox-auto-xs hbox-auto-sm" >
+        <toaster-container toaster-options="{'position-class': 'toast-top-right', 'close-button':true}"></toaster-container>
+        <div class="wrapper-sm m-b-none" >
+            <div class="panel panel-default ">
+                <div class="row wrapper-xs">
+                    <div class="col-md-8 col-sm-8 col-lg-8">
+                        <input type="text" class="form-control w-sm pull-left m-t-md " style="margin-top: 34px;" datepicker-popup="{{format}}" placeholder="开始日期" ng-model="startDate" is-open="showStartDate" datepicker-options="dateOptions" max-date="today"  close-text="关闭" />
+                        <button type="button" class="btn btn-default pull-left m-t-md" style="margin-top: 34px;" ng-click="startDateClick($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                        <div uib-timepicker class="w-sm pull-left m-l-xs" ng-model="startTime" ng-change="timeChanged()" hour-step="1" show-seconds="true" minute-step="1" show-meridian="false" template-url="tpl/template/timepicker.html"></div>
+
+                        <div class="pull-left m-l-xs m-r-xs l-h-2x m-t-md" style="margin-top: 34px;">至</div>
+
+                        <input type="text" class="form-control w-sm pull-left m-t-md" style="margin-top: 34px;" datepicker-popup="{{format}}" placeholder="结束日期" ng-model="endDate" is-open="showEndDate" datepicker-options="dateOptions" min-date="startDate" max-date="today" close-text="关闭" />
+                        <button type="button" class="btn btn-default pull-left m-t-md" style="margin-top: 34px;" ng-click="endDateClick($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                        <div uib-timepicker class="w-sm pull-left m-l-xs" ng-model="endTime" ng-change="timeChanged()" hour-step="1" show-seconds="true" minute-step="1" show-meridian="false"></div>
+                        <button type="button" class="btn btn-default pull-left m-t-md m-l-xs" style="margin-top: 34px;" ng-click="initTrack()">查询</button>
+
+                    </div>
+                    <div class="col-md-4 col-sm-4 col-lg-4">
+                        <button type="button" class="btn btn-danger pull-right m-l-xs m-t-md" style="margin-top: 34px;" ng-click="stop()" ng-show="playStatus != 'unload'">停止</button>
+                        <button type="button" class="btn btn-warning pull-right m-l-xs m-t-md" style="margin-top: 34px;" ng-click="pause()" ng-show="playStatus == 'play'">暂停</button>
+                        <button type="button" class="btn btn-success pull-right m-l-xs m-t-md" style="margin-top: 34px;" ng-click="play()" ng-show="playStatus=='stop' || playStatus=='pause'" >播放</button>
+                    </div>
+                    <div class="col-md-12 col-sm-12 col-lg-12">
+                        <slider ng-model="playSlider" floor="1" ceiling="100" ng-change="sliderChanged()">
+                        </slider>
+                    </div>
+                </div>
+                <div class="row wrapper-xs">
+                    <div class="col-md-12 col-sm-12 col-lg-12">
+                        <div id="allmap" style="width: 100%; height:58vh; background: #ccc" fullscreen="isFullscreen" only-watched-property>地图</div>
+                    </div>
+                </div>
+                <div class="row wrapper-xs">
+                    <div class="col-md-12 col-sm-12 col-lg-12">
+                        <div class="panel-heading b-b b-light b-a">设备信息
+                            <button class="btn btn-default btn-xs pull-right" ng-init="isCollapsed = false" ng-click="isCollapsed = !isCollapsed">折叠</button>
+                        </div>
+                        <div collapse="isCollapsed" class="panel-body b-a " style="height: 450px">
+                            <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                                <!-- Indicators -->
+                                <ol class="carousel-indicators">
+                                    <li data-target="#myCarousel" data-slide-to="{{$index}}" class="{{$index == 0? 'active': ''}}" ng-repeat="option in options"></li>
+                                </ol>
+
+                                <div class="carousel-inner">
+                                    <div class="{{$index == 0? 'item active': 'item'}}" ng-repeat="option in options">
+                                        <table class="table table-striped b-t b-b">
+                                            <thead>
+                                                <tr>
+                                                    <th  style="width:20%">SIM卡号</th>
+                                                    <th  style="width:25%">服务器时间</th>
+                                                    <th  style="width:25%">GPS设备时间</th>
+                                                    <th  style="width:15%">状态</th>
+                                                    <th  style="width:15%">经度</th>
+                                                    <th  style="width:15%">纬度</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-repeat="x in option">
+                                                    <td  style="width:20%">{{x.simCardNum}}</td>
+                                                    <td  style="width:25%">{{x.time | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                                                    <td  style="width:25%">{{x.receiveTime | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                                                    <td  style="width:15%">{{x.status}}</td>
+                                                    <td  style="width:15%">{{x.lat}}</td>
+                                                    <td  style="width:15%">{{x.lon}}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <footer class="panel-footer">
+                                    <div class="row">
+                                        <div class="col-sm-12 text-right text-center-xs">
+                                            <ul class="pagination pagination-sm m-t-none m-b-none">
+                                                <li><a class="btn btn-default" ng-click="prev()"><i class="fa fa-chevron-left"></i></a></li>
+                                                <li><a class="btn btn-default" ng-click="next()"><i class="fa fa-chevron-right"></i></a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </footer>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
     </div>
+    <!-- /hbox layout -->
 
-    <slider ng-model="playSlider" floor="1" ceiling="100" ng-change="sliderChanged()">
-    </slider>
-
-
-
-
-
-
-    <!--<div class="wrapper-sm" >-->
-        <!--<div class="row">-->
-            <!--<div class="col-sm-12 form-group">-->
-                <!--<label class="control-label text-left">开始日期:</label>-->
-                <!--<div class="pull-left">-->
-                    <!--<input type="text" class="form-control w-sm pull-left m-r-xs" name="foundTime" datepicker-popup="{{format}}" placeholder="开始日期" ng-model="startDate" is-open="showStartDate" datepicker-options="dateOptions" max-date="today"  close-text="关闭" />-->
-                    <!--<span>-->
-                        <!--<button type="button" class="btn btn-default pull-left m-r-xs" ng-click="startDateClick($event)"><i class="glyphicon glyphicon-calendar"></i></button>-->
-                    <!--</span>-->
-                <!--</div>-->
-                <!--<div uib-timepicker class="w-sm pull-left m-l-xs" ng-model="startTime" ng-change="timeChanged()" hour-step="1" show-seconds="true" minute-step="1" show-meridian="false" template-url="tpl/template/timepicker.html"></div>-->
-                <!--<label class="control-label text-left">结束日期:</label>-->
-                <!--<div class="pull-left">-->
-                    <!--<input type="text" class="form-control w-sm pull-left m-r-xs" name="foundTime" datepicker-popup="{{format}}" placeholder="结束日期" ng-model="endDate" is-open="showEndDate" datepicker-options="dateOptions" min-date="startDate" max-date="today" close-text="关闭" />-->
-                    <!--<span>-->
-                        <!--<button type="button" class="btn btn-default pull-left m-r-xs" ng-click="endDateClick($event)"><i class="glyphicon glyphicon-calendar"></i></button>-->
-                    <!--</span>-->
-                <!--</div>-->
-                <!--<div uib-timepicker class="w-sm pull-left m-l-xs" ng-model="endTime" ng-change="timeChanged()" hour-step="1" show-seconds="true" minute-step="1" show-meridian="false"></div>-->
-                <!--<button type="button" class="btn btn-default pull-left m-b-xs" ng-click="initTrack()">查询</button>-->
-                <!--<button type="button" class="btn btn-success pull-left m-b-xs" ng-click="play()" ng-show="playStatus=='stop' || playStatus=='pause'">播放</button>-->
-                <!--<button type="button" class="btn btn-warning pull-left m-b-xs" ng-click="pause()" ng-show="playStatus == 'play'">暂停</button>-->
-                <!--<button type="button" class="btn btn-danger pull-left m-b-xs" ng-click="stop()">停止</button>-->
-            <!--</div>-->
-        <!--</div>-->
-    <!--</div>-->
-    <div id="allmap" style="width: 100%; height: 75vh;" fullscreen="isFullscreen" only-watched-property></div>
 </div>

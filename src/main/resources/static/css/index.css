@@ -1,0 +1,681 @@
+/*2017年8月7日09:38:16*/
+@font-face {
+    font-family: 'zaozihei';
+    src: url('../fonts/zaozihei/zaozihei.ttf');
+    /*src: url('../font/zaozihei-webfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    src: url('../fonts/zaozihei/zaozihei.eot?#iefix') format('eot'),
+    url('../fonts/zaozihei/zaozihei.ttf') format('truetype'),
+    url('../fonts/zaozihei/zaozihei.woff') format('woff'),
+    url('../fonts/zaozihei/zaozihei.svg#shanggo') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'digitalnum';
+    src: url('../fonts/digitalnum/digitalnum.eot');
+    /*src: url('../font/zaozihei-webfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    src: url('../fonts/digitalnum/digitalnum.eot?#iefix') format('eot'),
+    url('../fonts/digitalnum/digitalnum.ttf') format('truetype'),
+    url('../fonts/digitalnum/digitalnum.woff') format('woff'),
+    url('../fonts/digitalnum/digitalnum.svg#shanggo') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body, h1, h2, h3, h4, h5, h6, hr, p, blockquote, dl, dt, dd, ul, ol, li, pre, form, fieldset, legend, button, input, textarea, th, td, s {
+    margin: 0;
+    padding: 0;
+}
+
+body, button, input, select, textarea {
+    font-size: 14px;
+    line-height: 1.5;
+    font-family: Arial, 'Helvetica', 'Microsoft YaHei' !important;
+    /**+font-family: '\5FAE\8F6F\96C5\9ED1', tahoma, arial !important;*/
+    -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: normal;
+    font-family: Arial, 'Helvetica', 'Microsoft YaHei' !important;
+    -webkit-font-smoothing: antialiased;
+}
+
+ul, ol {
+    list-style: none outside none;
+}
+
+.clear {
+    clear: both;
+}
+
+.fl {
+    float: left;
+}
+
+.fr {
+    float: right;
+}
+
+input[type="text"], input[type="password"], button {
+    -webkit-appearance: none;
+    appearance: none;
+    outline: none;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    border-radius: 0;
+    border: none;
+}
+
+a:link, a:active, a:visited {
+    color: #666;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #0070b0 !important;
+    text-decoration: none;
+}
+
+a:focus {
+    outline: none;
+}
+
+.relative {
+    position: relative;
+}
+
+.auto {
+    margin: 0 auto;
+}
+
+img {
+    border: none;
+}
+
+.disb {
+    display: block;
+}
+
+.untext {
+    -moz-user-select: none;
+    /*火狐*/
+    -webkit-user-select: none;
+    /*webkit浏览器*/
+    -ms-user-select: none;
+    /*IE10*/
+    -khtml-user-select: none;
+    /*早期浏览器*/
+    user-select: none;
+}
+
+/*0.3s*/
+.transiton3 {
+    transition: all .3s ease;
+    -webkit-transition: all .3s ease;
+    -moz-transition: all .3s ease;
+    -ms-transition: all .3s ease;
+    -o-transition: all .3s ease;
+}
+
+/*0.5s*/
+.transiton5 {
+    transition: all .5s ease;
+    -webkit-transition: all .5s ease;
+    -moz-transition: all .5s ease;
+    -ms-transition: all .5s ease;
+    -o-transition: all .5s ease;
+}
+
+/*放大*/
+.zoom-in {
+    transition: all .3s ease;
+    -webkit-transition: all .3s ease;
+    -moz-transition: all .3s ease;
+    -ms-transition: all .3s ease;
+    -o-transition: all .3s ease;
+    -webkit-backface-visibility: hidden
+}
+
+.zoom-in:hover {
+    transform: scale(1.05, 1.05);
+    -moz-transform: scale(1.05, 1.05);
+    -webkit-transform: scale(1.05, 1.05);
+    -o-transform: scale(1.05, 1.05)
+}
+
+.echarts-common-bg {
+    background-color: #242d36;
+}
+
+.childe-charts-style {
+    height: 450px;
+    background: transparent;
+}
+
+.childe-charts-style h1 {
+    height: 40px;
+    margin-left: 15px;
+    line-height: 40px;
+    color: #DCDCDC;
+    font-size: 18px;
+    font-weight: bold;
+    border-bottom: 2px solid #008C9E;
+    z-index: 1;
+}
+
+.childe-charts-style h6 {
+    color: white;
+    font-size: 12px;
+}
+
+.childe-charts-style h6 span {
+    padding: 0px 7px;
+    margin-left: 25px;
+    background: rgb(255, 246, 0);
+    border-radius: 3px;
+}
+
+.childe-charts-style h6 span.bg-yellow {
+    background: rgb(255, 246, 0);
+}
+
+.childe-charts-style h6 span.bg-red {
+    background: rgb(227, 5, 5);
+}
+
+.child-page-echarts-mark {
+    width: 30%;
+    height: 40px;
+    background-color: #242d36;
+    float: left;
+    font-size: 12px;
+    color: white;
+    text-align: center;
+    border: 1px dashed #ffffff;
+}
+
+.child-page-scroll-table-box h2 {
+    height: 50px;
+    line-height: 50px;
+    font-size: 22px;
+    color: #006B73;
+    text-align: center;
+}
+
+.child-page-scroll-table-box {
+    min-width: 1100px;
+    overflow-x: scroll;
+}
+
+.child-page-scroll-table .child-page-table-1 {
+    border: 1px solid #ebebeb !important;
+    margin-bottom: 0px;
+    background-color: #F9FAFC;
+    color: #006B73;
+}
+
+.child-page-scroll-table .child-page-table-1 td {
+    height: 28px;
+    text-align: center;
+    vertical-align: middle !important;
+}
+
+.child-page-scroll-table .child-page-table-2 {
+    margin-bottom: 0px;
+}
+
+.child-page-scroll-table .child-page-table-2 td {
+    height: 28px;
+    text-align: center;
+    vertical-align: middle !important;
+    font-size: 15px;
+    color: #555657;
+}
+
+#tableScrollDemo {
+    overflow: hidden;
+    height: 340px;
+}
+
+/*首页开始*/
+
+.indexTop {
+    /*width: 100%;*/
+    height: 90px;
+    /*position: absolute;*/
+    /*top: 0px;*/
+    background: rgb(55, 61, 65);
+    z-index: 100;
+}
+
+.indexTop * {
+    color: #f9f9f9;
+}
+
+.indexTop-l .indexTop-l-t {
+    color: #00c7ff;
+}
+
+.indexTop-l {
+    height: 90px;
+    line-height: 90px;
+    font-style: italic;
+}
+
+.indexTop-l span {
+    line-height: 2.1;
+    font-size: 1.8em;
+}
+
+.indexTop-l img {
+    position: relative;
+    top: 23%;
+    cursor: pointer;
+    height: 54%;
+}
+
+.indexTop-r {
+    height: 90px;
+}
+
+.slide-nav {
+    position: absolute;
+    width: 100%;
+    background-color: #272b2e;
+    z-index: 100;
+}
+
+.slide-danche-w h3, .slide-danche-w .slide-danche-c {
+    /*width:45%;*/
+    padding: 0;
+    margin: 0;
+}
+
+.slide-danche h3 {
+    padding-left: 30px;
+    padding-bottom: 10px;
+    font-size: 18px;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.slide-danche-c {
+    margin-left: 30px;
+}
+
+.slide-danche-cc h2 {
+    width: 49%;
+    /*margin-left:2px;*/
+    float: left;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 3;
+}
+
+.slide-danche-c h2 {
+    font-size: 14px;
+    color: #cdcfd0;
+    cursor: pointer;
+    padding: 6px 0;
+    min-width: 117px;
+}
+
+.slide-danche-c h2:hover {
+    color: #00bfdc;
+}
+
+.indexFGX {
+    width: 100%;
+    height: 1px;
+    background: url(../img/index/indexfgx.png) no-repeat center;
+}
+
+#indexTran {
+    background: #005098;
+    color: white;
+    cursor: pointer;
+    padding: 5px 7px;
+    position: relative;
+    top: -5px;
+}
+
+/*地图*/
+
+.indexMap {
+    width: 100%;
+    height: 62em;
+    background: url(../img/index/map.png) no-repeat center;
+    /*background-size: 500% 500%;*/
+}
+
+.indexMapHover {
+    transition: all .5s ease;
+    -webkit-transition: all .5s ease;
+    -moz-transition: all .5s ease;
+    -ms-transition: all .5s ease;
+    -o-transition: all .5s ease;
+    transform: perspective(201em) rotateX(45deg);
+}
+
+.indexNav {
+    padding: 0;
+}
+
+.indexNav .indexNav1 {
+    position: relative;
+    height: 90px;
+}
+
+.indexNav1 li {
+    width: 11.1%;
+    float: left;
+    text-align: center;
+    height: 90px;
+    line-height: 90px;
+    color: #ffffff;
+    font-size: 115%;
+    cursor: pointer;
+    z-index: 21;
+    overflow: hidden;
+}
+
+.indexNav1 li span:hover {
+    color: #00bfdc;
+}
+
+.indexNav-b {
+    right: 35px;
+    background: rgba(51, 61, 65, 1);
+}
+
+.indexNav2 {
+    position: relative;
+    height: auto;
+    overflow: hidden;
+}
+
+.indexNav2 li {
+    width: 11.1%;
+    float: left;
+    color: white;
+    text-align: center;
+    height: 35px;
+    cursor: pointer;
+    z-index: 101;
+    line-height: 35px;
+}
+
+.indexNav2 li span:hover {
+    color: #00bfdc;
+}
+
+/* .indexNavUl li.on{
+    color:#00bfdc;
+} */
+
+.indexNav .indexNavUl .on {
+    color: #00bfdc;
+}
+
+.indexNav #indexNavFirst {
+    position: absolute;
+    display: none;
+    bottom: 0;
+    left: 0;
+    width: 11.1%;
+    padding: 2px 0;
+    background: #00bfdc;
+    transition: all .3s;
+    -webkit-transition: all .3s
+}
+
+.hide-nav {
+    height: 35px;
+    position: relative;
+    top: 25px;
+    cursor: pointer;
+    right: 5%
+}
+
+.bgglass {
+    min-width: 360px;
+    min-height: 250px;
+    overflow: hidden;
+    background: url("../img/index/glass.png") no-repeat center;
+    -webkit-background-size: 100% 100%;
+    background-size: 100% 100%;
+    position: fixed;
+    z-index: 50;
+}
+
+.bgglass img {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    min-width: 360px;
+    min-height: 250px;
+    z-index: 23;
+}
+
+.bgglass .bgglass-echarts > div {
+    height: 100%;
+}
+
+.indexTL {
+    top: 130px;
+    left: -36em;
+    opacity: 0;
+}
+
+.indexTR {
+    top: 130px;
+    right: -36em;
+    opacity: 0;
+}
+
+.indexBL {
+    bottom: 6%;
+    left: -36em;
+    opacity: 0;
+}
+
+.indexBR {
+    bottom: 6%;
+    right: -36em;
+    opacity: 0;
+}
+
+.bgglass .bgglass-echarts {
+    height: 100%;
+    /*width:100%;*/
+    padding: 3% 5% 1% 5%;
+    z-index: 30;
+}
+
+.indexMapTab {
+    position: absolute;
+    width: 15.5em;
+    bottom: 1em;
+    right: 1em;
+    background: rgba(255, 255, 255, 0.31);
+    padding: 0.4em 0.5em;
+    width: 26.8em;
+    height: 6.7em;
+    border-radius: 6px;
+}
+
+.indexMapTab .on {
+    border: 2px solid #3385ff;
+    z-index: 33 !important;
+}
+
+.indexMapTab-s {
+    width: 8.2em;
+    height: 5.8em;
+    overflow: hidden;
+    border: 2px solid transparent;
+    border-radius: 6px;
+    cursor: pointer;
+    float: left;
+    margin: 0 0.2em;
+    z-index: 1;
+    position: relative;
+}
+
+.indexMapTab-s em {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    font-size: 0.8em;
+    color: white;
+    padding: 0.3em 0.5em;
+    background: #3385ff;
+    border-radius: 6px 0 0;
+}
+
+.indexMapTab-s1 {
+    background: url(../img/index/maptab.png) no-repeat 0 0;
+}
+
+.indexMapTab-s2 {
+    background: url(../img/index/maptab.png) no-repeat 0 -83px;
+}
+
+.indexMapTab-s3 {
+    background: url(../img/index/maptab.png) no-repeat 0 -166px;
+}
+
+/*首页数字滚动CSS*/
+#numberScroll {
+    width: 32%;
+    height: 28%;
+    min-width: 305px;
+    min-height: 180px;
+    /*background:rgba(200,200,200,0.3);*/
+    background: url(../img/index/numberBG.png) no-repeat center;
+    background-size: 100% 100%;
+    position: fixed;
+    top: -250px;
+    left: 50%;
+}
+
+#numberScroll h3 {
+    color: rgb(252, 238, 80);
+    font-size: 1.8em;
+    text-align: center;
+    position: relative;
+    top: 0px;
+}
+
+#numberS1 {
+    width: 100%;
+    height: 45%;
+    margin: 0 auto;
+    /*overflow: hidden;*/
+    /* background: rgba(123,45,123,0.2); */
+    padding: 2% 2% 0px 6%;
+}
+
+#numberS1 i {
+    color: gold;
+    font-size: 5em;
+    background: url(../img/index/Card.png) no-repeat center;
+    background-size: 100% 100%;
+    font-family: 'zaozihei';
+    padding: 5px;
+    width: 11%;
+    height: 100%;
+    max-height: 78px;
+    display: block;
+    float: left;
+    font-style: normal;
+    margin: 0 4px;
+    text-align: center;
+    line-height: 0.9;
+    text-shadow: 0px 8px 38px rgba(255, 215, 0, 0);
+}
+
+.numberScroll-s {
+    width: 100%;
+    height: 35%;
+    margin: 0 auto;
+    padding-top: 0%;
+}
+
+.numberScroll-s1, .numberScroll-s2 {
+    width: 50%;
+}
+
+.numberScroll-s h4 {
+    color: rgb(108, 254, 255);
+    font-size: 21px;
+    height: 35px;
+    line-height: 35px;
+    font-weight: bold;
+    text-align: center;
+}
+
+#numberS2, #numberS3 {
+    height: 70%;
+    width: 100%;
+    /*overflow: hidden;*/
+    padding-left: 5%;
+}
+
+.Inumber i {
+    color: rgb(108, 254, 255);
+    font-size: 3.1em;
+    background: url(../img/index/Card.png) no-repeat center;
+    background-size: 100% 100%;
+    font-family: 'zaozihei';
+    padding: 5px;
+    width: 13.5%;
+    height: 90%;
+    font-style: normal;
+    display: block;
+    float: left;
+    margin: 0 1px;
+    text-align: center;
+    line-height: 0.7;
+    text-shadow: 0px 8px 38px rgba(108, 254, 255, 0.74);
+}
+
+.numberScroll-img {
+    display: block;
+    width: 100%;
+    height: 90%;
+    left: 0;
+    top: 8%;
+    position: absolute;
+}
+
+.child-number-scroll-box { }
+
+.child-number-scroll-lenged {
+    height: 20px;
+    font-size: 14px;
+    color: white;
+    text-align: left;
+    line-height: 20px;
+}
+
+.child-number-scroll-lenged span {
+    display: block;
+    width: 13px;
+    height: 6px;
+    float: left;
+    margin-top: 7px;
+    margin-right: 8px;
+}
+
+.child-number-scroll {
+    font-family: 'digitalnum';
+    font-size: 36px;
+    font-style: normal;
+}
+

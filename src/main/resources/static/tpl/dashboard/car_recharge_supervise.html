@@ -1,0 +1,71 @@
+<div class="container-fluid child-page-box">
+  <div class="row childPage-Top">
+    <div class="row child-page-title-common-bg">
+      <h2 class="tac">汽车充值监管图表</h2>
+    </div>
+  </div>
+  <div class="row relative" ng-controller="carRechargeSupervise">
+    <div class="row panel-body echarts-common-bg">
+      <div class="col-md-12 panel panel-body childe-charts-style">
+        <div class="panel-body" id="option" style="width:100%;height:450px;"></div>
+        <!--图表标注开始-->
+        <div class="col-md-3 wrapper-sm hidden-xs" style="height:80px;position:absolute;left:43.5%;top:2%;z-index:99">
+          <div class="wrapper-sm col-md-12 child-number-scroll-box">
+            <div class="child-number-scroll-lenged">
+              <span class=" fl" style="background:#e6ff2f;"></span>当前余额（元）
+            </div>
+            <div class="child-number-scroll" style="color:#e6ff2f;text-shadow: 0px 0px 5px rgba(230,255,41,.6);">{{total}}</div>
+          </div>
+        </div>
+        <!--图表标注结束-->
+      </div>
+      <div class="clearfix"></div>
+    </div>
+    <!--table-->
+    <div class="row panel-body bg-white child-page-scroll-table-box">
+      <h2>车辆充值明细</h2>
+      <!-- table滚动开始 -->
+      <div class="row panel-body child-page-scroll-table">
+        <div class="row">
+          <table class="table table-hover child-page-table-1" border="1" align="center" cellpadding="0" cellspacing="0">
+            <tr>
+              <td width="16.6%">账单编号</td>
+              <td width="16.6%">用户</td>
+              <td width="16.6%">金额</td>
+              <td width="16.6%">支付方式</td>
+              <td width="16.6%">时间</td>
+              <td width="16.6%">账单状态</td>
+            </tr>
+          </table>
+        </div>
+        <div class="row" id="tableScrollDemo">
+          <div id="tableScrollDemoA">
+            <table class="table table-striped table-hover child-page-table-2" border="0" align="center" cellpadding="0" cellspacing="0">
+              <tr ng-repeat="carQuantityDto in rechargeDetails">
+                <td width="16.6%">{{carQuantityDto.billNumber}}</td>
+                <td width="16.6%">{{carQuantityDto.name}}</td>
+                <td width="16.6%">{{carQuantityDto.accountNumber}}</td>
+                <td width="16.6%">{{carQuantityDto.payType}}</td>
+                <td width="16.6%">{{carQuantityDto.dateTime | date:"yyyy-MM-dd"}}</td>
+                <td width="16.6%">{{carQuantityDto.state}}</td>
+              </tr>
+            </table>
+          </div>
+          <div id="tableScrollDemoB">
+            <table class="table table-striped table-hover child-page-table-2" border="0" align="center" cellpadding="0" cellspacing="0">
+              <tr ng-repeat="carQuantityDto in rechargeDetails">
+                <td width="16.6%">{{carQuantityDto.billNumber}}</td>
+                <td width="16.6%">{{carQuantityDto.name}}</td>
+                <td width="16.6%">{{carQuantityDto.accountNumber}}</td>
+                <td width="16.6%">{{carQuantityDto.payType}}</td>
+                <td width="16.6%">{{carQuantityDto.dateTime | date:"yyyy-MM-dd"}}</td>
+                <td width="16.6%">{{carQuantityDto.state}}</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+      <!--table滚动结束-->
+    </div>
+  </div>
+</div>

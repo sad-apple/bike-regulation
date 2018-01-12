@@ -1,0 +1,39 @@
+<div  ng-controller="bikeLocationController">
+    <ul class="breadcrumb bg-white b-b wrapper-sm m-b-none">
+        <li><a href><i class="fa fa-home"></i> 主页</a></li>
+        <li><a href>监控</a></li>
+        <li class="active">车辆分布</li>
+    </ul>
+    <div class="row wrapper-xs">
+        <div class="col-md-12 col-sm-12 col-lg-12">
+            <div class="optionpanel pull-right">
+                <select class="form-control" ng-model="mapStyle" ng-options="x.title for x in mapStyles"
+                        ng-init="mapStyle = mapStyles[0]" ng-change="onChangeMapStyle()"></select>
+            </div>
+            <div class="btn-group dropdown pull-right m-r-xs">
+                <button class="btn btn-info" data-toggle="dropdown" aria-expanded="true"> 热力图 <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a href="" ng-click="showHeadMap()">显示热力图</a></li>
+                    <li><a href="" ng-click="hideHeatMap()">隐藏热力图</a></li>
+                </ul>
+            </div>
+            <div class="btn-group dropdown pull-right m-r-xs">
+                <button class="btn btn-info" data-toggle="dropdown" aria-expanded="true"> 点聚合 <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a href="" ng-click="showCongruent()">显示点聚合</a></li>
+                    <li><a href="" ng-click="hideCongruent()">隐藏点聚合</a></li>
+                </ul>
+            </div>
+        </div>
+        </div>
+    </div>
+    <div class="row wrapper-xs">
+        <div class="col-md-12 col-sm-12 col-lg-12">
+            <div id="allmap" style="width: 100%; height: 100%; background: #ccc" fullscreen="isFullscreen"
+                 only-watched-property>地图
+            </div>
+        </div>
+    </div>
+</div>

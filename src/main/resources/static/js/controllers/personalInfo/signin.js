@@ -1,9 +1,6 @@
 'use strict';
 
 app.controller('SigninFormController', ["toaster", '$rootScope', '$scope', '$http', '$state', '$localStorage', '$cookieStore', function (toaster, $rootScope, $scope, $http, $state, $localStorage, $cookieStore) {
-    $http.post('access/logout').success(function () {
-    })
-
     $scope.user = {};
     $scope.alerts = [];
 
@@ -27,9 +24,7 @@ app.controller('SigninFormController', ["toaster", '$rootScope', '$scope', '$htt
                 var secondMenu = '';
 
                 for (var i in result.data.sysResources) {
-                    if (firstMenu == '' && result.data.sysResources[i].parentId == null)
-                        firstMenu = result.data.sysResources[i];
-                    if (result.data.sysResources[i].parentId == null && result.data.sysResources[i].sort == 4){
+                    if (firstMenu == '' && result.data.sysResources[i].parentId == null){
                         firstMenu = result.data.sysResources[i];
                         break;
                     }
@@ -54,6 +49,13 @@ app.controller('SigninFormController', ["toaster", '$rootScope', '$scope', '$htt
         });
     };
 
+    function autoLogin  () {
+        var headers = {authorization: "Basic " + btoa("test:111111")};
+        authenticate(headers);
+    };
+
+    autoLogin();
+    
     $scope.login = function (valid) {
         if (valid) {
             var headers = {authorization: "Basic " + btoa($scope.user.username + ":" + $scope.user.password)};

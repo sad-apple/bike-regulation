@@ -8,7 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/sysroles")
+@RequestMapping("sysroles")
 public class SysRoleController {
 
     @Autowired
@@ -18,7 +18,7 @@ public class SysRoleController {
      * 返回所有角色
      * @return
      */
-    @RequestMapping(value = "getAllSysRole" , method = RequestMethod.GET)
+    @RequestMapping(value = "/collection", method = RequestMethod.GET)
     public ResponseEntity<Message> getAllSysRole(){
         return sysRoleService.getAllSysRole();
     }
@@ -73,4 +73,5 @@ public class SysRoleController {
     public ResponseEntity<Message> getSysRoleById(@PathVariable Long id){
         return sysRoleService.getSysRoleById(id);
     }
+
 }

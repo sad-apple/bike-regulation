@@ -1,0 +1,43 @@
+<div class="modal-header">
+    <h3 class="modal-title">新建罚款规则</h3>
+</div>
+<div class="modal-body">
+    <form name="form" class="form-validation" novalidate>
+        <!-- alert -->
+        <div>
+            <toaster-container toaster-options="{'position-class': 'toast-top-right', 'close-button':true}"></toaster-container>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-3 control-label text-right">所属区域:</label>
+            <div class="col-sm-8">
+                <input type="text" placeholder="请输入所属区域" class="form-control" name="phone" ng-model="fineRule.region">
+            </div>
+        </div>
+
+        <div class="modal-header">
+            <h3 class="modal-title">罚款规则设置：</h3>
+        </div>
+
+        <div class="form-group row">
+           <span class="col-sm-5 text-right">红色区域：在违停区域内，若</span>
+           <input type="text" class="col-sm-1 control-label text-right" name="hours" ng-model="fineRule.hours">
+           <span class="col-sm-3 text-center">小时未处理罚款</span>
+           <input type="text" class="col-sm-1 control-label text-right" name="money" ng-model="fineRule.amount"> 元；
+        </div>
+
+        <div class="form-group row">
+            <span class="col-sm-7 text-right">绿色区域：在可停车的区域内，不进行处罚；</span>
+        </div>
+
+        <div class="form-group row">
+            <span class="col-sm-7 text-right">灰色区域：在不算违停区域内，不进行处罚；</span>
+        </div>
+    </form>
+</div>
+<div class="modal-footer ng-scope">
+    <button class="btn btn-default" ng-click="close()">取消</button>
+    <button type="submit" class="btn btn-primary" ng-click="create()">保存并提交
+    </button>
+
+</div>

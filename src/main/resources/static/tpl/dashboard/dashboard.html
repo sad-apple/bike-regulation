@@ -1,0 +1,49 @@
+<div ng-controller="dashboardCtrl">
+  <shortcut></shortcut>
+  <!--<ng-echarts class="col-md-12 echarts" ec-config="lineConfig" ec-option="lineOption" ></ng-echarts>-->
+  <!--<div class="optionpanel pull-right" style="width:150px;height:30px;position:fixed;right:10px;top:5px;z-index:999;">-->
+  <!--<select class="form-control" ng-model="mapStyle" ng-options="mapStyle.styleName for mapStyle in mapStyles" ng-init="mapStyle = mapStyles[7]" ng-change="onChangeMapStyle()">-->
+  <!--</select>-->
+  <!--</div>-->
+  <div id="lineChart"></div>
+  <!-- 上左 -->
+  <div class="col-lg-3 bgglass indexTL untext relative" id="indexTLid" style="height: 35%;">
+    <div class="col-md-12 bgglass-echarts" id="systemActivityChart"></div>
+  </div>
+  <!-- 上右 -->
+  <div class="col-lg-3 bgglass indexTR untext relative" id="indexTRid" style="height: 35%;">
+    <div class="col-md-12 bgglass-echarts" id="fundStreamChart"></div>
+  </div>
+  <!-- 下左 -->
+  <div class="col-lg-3 bgglass indexBL untext relative" id="indexBLid" style="height: 35%;">
+    <div class="col-md-12 bgglass-echarts" id="bikeStateChart"></div>
+  </div>
+  <!-- 下右 -->
+  <div class="col-lg-3 bgglass indexBR untext relative" id="indexBRid" style="height: 35%;">
+    <div class="col-md-12 bgglass-echarts" id="operationChart"></div>
+  </div>
+
+  <!-- 中央滚动数字显示 -->
+  <div id="numberScroll">
+    <h3>用户人数</h3>
+    <!-- 数字跳动 -->
+    <div class="numberRun1 Inumber" id="numberS1"></div>
+    <div class="numberScroll-s relative">
+      <!-- 左侧 -->
+      <div class="numberScroll-s1 fl">
+        <h4>今日用户活跃度</h4>
+        <div class="numberRun2 Inumber" id="numberS2"></div>
+      </div>
+      <!-- 右侧 -->
+      <div class="numberScroll-s2 fr">
+        <h4>今日车辆活跃度</h4>
+        <div class="numberRun3 Inumber" id="numberS3"></div>
+      </div>
+    </div>
+    <img src="img/index/numberBGt.png" alt="" class="numberScroll-img">
+  </div>
+</div>
+<script type="text/javascript" src="libs/common/lucky/js/numberAnimate2.js"></script>
+<script src="js/controllers/dashboard/dashboard.js"></script>
+
+

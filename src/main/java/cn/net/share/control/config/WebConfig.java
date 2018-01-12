@@ -31,6 +31,11 @@ public class WebConfig extends WebMvcConfigurerAdapter implements AsyncConfigure
         return new RestTemplate(httpRequestFactory);
     }
 
+    @Bean
+    public FileUploadProperties fileUploadProperties(){
+        return new FileUploadProperties();
+    }
+
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
     }
@@ -54,4 +59,5 @@ public class WebConfig extends WebMvcConfigurerAdapter implements AsyncConfigure
     public AsyncUncaughtExceptionHandler getAsyncUncaughtExceptionHandler() {
         return new SimpleAsyncUncaughtExceptionHandler();
     }
+
 }

@@ -5,17 +5,32 @@ app.controller('createRegulatorController', ['$scope', '$http', '$modalInstance'
     };
 
     /**
-     * 用户信息
+     * 检查用户是否已存在
+     */
+    $scope.check = function () {
+        $http.post('regulator-orgs/'+ $scope.regulatorOrgDetailsDto.adminName).success(function (data) {
+            if(data.status == "ERROR"){
+                $scope.pop('error', '', data.error);
+            }
+        }).error(function (err) {
+            alert(err.error);
+        })
+    };
+
+    /**
+     * 机构信息
      */
     $scope.create = function () {
-        $http.post('customers', $scope.customer).success(function (data) {
+        $http.post('regulator-orgs', $scope.regulatorOrgDetailsDto).success(function (data) {
             if(data.status=="ERROR"){
                 $scope.pop('error', '', data.error);
             }else{
                 $scope.close('SUCCESS');
             }
+        }).error(function (err) {
+            alert(err.error);
         })
-    }
+    };
 
     /**
      * 关闭新增窗口

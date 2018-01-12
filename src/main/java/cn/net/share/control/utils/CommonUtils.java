@@ -18,4 +18,14 @@ public class CommonUtils {
     public static String getFileSuffix(String fileName){
         return fileName.substring(fileName.lastIndexOf("."));
     }
+
+    /**
+     * 生成随机数
+     * @param n：为随机数位数，大于0
+     * @return
+     */
+    public static Integer generateRandom(int n){
+        int unit = (int)Math.pow(10, n - 1);
+        return (int)(Math.random()*unit*9+unit);
+    }
 }

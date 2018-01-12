@@ -1,0 +1,14 @@
+<div class="hbox hbox-auto-xs hbox-auto-sm"   uploader="uploader"  >
+    <label for="file-upload"class="btn btn-primary">添加文件</label>
+    <input id="file-upload" style="display: none" type="file"   nv-file-select="" filters="queueLimit, customFilter，extension"  uploader="uploader" ng-if="uploader"/>
+    <div ng-repeat = "temp in uploader.queue" ng-show="$last">
+        <div class="m-t"><strong> {{ temp.file.name }}</strong></div>
+        <div class="progress progress-sm m-t">
+            <div class="progress-bar bg-success" role="progressbar" ng-style="{ 'width': temp.progress + '%' }"></div>
+        </div>
+    </div>
+    <div>
+        <button class="btn btn-success m-t" ng-click="fileUpload()">上传</button>
+
+    </div>
+</div>

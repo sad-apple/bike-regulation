@@ -17,6 +17,7 @@ import java.util.List;
 @Entity
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class SysResource {
+
     @Id
     @GeneratedValue
     private Long id;
@@ -31,6 +32,7 @@ public class SysResource {
     @ManyToMany(mappedBy = "sysResources" , cascade = CascadeType.ALL)
     @JsonIgnore
     private List<SysRole> sysRoles;
+
     /**
      * 资源与自身父菜单关联
      */
@@ -56,4 +58,7 @@ public class SysResource {
 
     @LastModifiedDate
     private Date updateTime;
+
+    public SysResource() {}
+
 }

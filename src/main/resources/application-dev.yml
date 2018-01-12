@@ -1,5 +1,5 @@
 server:
-  port: 8086
+  port: 8090
 spring:
   output:
     ansi:
@@ -11,14 +11,22 @@ spring:
       ddl-auto: update
   datasource:
     platform: mysql
-    url: jdbc:mysql://localhost:3306/sharebike?useUnicode=true&characterEncoding=UTF-8
+    url: jdbc:mysql://localhost:3306/bike_regulation?useUnicode=true&characterEncoding=UTF-8
     username: root
-    password: cloudfog2017
+    password: 123456
     driver-class-name: com.mysql.jdbc.Driver
   redis:
-    host: 127.0.0.1
+    host: localhost
+  http:
+      multipart:
+        max-file-size: 10000Mb
+        max-request-size: 10000Mb
+
+file:
+  filePath: E:/download/
+  excelFilePath: E:/download/excel/
 
 logging:
-  file: ./mylogs/sharebike-bms.log
+  file: ./mylogs/bike-regulation.log
   level.: ERROR
   level.cn.net.share: INFO

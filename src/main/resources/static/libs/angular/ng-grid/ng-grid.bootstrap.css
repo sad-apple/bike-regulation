@@ -2,7 +2,7 @@
   background-color: transparent;
 }
 .ngVerticalBarVisible {
-  background-color: #edf1f2;
+  /*background-color: #edf1f2;*/
 }
 .ngTopPanel {
   position: relative;
@@ -58,10 +58,11 @@
 }
 .ngHeaderText,
 .ngCellText{
-  padding: 8px 15px;
+  text-align: center!important;
+  padding: 12px 15px!important;
 }
 .ngFooterSelectedItems{padding-top: 0; margin-top: -4px}
-.ngGridMaxPagesNumber{position: relative; top: -6px}
+.ngGridMaxPagesNumber{position: relative; top: 0px}
 .ngGrid input, 
 .ngGrid select{
   border: 1px solid #cfdadd;

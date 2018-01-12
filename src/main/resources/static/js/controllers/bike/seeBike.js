@@ -1,8 +1,8 @@
 app.controller('seeBikeController', ['$scope', '$http', '$modalInstance', 'bike', '$filter', function ($scope, $http, $modalInstance, bike, $filter) {
 
     function init() {
-        $http.get("vehiclegroups/getAll").success(function (data) {
-            $scope.vehicleGroups = data.data;
+        $http.get("bikegroups/getAll").success(function (data) {
+            $scope.bikeGroups = data.data;
         });
     }
 

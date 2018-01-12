@@ -1,0 +1,63 @@
+<div class="modal-header">
+    <h3 class="modal-title">审核信息</h3>
+</div>
+<div class="modal-body">
+    <form name="form" class="form-validation" novalidate>
+        <div>
+            <toaster-container toaster-options="{'position-class': 'toast-top-right', 'close-button':true}"></toaster-container>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-3 control-label text-right">车辆类型民名称:</label>
+            <div class="col-sm-8">
+                <label class="col-sm-12 control-label text-left">{{IllegallyParked.bikeType.name}}</label>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-3 control-label text-right">车标图片：</label>
+            <div class="col-sm-8">
+                <div class=""><img ng-src="{{bikeTypeImageUrl}}" style="width:200px;height:120px"> </div>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-3 control-label text-right">单车编号:</label>
+            <div class="col-sm-8">
+                <label class="col-sm-12 control-label text-left">{{IllegallyParked.plateNumber}}</label>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-3 control-label text-right">违停图片：</label>
+            <div class="col-sm-8">
+                <div class=""><img ng-src="{{parkedImageUrl}}" style="width:200px;height:120px"> </div>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-3 control-label text-right">状态:</label>
+            <div class="col-sm-8">
+                <label class="col-sm-12 control-label text-left">{{IllegallyParked.faultStatus.status}}</label>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-3 control-label text-right">举报时间:</label>
+            <div class="col-sm-8">
+                <label class="col-sm-12 control-label text-left">{{reportDate}}</label>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-3 control-label text-right">备注:</label>
+            <div class="col-sm-8">
+                <label class="col-sm-12 control-label text-left">{{IllegallyParked.remark}}</label>
+            </div>
+        </div>
+
+    </form>
+</div>
+<div class="modal-footer ng-scope">
+    <button class="btn btn-default" ng-click="close()">关闭</button>
+</div>

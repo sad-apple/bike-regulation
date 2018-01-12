@@ -99,4 +99,5 @@ public class SysResourceService {
         List<SysResource> sysResourceList = sysResourceRepository.findBySysRolesId(sysRoleId);
         return new ResponseEntity<Message>(new Message(MessageType.MSG_TYPE_SUCCESS, sysResourceList), HttpStatus.OK);
     }
+
 }

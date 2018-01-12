@@ -1,10 +1,13 @@
 package cn.net.share.control.service;
 
 import cn.net.share.control.dao.GpsDataRepository;
+import cn.net.share.control.dao.RouteFullLocationsRepository;
 import cn.net.share.control.domain.GpsData;
+import cn.net.share.control.domain.RouteFullLocations;
 import cn.net.share.control.dto.message.Message;
 import cn.net.share.control.dto.message.MessageInfo;
 import cn.net.share.control.dto.message.MessageType;
+import cn.net.share.control.utils.CommonUtils;
 import cn.net.share.control.utils.LogUtil;
 import cn.net.share.control.utils.consts.BaiduMap;
 import cn.net.share.control.dao.RedisRepository;
@@ -39,12 +42,15 @@ public class GpsDataService {
     @Autowired
     private ObjectMapper objectMapper;
 
+    @Autowired
+    private RouteFullLocationsRepository routeFullLocationsRepository;
+
     /**
      * 根据sim卡号获取最新单车位置信息
      * @param simCardNum
      * @return
      */
-    public ResponseEntity<Message> getVehicleNewPosition(String simCardNum){
+    public ResponseEntity<Message> getBikeNewPosition(String simCardNum){
         GpsData gpsData = null;
         try {
             gpsData = (GpsData) redisRepository.get(simCardNum);
@@ -53,6 +59,9 @@ public class GpsDataService {
         }catch (Exception e){
             gpsData = findInDB(simCardNum);
         } finally {
+            if (gpsData == null) {
+                return new ResponseEntity<Message>(new Message(MessageType.MSG_TYPE_ERROR, "未查询到单车信息"), HttpStatus.OK);
+            }
         }
 
         String coor = gpsData.getLon()+","+gpsData.getLat();
@@ -60,8 +69,8 @@ public class GpsDataService {
         try {
             Map map = objectMapper.readValue(baiduCoor, Map.class);
             Map baiduTranceCoor = (Map) ((List) map.get("result")).get(0);
-            gpsData.setLon(Float.parseFloat( baiduTranceCoor.get("x")+""));
-            gpsData.setLat(Float.parseFloat( baiduTranceCoor.get("y")+""));
+            gpsData.setLon(Double.parseDouble( baiduTranceCoor.get("x")+""));
+            gpsData.setLat(Double.parseDouble( baiduTranceCoor.get("y")+""));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -89,8 +98,8 @@ public class GpsDataService {
                 List list = (List) map.get("result");
                 for (int i = 0; i < list.size(); i++) {
                     Map coor = (Map) list.get(i);
-                    gpsDataList.get(j+i).setLat(Float.parseFloat(coor.get("y").toString()));
-                    gpsDataList.get(j+i).setLon(Float.parseFloat(coor.get("x").toString()));
+                    gpsDataList.get(j+i).setLat(Double.parseDouble(coor.get("y").toString()));
+                    gpsDataList.get(j+i).setLon(Double.parseDouble(coor.get("x").toString()));
                 }
             } catch (IOException e) {
                 e.printStackTrace();
@@ -130,4 +139,26 @@ public class GpsDataService {
     public void deleteRedis(String simCardNum){
         redisRepository.delete(simCardNum);
     }
+
+    //临时代码：保存gps演示点
+    public void saveData() {
+        //数据来源
+        List<RouteFullLocations> points = routeFullLocationsRepository.findByRouteId(2449L);
+        for (int i = 0; i < points.size(); i ++) {
+            try {
+                Thread.sleep(10000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            GpsData newgpsData = new GpsData(points.get(i));
+            newgpsData.setSimCardNum("1064892131102");
+            newgpsData.setSpeed(Float.parseFloat(CommonUtils.generateRandom(1).toString()));
+            newgpsData.setStatus(CommonUtils.generateRandom(6));
+            newgpsData.setTime(new Date());
+            newgpsData.setReceiveTime(new Date(new Date().getTime() + 2));
+
+            gpsDataRepository.save(newgpsData);
+        }
+    }
+
 }

@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface SysRoleRepository extends JpaRepository<SysRole,Long> {
     List<SysRole> findByNameLike(String name);
+
+    List<SysRole> findByIdBetween(Long value, Long value1);
 }

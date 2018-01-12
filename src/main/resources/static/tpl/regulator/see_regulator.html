@@ -1,5 +1,5 @@
 <div class="modal-header">
-    <h3 class="modal-title">客户信息</h3>
+    <h3 class="modal-title">监管机构信息</h3>
 </div>
 <div class="modal-body">
     <form name="form" class="form-validation" novalidate>
@@ -9,90 +9,73 @@
         </div>
         <!-- / alert -->
         <div class="form-group row">
-            <label class="col-sm-3 control-label text-right">企业名称:</label>
+            <label class="col-sm-3 control-label text-right">机构名称:</label>
             <div class="col-sm-8">
-                <label class="col-sm-12 control-label text-left">{{customer.name}}</label>
+                <label class="col-sm-12 control-label text-left">{{regulatorOrgDetailsDto.name}}</label>
             </div>
         </div>
 
         <div class="form-group row">
             <label class="col-sm-3 control-label text-right">管理员账号:</label>
             <div class="col-sm-8">
-                <label class="col-sm-12 control-label text-left">{{customer.admin.username}}</label>
+                <label class="col-sm-12 control-label text-left">{{regulatorOrgDetailsDto.adminName}}</label>
             </div>
         </div>
 
 
         <div class="form-group row">
-            <label class="col-sm-3 control-label text-right">组织机构编号:</label>
+            <label class="col-sm-3 control-label text-right">机构编号:</label>
             <div class="col-sm-8">
-                <label class="col-sm-12 control-label text-left">{{customer.organizeNum}}</label>
+                <label class="col-sm-12 control-label text-left">{{regulatorOrgDetailsDto.organizeNum}}</label>
             </div>
         </div>
 
         <div class="form-group row">
-            <label class="col-sm-3 control-label text-right">注册成立日期:</label>
+            <label class="col-sm-3 control-label text-right">单位领导:</label>
             <div class="col-sm-8">
-                <label class="col-sm-12 control-label text-left">{{customer.foundTime}}</label>
+                <label class="col-sm-12 control-label text-left">{{regulatorOrgDetailsDto.represent}}</label>
             </div>
         </div>
 
         <div class="form-group row">
-            <label class="col-sm-3 control-label text-right">法人代表:</label>
+            <label class="col-sm-3 control-label text-right">机构联系人:</label>
             <div class="col-sm-8">
-                <label class="col-sm-12 control-label text-left">{{customer.represent}}</label>
-            </div>
-        </div>
-
-        <div class="form-group row">
-            <label class="col-sm-3 control-label text-right">企业联系人:</label>
-            <div class="col-sm-8">
-                <label class="col-sm-12 control-label text-left">{{customer.contacts}}</label>
+                <label class="col-sm-12 control-label text-left">{{regulatorOrgDetailsDto.contactsName}}</label>
             </div>
         </div>
 
 
         <div class="form-group row">
-            <label class="col-sm-3 control-label text-right">企业联系电话:</label>
+            <label class="col-sm-3 control-label text-right">联系电话:</label>
             <div class="col-sm-8">
-                <label class="col-sm-12 control-label text-left">{{customer.phone}}</label>
+                <label class="col-sm-12 control-label text-left">{{regulatorOrgDetailsDto.phone}}</label>
             </div>
         </div>
 
 
-
         <div class="form-group row">
-            <label class="col-sm-3 control-label text-right">24小时值班电话:</label>
-            <div class="col-sm-8">
-                <label class="col-sm-12 control-label text-left">{{customer.dutyPhone}}</label>
-            </div>
+            <label class="col-sm-3 control-label text-right">地址:</label>
+            <province-city-picker region="regulatorOrgDetailsDto.region"></province-city-picker>
         </div>
 
         <div class="form-group row">
-            <label class="col-sm-3 control-label text-right">企业员工数量:</label>
+            <label class="col-sm-3 control-label text-right">单位地址:</label>
             <div class="col-sm-8">
-                <label class="col-sm-12 control-label text-left">{{customer.staffNum}}</label>
-            </div>
-        </div>
-
-        <div class="form-group row">
-            <label class="col-sm-3 control-label text-right">办公地址:</label>
-            <div class="col-sm-8">
-                <label class="col-sm-12 control-label text-left">{{customer.address}}</label>
+                <label class="col-sm-12 control-label text-left">{{regulatorOrgDetailsDto.address}}</label>
             </div>
         </div>
 
         <div class="form-group row">
             <label class="col-sm-3 control-label text-right">注册地点:</label>
             <div class="col-sm-8">
-                <label class="col-sm-12 control-label text-left">{{customer.registerAddress}}</label>
+                <label class="col-sm-12 control-label text-left">{{regulatorOrgDetailsDto.registerAddress}}</label>
             </div>
         </div>
 
         <div class="form-group row">
             <label class="col-sm-3 control-label text-right">备注:</label>
             <div class="col-sm-8">
-                <label class="col-sm-12 control-label text-left">{{customer.remark}}</label>
+                <label class="col-sm-12 control-label text-left">{{regulatorOrgDetailsDto.remark}}</label>
             </div>
         </div>
 

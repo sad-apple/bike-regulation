@@ -1,0 +1,152 @@
+[
+  {
+    "speech": "展示首页",
+    "command": "homePage",
+    "point": "app.dashboard"
+  },
+  {
+    "speech": "单车物价报表",
+    "command": "bikePrice",
+    "point": "app.bikePrice"
+  },
+  {
+    "speech": "单车质量报表",
+    "command": "bikeQuality",
+    "point": "app.bikeQuality"
+  },
+  {
+    "speech": "单车数量报表",
+    "command": "bikeNumber",
+    "point": "app.bikeQuantity"
+  },
+  {
+    "speech": "单车调度报表",
+    "command": "bikeDispatch",
+    "point": "app.bikeDispatcher"
+  },
+  {
+    "speech": "单车押金报表",
+    "command": "bikeDeposit",
+    "point": "app.depositSuperviseReport"
+  },
+  {
+    "speech": "单车充值报表",
+    "command": "bikeRecharge",
+    "point": "app.dashboardRecharge"
+  },
+  {
+    "speech": "单车违停报表",
+    "command": "bikeIllegallyParked",
+    "point": "app.bikeIllegalPark"
+  },
+  {
+    "speech": "单车投保报表",
+    "command": "bikeInsure",
+    "point": "app.dashboardInsured"
+  },
+  {
+    "speech": "单车电子围栏报表",
+    "command": "bikeElectronicFence",
+    "point": "app.dashboardArea"
+  },
+  {
+    "speech": "单车安全监管报表",
+    "command": "bikeSafetySupervision",
+    "point": "app.dashboardIllegalMoving"
+  },
+  {
+    "speech": "单车车身广告报表",
+    "command": "bikeBodyAdvertise",
+    "point": "app.adSupervision"
+  },
+  {
+    "speech": "单车慢行交通报表",
+    "command": "bikeSlowTraffic",
+    "point": "app.slowTrafficSystem"
+  },
+  {
+    "speech": "单车区域改造报表",
+    "command": "bikeZonePark",
+    "point": "app.regionReform"
+  },
+  {
+    "speech": "单车税务报表",
+    "command": "bikeTax",
+    "point": "app.taxSuperviseReport"
+  },
+
+
+  {
+    "speech": "顺风车物价报表",
+    "command": "ridePrice",
+    "point": "app.priceSupervise"
+  },
+  {
+    "speech": "顺风车数量报表",
+    "command": "rideNumber",
+    "point": "app.numberSupervise"
+  },
+  {
+    "speech": "顺风车投诉处理报表",
+    "command": "rideComplaintHandle",
+    "point": "app.carComplaintStatistics"
+  },
+  {
+    "speech": "顺风车投保情况报表",
+    "command": "rideInsureState",
+    "point": "app.carAccidentInsured"
+  },
+  {
+    "speech": "顺风车税务报表",
+    "command": "rideTax",
+    "point": "app.freeRiderTax"
+  },
+
+
+  {
+    "speech": "汽车物价报表",
+    "command": "carPrice",
+    "point": "app.shareCarPriceSupervise"
+  },
+  {
+    "speech": "汽车质量报表",
+    "command": "carQuality",
+    "point": "app.carQuality"
+  },
+  {
+    "speech": "汽车数量报表",
+    "command": "carNumber",
+    "point": "app.quantitySupervise"
+  },
+  {
+    "speech": "汽车调度报表",
+    "command": "carDispatch",
+    "point": "app.carDispatcher"
+  },
+  {
+    "speech": "汽车充值报表",
+    "command": "carRecharge",
+    "point": "app.carRechargeSupervise"
+  },
+  {
+    "speech": "汽车押金报表",
+    "command": "carDeposit",
+    "point": "app.carDepositSupervise"
+  },
+  {
+    "speech": "汽车投保情况报表",
+    "command": "carInsureState",
+    "point": "app.carInsure"
+  },
+  {
+    "speech": "汽车安全监管报表",
+    "command": "carSafetySupervision",
+    "point": "app.carIllegalMoving"
+  },
+  {
+    "speech": "汽车税务报表",
+    "command": "carTax",
+    "point": "app.carTaxSupervise"
+  }
+]
+

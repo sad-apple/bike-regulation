@@ -1,0 +1,11 @@
+[{
+    "id": 1,
+    "name": "优惠",
+    "typeSort": 1,
+    "typeRemark": "折扣优惠"
+}, {
+    "id": 2,
+    "name": "公告",
+    "typeSort": 2,
+    "typeRemark": "公告内容"
+}]

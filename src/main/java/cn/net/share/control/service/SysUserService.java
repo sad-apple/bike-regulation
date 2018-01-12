@@ -1,12 +1,12 @@
 package cn.net.share.control.service;
 
-import cn.net.share.control.domain.Customer;
+import cn.net.share.control.dao.CustomerRepository;
+import cn.net.share.control.dao.SysUserRepository;
 import cn.net.share.control.domain.SysUser;
 import cn.net.share.control.dto.message.Message;
-import cn.net.share.control.utils.state.UserStatus;
-import cn.net.share.control.dao.SysUserRepository;
+import cn.net.share.control.dto.message.MessageInfo;
 import cn.net.share.control.dto.message.MessageType;
-import cn.net.share.control.utils.state.UserType;
+import cn.net.share.control.utils.state.UserStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
 import org.springframework.http.HttpStatus;
@@ -19,11 +19,15 @@ import java.util.Date;
 
 @Service
 public class SysUserService {
+
     @Autowired
     private SysUserRepository sysUserRepository;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private CustomerRepository customerRepository;
 
     /**
      * 分页返回用户列表
@@ -39,6 +43,9 @@ public class SysUserService {
             customer.setId(loginUser.getCustomer().getId());
             sysUser.setCustomer(customer);
         }*/
+        if (null != sysUser.getUserType() && 0 == sysUser.getUserType()) { //查找全部角色类型
+            sysUser.setUserType(null);
+        }
         ExampleMatcher exampleMatcher = ExampleMatcher.matching().withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING).withIgnoreNullValues();
         Page customers = sysUserRepository.findAll(Example.of(sysUser, exampleMatcher), new PageRequest(page - 1, size,new Sort(Sort.Direction.DESC,"createTime")));
         return new ResponseEntity<Message>(new Message(MessageType.MSG_TYPE_SUCCESS, customers), HttpStatus.OK);
@@ -58,7 +65,7 @@ public class SysUserService {
                 sysUser.setEnableTime(new Date());
             }
         }
-        sysUser.setUserType(Integer.valueOf(sysUser.getRoles().get(0).getId().toString()));
+        sysUser.setUserType(Long.valueOf(sysUser.getRoles().get(0).getId().toString()));
         sysUserRepository.save(sysUser);
         return new ResponseEntity(new Message(MessageType.MSG_TYPE_SUCCESS), HttpStatus.OK);
     }
@@ -76,7 +83,6 @@ public class SysUserService {
         return new ResponseEntity(new Message(MessageType.MSG_TYPE_SUCCESS), HttpStatus.OK);
     }
 
-
     /**
      * 创建用户
      * @param sysUser
@@ -84,11 +90,12 @@ public class SysUserService {
      */
     public ResponseEntity<Message> createSysUser(SysUser sysUser,SysUser sysLoginUser){
         if(sysUserRepository.findByUsername(sysUser.getUsername())!=null){
-            return new ResponseEntity(new Message(MessageType.MSG_TYPE_ERROR,"用户名已经存在"), HttpStatus.OK);
+            return new ResponseEntity(new Message(MessageType.MSG_TYPE_ERROR, MessageInfo.ROLE_ALREADY_EXIST), HttpStatus.OK);
         }else{
             sysUser.setCustomer(sysLoginUser.getCustomer());
             sysUser.setPassword(passwordEncoder.encode(sysUser.getPassword()));
-            sysUser.setUserType(Integer.valueOf(sysUser.getRoles().get(0).getId().toString()));
+            Long type = Long.valueOf(sysUser.getRoles().get(0).getId().toString());
+            sysUser.setUserType(type);
             sysUserRepository.save(sysUser);
             return new ResponseEntity(new Message(MessageType.MSG_TYPE_SUCCESS), HttpStatus.OK);
         }
@@ -100,6 +107,10 @@ public class SysUserService {
      * @return
      */
     public ResponseEntity<Message> deleteSysUser(Long id){
+        SysUser sysUser = sysUserRepository.findOne(id);
+        if(customerRepository.findByAdminId(sysUser.getId()) != null)
+            return new ResponseEntity<Message>(new Message(MessageType.MSG_TYPE_ERROR,MessageInfo.CANNOT_REMOVE_ADMIN),HttpStatus.OK);
+
         sysUserRepository.delete(id);
         return new ResponseEntity(new Message(MessageType.MSG_TYPE_SUCCESS), HttpStatus.OK);
     }
@@ -113,11 +124,18 @@ public class SysUserService {
         return new ResponseEntity(new Message(MessageType.MSG_TYPE_SUCCESS,sysUserRepository.findOne(id)), HttpStatus.OK);
     }
 
+    /**
+     * 修改用户密码
+     * @param id
+     * @param oldPassword
+     * @param newPassword
+     * @return
+     */
     public ResponseEntity<Message> changePassword(Long id, String oldPassword, String newPassword){
         SysUser sysUser = sysUserRepository.findOne(id);
         Message message;
         if(!passwordEncoder.matches(oldPassword, sysUser.getPassword())){
-            message = new Message(MessageType.MSG_TYPE_ERROR, "原密码错误");
+            message = new Message(MessageType.MSG_TYPE_ERROR, MessageInfo.WRONG_OLD_PASSWORD);
             return new ResponseEntity<Message>(message, HttpStatus.OK);
         }
         sysUser.setPassword(new BCryptPasswordEncoder().encode(newPassword));

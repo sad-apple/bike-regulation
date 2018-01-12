@@ -58,11 +58,10 @@
             <label class="col-sm-3 control-label text-right" ng-if="riderDto.userStatus == 0 ">禁用时间:</label>
             <div class="col-sm-8">
                 <label class="col-sm-12 control-label text-left" ng-if="riderDto.userStatus == 0 ">
-                    {{riderDto.enableTime | date:'yyyy-MM-dd HH:mm:ss'}}
-                </label>
-
-                <label class="col-sm-12 control-label text-left" ng-if="riderDto.userStatus == 1 ">
                     {{riderDto.disableTime | date:'yyyy-MM-dd HH:mm:ss'}}
+                </label>
+                <label class="col-sm-12 control-label text-left" ng-if="riderDto.userStatus == 1 ">
+                    {{riderDto.enableTime | date:'yyyy-MM-dd HH:mm:ss'}}
                 </label>
             </div>
         </div>

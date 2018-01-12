@@ -1,22 +1,13 @@
-/**
- * Created by qiaohao on 2016/12/6.
- */
+
 'use strict';
 
 app.controller('regulatorListController', ['$scope', '$http', '$modal', 'toaster', function ($scope, $http, $modal, toaster) {
     $scope.name="";
-    $scope.organizeNum="";
     $scope.represent="";
-    $scope.contacts="";
+    $scope.organizeNum="";
+    $scope.contactsName="";
     $scope.phone="";
-    $scope.dutyPhone="";
-
-
-    //ngGrid初始化数据
-    $scope.filterOptions = {
-        filterText: "",
-        useExternalFilter: true
-    };
+    $scope.address="";
 
     //提示信息
     $scope.toaster = {
@@ -24,8 +15,15 @@ app.controller('regulatorListController', ['$scope', '$http', '$modal', 'toaster
         title: 'Title',
         text: 'Message'
     };
-    $scope.pop = function(type,title,text){
-        toaster.pop(type,'',text);
+
+    $scope.pop = function(type, title, text){
+        toaster.pop(type, '', text);
+    };
+
+    //ngGrid初始化数据
+    $scope.filterOptions = {
+        filterText: "",
+        useExternalFilter: true
     };
 
     $scope.pagingOptions = {
@@ -43,62 +41,59 @@ app.controller('regulatorListController', ['$scope', '$http', '$modal', 'toaster
         totalServerItems: 'totalServerItems',
         pagingOptions: $scope.pagingOptions,
         columnDefs: [
-
-            { field: 'name', displayName: '企业名称', width:'200px' },
-            { field: 'organizeNum', displayName: '组织机构编号', width:'200px' },
-            { field: 'contacts', displayName: '企业联系人', width:'200px' },
-            { field: 'phone', displayName: '企业联系电话', width:'200px' },
-            { field: 'address', displayName: '办公地址', width:'200px' },
-            { field: 'remove', displayName: '操作', width: "400px", cellTemplate: '<a ng-click="editRowIndex(row.entity)" title="编辑" class="btn btn-default m-l-xs" style="margin-top: 2px"><i class="fa fa-pencil"></i></a>' +
-            '<a mwl-confirm message="确定删除?" title="删除" confirm-text="确定" cancel-text="取消" confirm-button-type="danger" on-confirm="removeRowIndex(row.entity)" class="btn btn-default m-l-xs" style="margin-top: 2px"><i class="fa fa-times"></i></a>' +
-            '<a ng-click="seeRowIndex(row.entity)" title="详情" class="btn btn-default m-l-xs" style="margin-top: 2px"><i class="fa fa-info-circle"></i></a>' }
+            { field: 'name', displayName: '机构名称', width:'200px' },
+            { field: 'organizeNum', displayName: '机构编号', width:'200px' },
+            { field: 'represent', displayName: '单位领导', width:'200px'},
+            { field: 'contactsName', displayName: '机构联系人姓名', width:'200px' },
+            { field: 'phone', displayName: '联系电话', width:'200px' },
+            { field: 'address', displayName: '单位地址', width:'200px' },
+            { field: 'remove', displayName: '操作', width: "400px",
+                cellTemplate: '<button class="btn btn-primary btn-sm m-t-xs m-l-xs" title="编辑" style="margin-top: 2px" ng-click="editRowIndex(row.entity)">编辑</button>' +
+                '<button class="btn btn-info btn-sm m-t-xs m-l-xs" title="详情"  style="margin-top: 2px" ng-click="seeRowIndex(row.entity)" >详情</button>' +
+                '<button class="btn btn-danger btn-sm m-t-xs m-l-xs" style="margin-top: 2px" confirm-button-type="danger" mwl-confirm message="确定删除?" title="删除" confirm-text="确定" cancel-text="取消" on-confirm="removeRowIndex(row.entity)">删除</button>'
+            }
         ]
     };
-    $scope.getPagedDataAsync = function (pageSize, page, searchText) {
-        var url = 'customers?page=' + page + '&size=' + pageSize
-            +'&name=' +$scope.name
-            ;
+
+    $scope.getPagedDataAsync = function (pageSize, page) {
+        var url = 'regulator-orgs?page=' + page + '&size=' + pageSize +'&name=' +$scope.name;
+        if($scope.represent !="")
+            url+="&represent="+$scope.represent;
         if($scope.organizeNum != "")
             url+="&organizeNum="+$scope.organizeNum;
-        if($scope.represent !="" )
-            url+="&represent="+$scope.represent;
-        if($scope.contacts !="" )
-            url+="&contacts="+$scope.contacts;
+        if($scope.contactsName !="" )
+            url+="&contactsName="+$scope.contactsName;
         if($scope.phone !="" )
-            url+="&contacts="+$scope.phone;
-        if($scope.dutyPhone !="" )
-            url+="&contacts="+$scope.dutyPhone;
+            url+="&phone="+$scope.phone;
+        if($scope.address !="" )
+            url+="&address="+$scope.address;
 
         $http.get(url).success(function (pagedata) {
             $scope.codes = pagedata.data.content;
             $scope.totalServerItems = pagedata.data.totalElements;
         });
     };
-    
-    $scope.getPagedDataAsync($scope.pagingOptions.pageSize, $scope.pagingOptions.currentPage, "");
-    
+
+    $scope.getPagedDataAsync($scope.pagingOptions.pageSize, $scope.pagingOptions.currentPage);
+
     $scope.$watch('pagingOptions', function (newVal, oldVal) {
         if (newVal !== oldVal || newVal.currentPage !== oldVal.currentPage || newVal.pageSize !== oldVal.pageSize) {
-            $scope.getPagedDataAsync($scope.pagingOptions.pageSize, $scope.pagingOptions.currentPage, $scope.filterOptions.filterText);
+            $scope.getPagedDataAsync($scope.pagingOptions.pageSize, $scope.pagingOptions.currentPage);
         }
     }, true);
 
     $scope.$watch('filterOptions', function (newVal, oldVal) {
         if (newVal !== oldVal) {
-            $scope.getPagedDataAsync($scope.pagingOptions.pageSize, $scope.pagingOptions.currentPage, $scope.filterOptions.filterText);
+            $scope.getPagedDataAsync($scope.pagingOptions.pageSize, $scope.pagingOptions.currentPage);
         }
     }, true);
 
-    $scope.pop = function(type,title,text){
-        toaster.pop(type,'',text);
-    };
-
     $scope.search = function(){
         $scope.pagingOptions.currentPage = 1;
-        $scope.getPagedDataAsync($scope.pagingOptions.pageSize, $scope.pagingOptions.currentPage, '');
-    }
-    
-    $scope.createCustomer = function(){
+        $scope.getPagedDataAsync($scope.pagingOptions.pageSize, $scope.pagingOptions.currentPage);
+    };
+
+    $scope.createRegulator = function(){
         var rtn = $modal.open({
             templateUrl: 'tpl/regulator/create_regulator.html',
             controller: 'createRegulatorController',
@@ -107,47 +102,48 @@ app.controller('regulatorListController', ['$scope', '$http', '$modal', 'toaster
         });
         rtn.result.then(function (status) {
             if(status == 'SUCCESS') {
-                $scope.pop('success', '', '新增客户信息成功');
+                $scope.pop('success', '', '新增机构信息成功');
                 $scope.getPagedDataAsync($scope.pagingOptions.pageSize, $scope.pagingOptions.currentPage);
             }
         },function(){
         });
-    }
+    };
 
     $scope.seeRowIndex = function(entity){
+        var id = this.row.entity.id;
         var rtn = $modal.open({
-            templateUrl: 'tpl/regulator/see_customer.html',
+            templateUrl: 'tpl/regulator/see_regulator.html',
             controller: 'seeRegulatorController',
             resolve:{
-                customer : function (){ return entity }
+                regulatorOrgDetailsID : function (){ return id }
             }
         });
         rtn.result.then(function (status) {
             $scope.getPagedDataAsync($scope.pagingOptions.pageSize, $scope.pagingOptions.currentPage);
         },function(){
         });
-    }
-    
+    };
+
     $scope.editRowIndex = function(entity){
         var id = this.row.entity.id;
         var rtn = $modal.open({
-            templateUrl: 'tpl/regulator/update_customer.html',
+            templateUrl: 'tpl/regulator/update_regulator.html',
             controller: 'updateRegulatorController',
             resolve:{
-                customerId:function(){return id;}
+                regulatorDetailsId:function(){return id;}
             }
         });
         rtn.result.then(function (status) {
             if(status == 'SUCCESS') {
-                $scope.pop('success', '', '修改客户信息成功');
+                $scope.pop('success', '', '修改机构信息成功');
                 $scope.getPagedDataAsync($scope.pagingOptions.pageSize, $scope.pagingOptions.currentPage);
             }
         },function(){
         });
-    }
-    
+    };
+
     $scope.removeRowIndex = function(entity){
-        $http.delete('customers/'+this.row.entity.id).success(function(data) {
+        $http.delete('regulator-orgs/'+this.row.entity.id).success(function(data) {
             if(data.status == 'SUCCESS'){
                 $scope.pop('success','','删除成功');
                 $scope.getPagedDataAsync($scope.pagingOptions.pageSize, $scope.pagingOptions.currentPage);
@@ -156,5 +152,4 @@ app.controller('regulatorListController', ['$scope', '$http', '$modal', 'toaster
             }
         })
     }
-}])
-;
+}]);
